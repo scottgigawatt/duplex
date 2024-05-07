@@ -64,7 +64,7 @@ To import the Duplex Docker Compose project into the DSM 7.2 Container Manager's
 
    <img width="485" alt="Screenshot 2024-05-07 at 00 16 11" src="https://github.com/scottgigawatt/duplex/assets/16313565/41433a35-e194-4882-9e4d-f70c4430bd70">
 
-6. Give the project a title, e.g., "Duplex," and proceed through the UI prompts to create the project.
+6. Give the project a title, e.g., **duplex**, and proceed through the UI prompts to create the project.
 
 7. The project will be created, and you can see all of the project containers and information in one place.
 
