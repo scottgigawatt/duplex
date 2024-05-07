@@ -60,7 +60,7 @@ services:
     #
     image: kometateam/imagemaid:${IMAGE_MAID_TAG} # Run using the nightly Kometa build
     pull_policy: always                           # Ensure that the image is always pulled
-    container_name: imagemaid-${IMAGE_MAID_TAG}  # Append Docker image tag to container name
+    container_name: imagemaid-${IMAGE_MAID_TAG}   # Append Docker image tag to container name
     restart: unless-stopped                       # Restart the container unless explicitly stopped
     network_mode: bridge                          # Use the default bridge network
 
