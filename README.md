@@ -27,13 +27,13 @@ To start the Duplex service stack, follow these steps:
     docker-compose up -d
     ```
 
-    This command will start the Docker containers defined in the `docker-compose.yml` file in detached mode.
+    This command will start the Docker containers defined in the [`docker-compose.yml`](docker-compose.yml) file in detached mode.
 
 5. Access the services through their respective endpoints.
 
 ### Managing Docker Config Environment Variables
 
-Docker configuration environment variables can be set and managed in the `.env` file in the root of the project directory. These variables can also be easily overridden on the command line when starting the Docker Compose stack by setting the variables in front of the command like:
+Docker configuration environment variables can be set and managed in the [`.env`](.env) file in the root of the project directory. These variables can also be easily overridden on the command line when starting the Docker Compose stack by setting the variables in front of the command like:
 
 ```bash
 # Run the 'kometa' service using the 'latest' image tag
