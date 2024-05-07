@@ -8,3 +8,5 @@ newsletters/
 temp/
 *.lock
 *.db
+UUID
+config.ini
