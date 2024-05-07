@@ -4,7 +4,7 @@ Docker Utilities for Plex (Duplex) contains a Docker Compose configuration tailo
 
 ## Tools Included
 
-- **Kometa**: Manages metadata in Plex Media Server. [More info](https://kometa.wiki/en/nightly/)
+- **Kometa**: Manages metadata in Plex Media Server (configuration located [here](https://github.com/scottgigawatt/kometa-config)). [More info](https://kometa.wiki/en/nightly/)
 - **ImageMaid**: Cleans photos in Plex Media Server. [More info](https://kometa.wiki/en/nightly/kometa/scripts/imagemaid/)
 - **Tautulli**: Provides monitoring and tracking tools for Plex Media Server. [GitHub](https://github.com/Tautulli/Tautulli/)
 - **Watchtower**: Automates Docker container base image updates. [GitHub](https://github.com/containrrr/watchtower)
