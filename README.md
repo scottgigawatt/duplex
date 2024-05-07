@@ -1,6 +1,6 @@
 # Duplex
 
-Docker Utilities for Plex (Duplex) contains a Docker Compose configuration tailored for a Synology NAS environments. It simplifies the setup process for managing Plex Media Server by integrating several useful tools and utilities.
+Docker Utilities for Plex (Duplex) contains a Docker Compose configuration tailored for Synology NAS environments. It simplifies the setup process for managing Plex Media Server by integrating several useful tools and utilities.
 
 ## Tools Included
 
