@@ -1,19 +1,19 @@
 # Duplex
 
-Docker Utilities for Plex (Duplex) contains a Docker Compose configuration tailored for Synology NAS environments. It simplifies the setup process for managing Plex Media Server by integrating several useful tools and utilities.
+Duplex simplifies Plex Media Server management on Synology NAS by providing a Docker Compose configuration with essential tools and utilities.
 
 ## Tools Included
 
-- **Kometa**: Manages metadata in Plex Media Server (configuration located [here](https://github.com/scottgigawatt/kometa-config)). [More info](https://kometa.wiki/en/nightly/)
-- **ImageMaid**: Cleans photos in Plex Media Server. [More info](https://kometa.wiki/en/nightly/kometa/scripts/imagemaid/)
-- **Tautulli**: Provides monitoring and tracking tools for Plex Media Server. [GitHub](https://github.com/Tautulli/Tautulli/)
-- **Watchtower**: Automates Docker container base image updates. [GitHub](https://github.com/containrrr/watchtower)
+- **Kometa**: Manages Plex Media Server metadata. [Configuration details](https://github.com/scottgigawatt/kometa-config). [More info](https://kometa.wiki/en/nightly/)
+- **ImageMaid**: Cleans Plex Media Server photos. [More info](https://kometa.wiki/en/nightly/kometa/scripts/imagemaid/)
+- **Tautulli**: Monitors and tracks Plex Media Server usage. [GitHub](https://github.com/Tautulli/Tautulli/)
+- **Watchtower**: Automatically updates Docker container base images. [GitHub](https://github.com/containrrr/watchtower)
 
 ## Usage
 
-### Starting the Docker Compose Service Stack
+### Starting the Service Stack
 
-To start the Duplex service stack, follow these steps:
+Follow these steps to start the Duplex service stack:
 
 1. Clone this repository to your Synology NAS.
 
@@ -21,69 +21,60 @@ To start the Duplex service stack, follow these steps:
 
 3. Open a terminal or SSH into your Synology NAS.
 
-4. Run the following command:
+4. Run:
 
     ```bash
     docker-compose up -d
     ```
 
-    This command will start the Docker containers defined in the [`docker-compose.yml`](docker-compose.yml) file in detached mode.
+    This command starts the Docker containers defined in [`docker-compose.yml`](docker-compose.yml) in detached mode.
 
 5. Access the services through their respective endpoints.
 
 ### Managing Docker Config Environment Variables
 
-Docker configuration environment variables can be set and managed in the [`.env`](.env) file in the root of the project directory. These variables can also be easily overridden on the command line when starting the Docker Compose stack by setting the variables in front of the command like:
+Manage Docker configuration environment variables in the [`.env`](.env) file. Override these variables easily on the command line when starting the Docker Compose stack:
 
 ```bash
-# Run the 'kometa' service using the 'latest' image tag
 KOMETA_TAG="latest" docker-compose up -d
 ```
 
-Feel free to adjust the values of these environment variables according to your specific requirements.
+Adjust the values of these environment variables to your requirements.
 
-## Managing the Project with DSM Container Manager
+### Managing the Project with DSM Container Manager
 
-To import this project into the DSM 7.2 Container Manager's Project feature, follow these steps:
+To import this project into DSM 7.2 Container Manager's Project feature:
 
 1. SSH into your Synology system.
 
-2. Clone this repository onto the system.
+2. Clone this repository:
 
    ```bash
    git clone https://github.com/scottgigawatt/duplex.git
    ```
 
-3. Open Container Manager and click on **Project**, then **Create**.
+3. In Container Manager, click **Project** then **Create**.
 
-   <img width="747" alt="Create Project" src="https://github.com/scottgigawatt/duplex/assets/16313565/cccc73b3-0ca9-434b-ac77-753163cf8f50">
+4. Provide a title, e.g., **duplex**.
 
-4. Click **Set Path** and browse to the cloned repository, then click **Select**.
+5. Set the path to the cloned repository.
 
-5. Click **OK** on the popup window stating there is an existing `docker-compose.yml` in the selected path.
+6. Proceed through UI prompts to finish creating the project.
 
-   <img width="485" alt="Import Project" src="https://github.com/scottgigawatt/duplex/assets/16313565/41433a35-e194-4882-9e4d-f70c4430bd70">
+Refer to the official Synology documentation [here](https://kb.synology.com/en-id/DSM/help/ContainerManager/docker_project?version=7) for more on Container Manager Projects.
 
-6. Give the project a title, e.g., **duplex**, and proceed through the UI prompts to create the project.
+## Secure Access to Synology Applications
 
-7. The project will be created, and you can see all of the project containers and information in one place.
-
-   <img width="1202" alt="Manage Project" src="https://github.com/scottgigawatt/duplex/assets/16313565/b328cb18-7b9b-408b-915c-bd854dd5b618">
-
-See the official Synology documentation [here](https://kb.synology.com/en-id/DSM/help/ContainerManager/docker_project?version=7) for more information on Container Manager Projects.
-
-## Accessing Synology Applications Securely
-
-You can use the DSM 7 Reverse Proxy feature to configure secure access to your Synology applications. Follow the guide provided [here](https://mariushosting.com/synology-how-to-use-reverse-proxy-on-dsm-7/) to set up reverse proxy on DSM 7.
+Use DSM 7 Reverse Proxy to configure secure access to Synology applications. Follow the guide [here](https://mariushosting.com/synology-how-to-use-reverse-proxy-on-dsm-7/) for DSM 7.
 
 ## Environment Details
 
-The Duplex configuration has been tested on a Synology DS916+ running DSM 7.2.1-69057 Update 5, with Docker Compose version v2.9.0-6413-g38f6acd.
+Tested on Synology DS916+ running DSM 7.2.1-69057 Update 5, with Docker Compose version v2.9.0-6413-g38f6acd.
 
 ## License
 
-This project is licensed under the Apache 2 License - see the [LICENSE](LICENSE) file for details.
+Licensed under the Apache 2 License - see [LICENSE](LICENSE) for details.
 
 ---
 
-Feel free to contribute or provide feedback to improve the Duplex repository. Happy Plexing!
+Contribute or provide feedback to improve the Duplex repository. Happy Plexing!
