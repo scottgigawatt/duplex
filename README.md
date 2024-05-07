@@ -56,19 +56,19 @@ To import the Duplex Docker Compose project into the DSM 7.2 Container Manager's
 
 3. Open Container Manager and click on **Project**, then **Create**.
 
-   <img width="747" alt="Screenshot 2024-05-07 at 00 15 07" src="https://github.com/scottgigawatt/duplex/assets/16313565/cccc73b3-0ca9-434b-ac77-753163cf8f50">
+   <img width="747" alt="Create Project" src="https://github.com/scottgigawatt/duplex/assets/16313565/cccc73b3-0ca9-434b-ac77-753163cf8f50">
 
 4. Click **Set Path** and browse to the cloned repository, then click **Select**.
 
 5. Click **OK** on the popup window stating there is an existing `docker-compose.yml` in the selected path.
 
-   <img width="485" alt="Screenshot 2024-05-07 at 00 16 11" src="https://github.com/scottgigawatt/duplex/assets/16313565/41433a35-e194-4882-9e4d-f70c4430bd70">
+   <img width="485" alt="Import Project" src="https://github.com/scottgigawatt/duplex/assets/16313565/41433a35-e194-4882-9e4d-f70c4430bd70">
 
 6. Give the project a title, e.g., **duplex**, and proceed through the UI prompts to create the project.
 
 7. The project will be created, and you can see all of the project containers and information in one place.
 
-   <img width="1202" alt="Screenshot 2024-05-07 at 00 18 49" src="https://github.com/scottgigawatt/duplex/assets/16313565/b328cb18-7b9b-408b-915c-bd854dd5b618">
+   <img width="1202" alt="Manage Project" src="https://github.com/scottgigawatt/duplex/assets/16313565/b328cb18-7b9b-408b-915c-bd854dd5b618">
 
 See the official Synology documentation [here](https://kb.synology.com/en-id/DSM/help/ContainerManager/docker_project?version=7) for more information on Container Manager Projects.
 
