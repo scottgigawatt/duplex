@@ -44,7 +44,7 @@ Feel free to adjust the values of these environment variables according to your 
 
 ## Managing the Project with DSM Container Manager
 
-To import the Duplex Docker Compose project into the DSM 7.2 Container Manager's Project feature, follow these steps:
+To import this project into the DSM 7.2 Container Manager's Project feature, follow these steps:
 
 1. SSH into your Synology system.
 
