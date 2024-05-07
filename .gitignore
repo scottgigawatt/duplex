@@ -1,0 +1,10 @@
+.DS_Store
+.secrets/
+backups/
+cache/
+exports/
+logs/
+newsletters/
+temp/
+*.lock
+*.db

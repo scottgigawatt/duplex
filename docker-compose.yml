@@ -1,0 +1,138 @@
+#
+# docker-compose.yml: Docker Utilities for Plex (Duplex) contains a Docker Compose
+# configuration tailored for a Synology NAS environments, simplifying the setup process
+# for managing Plex Media Server by integrating several useful tools and utilities.
+#
+# Tools Included:
+#   - Kometa: Manages metadata in Plex Media Server.
+#   - ImageMaid: Cleans photos in Plex Media Server.
+#   - Tautulli: Provides monitoring and tracking tools for Plex Media Server.
+#   - Watchtower: Automates Docker container base image updates.
+#
+# For more information about Kometa, visit: https://kometa.wiki/en/nightly/
+# For more information about ImageMaid, visit: https://kometa.wiki/en/nightly/kometa/scripts/imagemaid/
+# For more information about Tautulli, visit: https://github.com/Tautulli/Tautulli
+# For more information about Watchtower, visit: https://github.com/containrrr/watchtower
+#
+
+#
+# Docker Compose version on the target system
+#
+version: "2.9"
+
+#
+# Define the services section
+#
+services:
+  #
+  # Define the 'kometa' service
+  #
+  kometa:
+    #
+    # Docker image and container information
+    #
+    image: kometateam/kometa:${KOMETA_TAG} # Run using the nightly Kometa build
+    pull_policy: always                    # Ensure that the image is always pulled
+    container_name: kometa-${KOMETA_TAG}   # Append Docker image tag to container name
+    restart: unless-stopped                # Restart the container unless explicitly stopped
+    network_mode: bridge                   # Use the default bridge network
+
+    #
+    # Define the container environment
+    #
+    environment:
+      - KOMETA_DEBUG=${KOMETA_DEBUG} # Toggles running with extra debug logs
+      - KOMETA_RUN=${KOMETA_RUN}     # Toggles running Kometa right away
+      - TZ=${TZ}                     # Set the timezone
+
+    #
+    # Mount host directories into the container
+    #
+    volumes:
+      - /volume2/docker/kometa-config:/config:rw
+
+  #
+  # Define the 'imagemaid' service
+  #
+  imagemaid:
+    #
+    # Docker image and container information
+    #
+    image: kometateam/imagemaid:${IMAGE_MAID_TAG} # Run using the nightly Kometa build
+    pull_policy: always                           # Ensure that the image is always pulled
+    container_name: imagemaid-${IMAGE_MAID_TAG}  # Append Docker image tag to container name
+    restart: unless-stopped                       # Restart the container unless explicitly stopped
+    network_mode: bridge                          # Use the default bridge network
+
+    #
+    # Define the container environment
+    #
+    environment:
+      - TZ=${TZ} # Set the timezone
+
+    #
+    # Mount host directories into the container
+    #
+    volumes:
+      - /volume2/docker/duplex/config/imagemaid:/config:rw
+      - /volume2/PlexMediaServer/AppData/Plex Media Server:/plex:rw
+
+  #
+  # Define the 'tautulli' service
+  #
+  tautulli:
+    #
+    # Docker image and container information
+    #
+    image: tautulli/tautulli:${TAUTULLI_TAG} # Run using the nightly Kometa build
+    pull_policy: always                      # Ensure that the image is always pulled
+    container_name: tautulli-${TAUTULLI_TAG} # Append Docker image tag to container name
+    restart: unless-stopped                  # Restart the container unless explicitly stopped
+    network_mode: bridge                     # Use the default bridge network
+
+    #
+    # Define the container environment
+    #
+    environment:
+      - PUID=${PUID} # Set uid from your ssh session
+      - PGID=${PGID} # Set gid from your ssh session
+      - TZ=${TZ}     # Set the timezone
+
+    #
+    # Define the host and container ports
+    #
+    ports:
+      - "8181:8181"
+
+    #
+    # Mount host directories into the container
+    #
+    volumes:
+      - /volume2/docker/duplex/config/tautulli:/config:rw
+
+  #
+  # Define the 'watchtower' service
+  #
+  watchtower:
+    #
+    # Docker image and container information
+    #
+    image: containrrr/watchtower:${WATCHTOWER_TAG} # Run using the nightly Kometa build
+    pull_policy: always                            # Ensure that the image is always pulled
+    container_name: watchtower-${WATCHTOWER_TAG}   # Append Docker image tag to container name
+    restart: unless-stopped                        # Restart the container unless explicitly stopped
+    network_mode: bridge                           # Use the default bridge network
+
+    #
+    # Define the container environment
+    #
+    environment:
+      - WATCHTOWER_POLL_INTERVAL=${WATCHTOWER_POLL_INTERVAL} # Set how often to check for new images
+      - WATCHTOWER_CLEANUP=${WATCHTOWER_CLEANUP}             # Clean old images afer container updates
+
+    #
+    # Mount host directories into the container
+    #
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock # Allow container to talk to host Docker API
+      - /etc/localtime:/etc/localtime:ro          # Setup container with the proper timezone
