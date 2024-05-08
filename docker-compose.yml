@@ -42,7 +42,6 @@ services:
     #
     environment:
       - KOMETA_DEBUG=${KOMETA_DEBUG} # Toggles running with extra debug logs
-      - KOMETA_RUN=${KOMETA_RUN}     # Toggles running Kometa right away
       - TZ=${TZ}                     # Set the timezone
 
     #
