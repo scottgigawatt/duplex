@@ -112,7 +112,7 @@ Follow these steps to start the Duplex service stack:
     This command starts the Docker containers defined in `docker-compose.yml` in detached mode.
 
 5. Access the services through their respective endpoints.
-6. Configure Tautulli to connect to Plex using the gateway IP address of the Docker bridge network. Find this IP in `Docker -> Network` or `Container Manager -> Network` for DSM 7.2 and above.
+6. Configure services to connect to Plex using the gateway IP address of the Docker bridge network. Find this IP in `Container Manager -> Network` for DSM 7.2 and above.
 
 ### Managing Docker Config Environment Variables
 
