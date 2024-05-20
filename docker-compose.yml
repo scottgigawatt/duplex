@@ -31,11 +31,12 @@ services:
     #
     # Docker image and container information
     #
-    image: kometateam/kometa:${KOMETA_TAG} # Run using the nightly Kometa build
+    image: kometateam/kometa:${KOMETA_TAG} # Run using the specified tag
     pull_policy: always                    # Ensure that the image is always pulled
     container_name: kometa-${KOMETA_TAG}   # Append Docker image tag to container name
     restart: unless-stopped                # Restart the container unless explicitly stopped
     network_mode: bridge                   # Use the default bridge network
+    hostname: kometa                       # Set the container hostname
 
     #
     # Define the container environment
@@ -48,7 +49,7 @@ services:
     # Mount host directories into the container
     #
     volumes:
-      - /volume2/docker/kometa-config:/config:rw
+      - /volume1/docker/kometa-config:/config:rw # Mount config directory
 
   #
   # Define the 'imagemaid' service
@@ -57,11 +58,12 @@ services:
     #
     # Docker image and container information
     #
-    image: kometateam/imagemaid:${IMAGE_MAID_TAG} # Run using the nightly Kometa build
+    image: kometateam/imagemaid:${IMAGE_MAID_TAG} # Run using the specified tag
     pull_policy: always                           # Ensure that the image is always pulled
     container_name: imagemaid-${IMAGE_MAID_TAG}   # Append Docker image tag to container name
     restart: unless-stopped                       # Restart the container unless explicitly stopped
     network_mode: bridge                          # Use the default bridge network
+    hostname: imagemaid                           # Set the container hostname
 
     #
     # Define the container environment
@@ -73,8 +75,8 @@ services:
     # Mount host directories into the container
     #
     volumes:
-      - /volume2/docker/duplex/config/imagemaid:/config:rw
-      - /volume2/PlexMediaServer/AppData/Plex Media Server:/plex:rw
+      - /volume1/docker/duplex/config/imagemaid:/config:rw           # Mount config directory
+      - /volume1/PlexMediaServer/AppData/Plex Media Server:/plex:rw  # Mount plex directory
 
   #
   # Define the 'tautulli' service
@@ -83,11 +85,12 @@ services:
     #
     # Docker image and container information
     #
-    image: tautulli/tautulli:${TAUTULLI_TAG} # Run using the nightly Kometa build
+    image: tautulli/tautulli:${TAUTULLI_TAG} # Run using the specified tag
     pull_policy: always                      # Ensure that the image is always pulled
     container_name: tautulli-${TAUTULLI_TAG} # Append Docker image tag to container name
     restart: unless-stopped                  # Restart the container unless explicitly stopped
     network_mode: bridge                     # Use the default bridge network
+    hostname: tautulli                       # Set the container hostname
 
     #
     # Define the container environment
@@ -107,7 +110,36 @@ services:
     # Mount host directories into the container
     #
     volumes:
-      - /volume2/docker/duplex/config/tautulli:/config:rw
+      - /volume1/docker/duplex/config/tautulli:/config:rw # Mount config directory
+
+  #
+  # Define the 'notifiarr' service
+  #
+  notifiarr:
+    #
+    # Docker image and container information
+    #
+    image: golift/notifiarr:${NOTIFIARR_TAG}   # Run using the specified tag
+    pull_policy: always                        # Ensure that the image is always pulled
+    container_name: notifiarr-${NOTIFIARR_TAG} # Append Docker image tag to container name
+    restart: unless-stopped                    # Restart the container unless explicitly stopped
+    network_mode: bridge                       # Use the default bridge network
+    hostname: notifiarr                        # Set the container hostname
+
+    #
+    # Define the host and container ports
+    #
+    ports:
+      - "5454:5454"
+
+    #
+    # Mount host directories into the container
+    #
+    volumes:
+      - /volume1/docker/duplex/config/notifiarr:/config:rw # Mount config directory
+      - /var/run/utmp:/var/run/utmp:ro                     # Used to count logged in users
+      - /etc/machine-id:/etc/machine-id:ro                 # Used to uniquely identify the host
+      - /etc/localtime:/etc/localtime:ro                   # Setup container with the proper timezone
 
   #
   # Define the 'watchtower' service
@@ -116,11 +148,12 @@ services:
     #
     # Docker image and container information
     #
-    image: containrrr/watchtower:${WATCHTOWER_TAG} # Run using the nightly Kometa build
+    image: containrrr/watchtower:${WATCHTOWER_TAG} # Run using the specified tag
     pull_policy: always                            # Ensure that the image is always pulled
     container_name: watchtower-${WATCHTOWER_TAG}   # Append Docker image tag to container name
     restart: unless-stopped                        # Restart the container unless explicitly stopped
     network_mode: bridge                           # Use the default bridge network
+    hostname: watchtower                           # Set the container hostname
 
     #
     # Define the container environment

@@ -11,6 +11,7 @@ This `docker-compose.yml` configures Docker containers for managing a Plex Media
 - **Kometa**: Manages Plex Media Server metadata. [Configuration details](https://github.com/scottgigawatt/kometa-config). [More info](https://kometa.wiki/en/nightly/)
 - **ImageMaid**: Cleans Plex Media Server photos. [More info](https://kometa.wiki/en/nightly/kometa/scripts/imagemaid/)
 - **Tautulli**: Monitors and tracks Plex Media Server usage. [GitHub](https://github.com/Tautulli/Tautulli/)
+- **Notifiarr**: Provides notifications for various media server activities. [GitHub](https://github.com/Notifiarr/notifiarr/)
 - **Watchtower**: Automatically updates Docker container base images. [GitHub](https://github.com/containrrr/watchtower)
 
 ## Docker Compose Configuration
@@ -18,6 +19,8 @@ This `docker-compose.yml` configures Docker containers for managing a Plex Media
 Ensure your Docker Compose version is compatible with version 2.9.
 
 ### Services Configuration
+
+> **Note**: Services will need to connect to Plex through the Docker bridge network. Use the gateway IP address of the bridge network assigned to each container to reach the Plex service running natively on the Synology NAS. You can find this IP by navigating to `Container Manager -> Network`.
 
 #### Kometa
 
@@ -30,7 +33,7 @@ Ensure your Docker Compose version is compatible with version 2.9.
   - `KOMETA_DEBUG=${KOMETA_DEBUG}`
   - `TZ=${TZ}`
 - **Volumes**:
-  - `/volume2/docker/kometa-config:/config:rw`
+  - `/volume1/docker/kometa-config:/config:rw`
 
 #### ImageMaid
 
@@ -42,12 +45,10 @@ Ensure your Docker Compose version is compatible with version 2.9.
 - **Environment Variables**:
   - `TZ=${TZ}`
 - **Volumes**:
-  - `/volume2/docker/duplex/config/imagemaid:/config:rw`
-  - `/volume2/PlexMediaServer/AppData/Plex Media Server:/plex:rw`
+  - `/volume1/docker/duplex/config/imagemaid:/config:rw`
+  - `/volume1/PlexMediaServer/AppData/Plex Media Server:/plex:rw`
 
 #### Tautulli
-
-> **Note**: Tautulli needs to connect to Plex through the Docker bridge network. Use the gateway IP address of the bridge network assigned to the Tautulli container to reach the Plex service running natively on the Synology NAS. You can find this IP by navigating to `Docker -> Network` or `Container Manager -> Network` for DSM 7.2 and above.
 
 - **Image**: `tautulli/tautulli:${TAUTULLI_TAG}`
 - **Pull Policy**: Always
@@ -61,7 +62,23 @@ Ensure your Docker Compose version is compatible with version 2.9.
 - **Ports**:
   - `8181:8181`
 - **Volumes**:
-  - `/volume2/docker/duplex/config/tautulli:/config:rw`
+  - `/volume1/docker/duplex/config/tautulli:/config:rw`
+
+#### Notifiarr
+
+- **Image**: `golift/notifiarr:${NOTIFIARR_TAG}`
+- **Pull Policy**: Always
+- **Container Name**: `notifiarr-${NOTIFIARR_TAG}`
+- **Restart Policy**: Unless stopped
+- **Network Mode**: Bridge
+- **Hostname**: notifiarr
+- **Ports**:
+  - `5454:5454`
+- **Volumes**:
+  - `/volume1/docker/duplex/config/notifiarr:/config`
+  - `/var/run/utmp:/var/run/utmp`
+  - `/etc/machine-id:/etc/machine-id`
+  - `/etc/localtime:/etc/localtime:ro`
 
 #### Watchtower
 
