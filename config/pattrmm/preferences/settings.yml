@@ -25,7 +25,6 @@ libraries:
         trakt_list_privacy: private
         meta:
           sort_title: "!020_1_Plex In-History"
-          collection_mode: hide
           visible_home: true
           visible_shared: true
           sync_mode: sync
@@ -48,7 +47,6 @@ libraries:
         increment: 10
         meta:
           sort_title: "!020_1_Plex In-History"
-          collection_mode: hide
           visible_home: true
           visible_shared: true
           sync_mode: sync
