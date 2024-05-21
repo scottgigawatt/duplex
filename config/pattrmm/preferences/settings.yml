@@ -20,7 +20,7 @@ libraries:
     extensions:
       in-history:
         range: month
-        collection_title: Released This {{range}} in History
+        collection_title: Released This {{Range}} in History
         save_folder: "shows/"
         trakt_list_privacy: private
         meta:
