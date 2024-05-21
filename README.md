@@ -121,14 +121,7 @@ Follow these steps to start the Duplex service stack:
 1. Clone this repository to your Synology NAS.
 2. Navigate to the directory containing the `docker-compose.yml` file.
 3. Open a terminal or SSH into your Synology NAS.
-4. Run:
-
-    ```bash
-    docker-compose up -d
-    ```
-
-    This command starts the Docker containers defined in `docker-compose.yml` in detached mode.
-
+4. Run `docker-compose up -d` to start the containers in detached mode.
 5. Access the services through their respective endpoints.
 6. Configure services to connect to Plex using the gateway IP address of the Docker bridge network. Find this IP in `Container Manager -> Network` for DSM 7.2 and above.
 
@@ -147,12 +140,7 @@ Adjust the values of these environment variables to your requirements.
 To import this project into DSM 7.2 Container Manager's Project feature:
 
 1. SSH into your Synology system.
-2. Clone this repository:
-
-   ```bash
-   git clone https://github.com/scottgigawatt/duplex.git
-   ```
-
+2. Clone this repository.
 3. In Container Manager, click **Project** then **Create**.
 4. Provide a title, e.g., **duplex**.
 5. Set the path to the cloned repository.
