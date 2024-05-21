@@ -152,6 +152,13 @@ Refer to the official Synology documentation [here](https://kb.synology.com/en-i
 
 Use DSM 7 Reverse Proxy to configure secure access to Synology applications. Follow the guide [here](https://mariushosting.com/synology-how-to-use-reverse-proxy-on-dsm-7/) for DSM 7.
 
+> **Note**: If you encounter "Socket closed" errors when accessing the DSM UI via reverse proxy and trying to open terminals for running containers, enable WebSocket for the reverse proxy record:
+>
+> 1. Go to `Control Panel -> Application Portal -> Reverse Proxy -> Edit` for your reverse proxy record.
+> 2. Navigate to the `Custom Header` tab.
+> 3. From the `Create` dropdown, select `WebSocket`.
+> 4. Save the changes to resolve the issue.
+
 ## Environment Details
 
 Tested on Synology DS916+ running DSM 7.2.1-69057 Update 5, with Docker Compose version v2.9.0-6413-g38f6acd.
