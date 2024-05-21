@@ -154,10 +154,11 @@ Use DSM 7 Reverse Proxy to configure secure access to Synology applications. Fol
 
 > **Note**: If you encounter "Socket closed" errors when accessing the DSM UI via reverse proxy and trying to open terminals for running containers, enable WebSocket for the reverse proxy record:
 >
-> 1. Go to `Control Panel -> Application Portal -> Reverse Proxy -> Edit` for your reverse proxy record.
-> 2. Navigate to the `Custom Header` tab.
-> 3. From the `Create` dropdown, select `WebSocket`.
-> 4. Save the changes to resolve the issue.
+> 1. Go to `Control Panel -> Application Portal -> Reverse Proxy`.
+> 2. Select `Edit` for your reverse proxy record.
+> 3. Navigate to the `Custom Header` tab.
+> 4. From the `Create` dropdown, select `WebSocket`.
+> 5. Save the changes to resolve the issue.
 
 ## Environment Details
 
