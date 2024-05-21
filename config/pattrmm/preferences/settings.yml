@@ -20,10 +20,17 @@ libraries:
     extensions:
       in-history:
         range: month
-        trakt_list_privacy: private
+        collection_title: Released This {{range}} in History
         save_folder: "shows/"
+        trakt_list_privacy: private
         meta:
           sort_title: "!020_1_Plex In-History"
+          collection_mode: hide
+          visible_home: true
+          visible_shared: true
+          sync_mode: sync
+          collection_order: critic_rating.desc
+          summary: A collection of shows released this {{range}} in history.
 
   #
   # Definitions for 'Movies' library
@@ -33,7 +40,7 @@ libraries:
     extensions:
       in-history:
         range: month
-        collection_title: Released This {{Range}} In History
+        collection_title: Released This {{Range}} in History
         save_folder: movies/
         trakt_list_privacy: private
         starting: 1975
@@ -46,7 +53,7 @@ libraries:
           visible_shared: true
           sync_mode: sync
           collection_order: critic_rating.desc
-          summary: Movies released this {{range}} in history
+          summary: A collection of movies released this {{range}} in history.
 
 #
 # Standard PATTRMM options
