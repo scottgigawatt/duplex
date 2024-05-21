@@ -10,6 +10,7 @@ This `docker-compose.yml` configures Docker containers for managing a Plex Media
 
 - **Kometa**: Manages Plex Media Server metadata. [Configuration details](https://github.com/scottgigawatt/kometa-config). [More info](https://kometa.wiki/en/nightly/)
 - **ImageMaid**: Cleans Plex Media Server photos. [More info](https://kometa.wiki/en/nightly/kometa/scripts/imagemaid/)
+- **PATTRMM**: Schedule and run media processing tasks. [GitHub](https://github.com/insertdisc/pattrmm)
 - **Tautulli**: Monitors and tracks Plex Media Server usage. [GitHub](https://github.com/Tautulli/Tautulli/)
 - **Notifiarr**: Provides notifications for various media server activities. [GitHub](https://github.com/Notifiarr/notifiarr/)
 - **Watchtower**: Automatically updates Docker container base images. [GitHub](https://github.com/containrrr/watchtower)
@@ -47,6 +48,23 @@ Ensure your Docker Compose version is compatible with version 2.9.
 - **Volumes**:
   - `/volume1/docker/duplex/config/imagemaid:/config:rw`
   - `/volume1/PlexMediaServer/AppData/Plex Media Server:/plex:rw`
+
+#### PATTRMM
+
+- **Image**: `ghcr.io/insertdisc/pattrmm:${PATTRMM_TAG}`
+- **Pull Policy**: Always
+- **Container Name**: `pattrmm-${PATTRMM_TAG}`
+- **Restart Policy**: Unless stopped
+- **Network Mode**: Bridge
+- **Environment Variables**:
+  - `PATTRMM_TIME=${PATTRMM_TIME}`
+  - `PUID=${PATTRMM_PUID}`
+  - `GUID=${PATTRMM_PGID}`
+  - `TZ=${TZ}`
+- **Volumes**:
+  - `${HOST_DOCKER_PATH}/duplex/config/pattrmm/data:/data:rw`
+  - `${HOST_DOCKER_PATH}/duplex/config/pattrmm/preferences:/preferences:rw`
+  - `${HOST_DOCKER_PATH}/kometa-config:/config:rw`
 
 #### Tautulli
 

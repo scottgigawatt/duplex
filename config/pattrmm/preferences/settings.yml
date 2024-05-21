@@ -1,0 +1,101 @@
+#
+# settings.yml: Main settings file for PATTRMM.
+#
+
+#
+# Define the libraries
+#
+libraries:
+  #
+  # Definitions for 'TV Shows' library
+  #
+  TV Shows:
+    trakt_list_privacy: private
+    save_folder: "shows/"
+    overlay_save_folder: "overlays/"
+    refresh: 30
+    days_ahead: 45
+
+    # Additional extensions for 'TV Shows'
+    extensions:
+      in-history:
+        range: month
+        trakt_list_privacy: private
+        save_folder: "shows/"
+
+  #
+  # Definitions for 'Movies' library
+  #
+  Movies:
+    # Additional extensions for 'Movies'
+    extensions:
+      in-history:
+        range: month
+        collection_title: Released This {{Range}} In History
+        save_folder: movies/
+        trakt_list_privacy: private
+        starting: 1975
+        ending: 2020
+        increment: 10
+        meta:
+          sort_title: "!!020"
+          collection_mode: hide
+          visible_home: true
+          visible_shared: true
+          sync_mode: sync
+          collection_order: critic_rating.desc
+          summary: Movies released this {{range}} in history
+
+#
+# Standard PATTRMM options
+#
+date_style: 1
+overlay_prefix: "RETURNING"
+horizontal_align: center
+vertical_align: top
+vertical_offset: 0
+horizontal_offset: 0
+leading_zeros: False
+date_delimiter: "/"
+year_in_dates: False
+returning_soon_bgcolor: "#81007F"
+returning_soon_fontcolor: "#FFFFFF"
+
+#
+# Customize additional 'airing status' overlays
+#
+extra_overlays:
+  new:
+    use: False
+    bgcolor: "#008001"
+    font_color: "#FFFFFF"
+    text: "N E W  S E R I E S"
+    horizontal_align: center
+    vertical_align: top
+  upcoming:
+    use: False
+    bgcolor: "#fc4e03"
+    font_color: "#FFFFFF"
+    text: "U P C O M I N G"
+    horizontal_align: center
+    vertical_align: top
+  airing:
+    use: False
+    bgcolor: "#343399"
+    font_color: "#FFFFFF"
+    text: "A I R I N G"
+  returning:
+    use: False
+    bgcolor: "#81007F"
+    font_color: "#FFFFFF"
+    text: "R E T U R N I N G"
+  ended:
+    use: False
+    bgcolor: "#000000"
+    font_color: "#FFFFFF"
+    text: "E N D E D"
+  canceled:
+    use: False
+    bgcolor: "#CF142B"
+    font_color: "#FFFFFF"
+    text: "C A N C E L E D"

@@ -6,12 +6,16 @@
 # Tools Included:
 #   - Kometa: Manages metadata in Plex Media Server.
 #   - ImageMaid: Cleans photos in Plex Media Server.
+#   - PATTRMM: Creates chronological 'Returning Soon' and 'In-History' collections
 #   - Tautulli: Provides monitoring and tracking tools for Plex Media Server.
+#   - Notifiarr: Provides notifications for applications and websites
 #   - Watchtower: Automates Docker container base image updates.
 #
 # For more information about Kometa, visit: https://kometa.wiki/en/nightly/
 # For more information about ImageMaid, visit: https://kometa.wiki/en/nightly/kometa/scripts/imagemaid/
+# For more information about PATTRMM, visit: https://github.com/InsertDisc/pattrmm
 # For more information about Tautulli, visit: https://github.com/Tautulli/Tautulli
+# For more information about Notifiarr, visit: https://notifiarr.wiki/en/home
 # For more information about Watchtower, visit: https://github.com/containrrr/watchtower
 #
 
@@ -28,9 +32,7 @@ services:
   # Define the 'kometa' service
   #
   kometa:
-    #
     # Docker image and container information
-    #
     image: kometateam/kometa:${KOMETA_TAG} # Run using the specified tag
     pull_policy: always                    # Ensure that the image is always pulled
     container_name: kometa-${KOMETA_TAG}   # Append Docker image tag to container name
@@ -38,26 +40,20 @@ services:
     network_mode: bridge                   # Use the default bridge network
     hostname: kometa                       # Set the container hostname
 
-    #
     # Define the container environment
-    #
     environment:
       - KOMETA_DEBUG=${KOMETA_DEBUG} # Toggles running with extra debug logs
       - TZ=${TZ}                     # Set the timezone
 
-    #
     # Mount host directories into the container
-    #
     volumes:
-      - /volume1/docker/kometa-config:/config:rw # Mount config directory
+      - ${HOST_DOCKER_PATH}/kometa-config:/config:rw # Mount config directory
 
   #
   # Define the 'imagemaid' service
   #
   imagemaid:
-    #
     # Docker image and container information
-    #
     image: kometateam/imagemaid:${IMAGE_MAID_TAG} # Run using the specified tag
     pull_policy: always                           # Ensure that the image is always pulled
     container_name: imagemaid-${IMAGE_MAID_TAG}   # Append Docker image tag to container name
@@ -65,26 +61,45 @@ services:
     network_mode: bridge                          # Use the default bridge network
     hostname: imagemaid                           # Set the container hostname
 
-    #
     # Define the container environment
-    #
     environment:
       - TZ=${TZ} # Set the timezone
 
-    #
     # Mount host directories into the container
-    #
     volumes:
-      - /volume1/docker/duplex/config/imagemaid:/config:rw           # Mount config directory
-      - /volume1/PlexMediaServer/AppData/Plex Media Server:/plex:rw  # Mount plex directory
+      - ${HOST_DOCKER_PATH}/duplex/config/imagemaid:/config:rw            # Mount config directory
+      - ${HOST_VOLUME}/PlexMediaServer/AppData/Plex Media Server:/plex:rw # Mount plex directory
+
+  #
+  # Define the 'pattrmm' (Plex Assistant to the Regional Meta Manager) service
+  #
+  pattrmm:
+    # Docker image and container information
+    image: ghcr.io/insertdisc/pattrmm:${PATTRMM_TAG} # Run using the specified tag
+    pull_policy: always                              # Ensure that the image is always pulled
+    container_name: pattrmm-${PATTRMM_TAG}           # Append Docker image tag to container name
+    restart: unless-stopped                          # Restart the container unless explicitly stopped
+    network_mode: bridge                             # Use the default bridge network
+    hostname: pattrmm                                # Set the container hostname
+
+    # Define the container environment
+    environment:
+      - PATTRMM_TIME=${PATTRMM_TIME} # Set scheduled run time
+      - PUID=${PATTRMM_PUID}         # Set uid from ssh session
+      - GUID=${PATTRMM_PGID}         # Set gid from ssh session
+      - TZ=${TZ}                     # Set the timezone
+
+    # Mount host directories into the container
+    volumes:
+      - ${HOST_DOCKER_PATH}/duplex/config/pattrmm/data:/data:rw               # Data directory
+      - ${HOST_DOCKER_PATH}/duplex/config/pattrmm/preferences:/preferences:rw # Preferences directory
+      - ${HOST_DOCKER_PATH}/kometa-config:/config:rw                          # Kometa config directory
 
   #
   # Define the 'tautulli' service
   #
   tautulli:
-    #
     # Docker image and container information
-    #
     image: tautulli/tautulli:${TAUTULLI_TAG} # Run using the specified tag
     pull_policy: always                      # Ensure that the image is always pulled
     container_name: tautulli-${TAUTULLI_TAG} # Append Docker image tag to container name
@@ -92,33 +107,25 @@ services:
     network_mode: bridge                     # Use the default bridge network
     hostname: tautulli                       # Set the container hostname
 
-    #
     # Define the container environment
-    #
     environment:
-      - PUID=${PUID} # Set uid from your ssh session
-      - PGID=${PGID} # Set gid from your ssh session
-      - TZ=${TZ}     # Set the timezone
+      - PUID=${TAUTULLI_PUID} # Set uid from ssh session
+      - PGID=${TAUTULLI_PGID} # Set gid from ssh session
+      - TZ=${TZ}              # Set the timezone
 
-    #
     # Define the host and container ports
-    #
     ports:
       - "8181:8181"
 
-    #
     # Mount host directories into the container
-    #
     volumes:
-      - /volume1/docker/duplex/config/tautulli:/config:rw # Mount config directory
+      - ${HOST_DOCKER_PATH}/duplex/config/tautulli:/config:rw # Mount config directory
 
   #
   # Define the 'notifiarr' service
   #
   notifiarr:
-    #
     # Docker image and container information
-    #
     image: golift/notifiarr:${NOTIFIARR_TAG}   # Run using the specified tag
     pull_policy: always                        # Ensure that the image is always pulled
     container_name: notifiarr-${NOTIFIARR_TAG} # Append Docker image tag to container name
@@ -126,28 +133,22 @@ services:
     network_mode: bridge                       # Use the default bridge network
     hostname: notifiarr                        # Set the container hostname
 
-    #
     # Define the host and container ports
-    #
     ports:
       - "5454:5454"
 
-    #
     # Mount host directories into the container
-    #
     volumes:
-      - /volume1/docker/duplex/config/notifiarr:/config:rw # Mount config directory
-      - /var/run/utmp:/var/run/utmp:ro                     # Used to count logged in users
-      - /etc/machine-id:/etc/machine-id:ro                 # Used to uniquely identify the host
-      - /etc/localtime:/etc/localtime:ro                   # Setup container with the proper timezone
+      - ${HOST_DOCKER_PATH}/duplex/config/notifiarr:/config:rw # Mount config directory
+      - /var/run/utmp:/var/run/utmp:ro                         # Used to count logged in users
+      - /etc/machine-id:/etc/machine-id:ro                     # Used to uniquely identify the host
+      - /etc/localtime:/etc/localtime:ro                       # Setup container with the proper timezone
 
   #
   # Define the 'watchtower' service
   #
   watchtower:
-    #
     # Docker image and container information
-    #
     image: containrrr/watchtower:${WATCHTOWER_TAG} # Run using the specified tag
     pull_policy: always                            # Ensure that the image is always pulled
     container_name: watchtower-${WATCHTOWER_TAG}   # Append Docker image tag to container name
@@ -155,16 +156,12 @@ services:
     network_mode: bridge                           # Use the default bridge network
     hostname: watchtower                           # Set the container hostname
 
-    #
     # Define the container environment
-    #
     environment:
       - WATCHTOWER_POLL_INTERVAL=${WATCHTOWER_POLL_INTERVAL} # Set how often to check for new images
       - WATCHTOWER_CLEANUP=${WATCHTOWER_CLEANUP}             # Clean old images afer container updates
 
-    #
     # Mount host directories into the container
-    #
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock # Allow container to talk to host Docker API
       - /etc/localtime:/etc/localtime:ro          # Setup container with the proper timezone
