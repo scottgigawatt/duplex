@@ -23,7 +23,7 @@ libraries:
         trakt_list_privacy: private
         save_folder: "shows/"
         meta:
-          sort_title: "!020_"
+          sort_title: "!020_1_Plex In-History"
 
   #
   # Definitions for 'Movies' library
@@ -40,7 +40,7 @@ libraries:
         ending: 2020
         increment: 10
         meta:
-          sort_title: "!020_"
+          sort_title: "!020_1_Plex In-History"
           collection_mode: hide
           visible_home: true
           visible_shared: true
