@@ -47,7 +47,7 @@ services:
 
     # Mount host directories into the container
     volumes:
-      - ${HOST_DOCKER_PATH}/kometa-config:/config:rw # Mount config directory
+      - /volume1/docker/kometa-config:/config:rw # Mount config directory
 
   #
   # Define the 'imagemaid' service
@@ -67,8 +67,8 @@ services:
 
     # Mount host directories into the container
     volumes:
-      - ${HOST_DOCKER_PATH}/duplex/config/imagemaid:/config:rw            # Mount config directory
-      - ${HOST_VOLUME}/PlexMediaServer/AppData/Plex Media Server:/plex:rw # Mount plex directory
+      - /volume1/docker/duplex/config/imagemaid:/config:rw          # Mount config directory
+      - /volume1/PlexMediaServer/AppData/Plex Media Server:/plex:rw # Mount plex directory
 
   #
   # Define the 'pattrmm' (Plex Assistant to the Regional Meta Manager) service
@@ -91,9 +91,9 @@ services:
 
     # Mount host directories into the container
     volumes:
-      - ${HOST_DOCKER_PATH}/duplex/config/pattrmm/data:/data:rw               # Data directory
-      - ${HOST_DOCKER_PATH}/duplex/config/pattrmm/preferences:/preferences:rw # Preferences directory
-      - ${HOST_DOCKER_PATH}/kometa-config:/config:rw                          # Kometa config directory
+      - /volume1/docker/duplex/config/pattrmm/data:/data:rw               # Data directory
+      - /volume1/docker/duplex/config/pattrmm/preferences:/preferences:rw # Preferences directory
+      - /volume1/docker/kometa-config:/config:rw                          # Kometa config directory
 
   #
   # Define the 'tautulli' service
@@ -119,7 +119,7 @@ services:
 
     # Mount host directories into the container
     volumes:
-      - ${HOST_DOCKER_PATH}/duplex/config/tautulli:/config:rw # Mount config directory
+      - /volume1/docker/duplex/config/tautulli:/config:rw # Mount config directory
 
   #
   # Define the 'notifiarr' service
@@ -139,10 +139,10 @@ services:
 
     # Mount host directories into the container
     volumes:
-      - ${HOST_DOCKER_PATH}/duplex/config/notifiarr:/config:rw # Mount config directory
-      - /var/run/utmp:/var/run/utmp:ro                         # Used to count logged in users
-      - /etc/machine-id:/etc/machine-id:ro                     # Used to uniquely identify the host
-      - /etc/localtime:/etc/localtime:ro                       # Setup container with the proper timezone
+      - /volume1/docker/duplex/config/notifiarr:/config:rw # Mount config directory
+      - /var/run/utmp:/var/run/utmp:ro                     # Used to count logged in users
+      - /etc/machine-id:/etc/machine-id:ro                 # Used to uniquely identify the host
+      - /etc/localtime:/etc/localtime:ro                   # Setup container with the proper timezone
 
   #
   # Define the 'watchtower' service
