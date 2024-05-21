@@ -22,6 +22,8 @@ libraries:
         range: month
         trakt_list_privacy: private
         save_folder: "shows/"
+        meta:
+          sort_title: "!020_"
 
   #
   # Definitions for 'Movies' library
@@ -38,7 +40,7 @@ libraries:
         ending: 2020
         increment: 10
         meta:
-          sort_title: "!!020"
+          sort_title: "!020_"
           collection_mode: hide
           visible_home: true
           visible_shared: true
