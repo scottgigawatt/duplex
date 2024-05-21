@@ -20,7 +20,7 @@ libraries:
     extensions:
       in-history:
         range: month
-        collection_title: Released This {{Range}} in History
+        collection_title: Shows This {{Range}} in History
         save_folder: "shows/"
         trakt_list_privacy: private
         meta:
@@ -39,7 +39,7 @@ libraries:
     extensions:
       in-history:
         range: month
-        collection_title: Released This {{Range}} in History
+        collection_title: Movies This {{Range}} in History
         save_folder: movies/
         trakt_list_privacy: private
         starting: 1975
