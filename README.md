@@ -34,7 +34,7 @@ Ensure your Docker Compose version is compatible with version 2.9.
   - `KOMETA_DEBUG=${KOMETA_DEBUG}`
   - `TZ=${TZ}`
 - **Volumes**:
-  - `/volume1/docker/kometa-config:/config:rw`
+  - `${HOST_DOCKER_PATH}/kometa-config:/config:rw`
 
 #### ImageMaid
 
@@ -46,8 +46,8 @@ Ensure your Docker Compose version is compatible with version 2.9.
 - **Environment Variables**:
   - `TZ=${TZ}`
 - **Volumes**:
-  - `/volume1/docker/duplex/config/imagemaid:/config:rw`
-  - `/volume1/PlexMediaServer/AppData/Plex Media Server:/plex:rw`
+  - `${HOST_DOCKER_PATH}/duplex/config/imagemaid:/config:rw`
+  - `${HOST_VOLUME}/PlexMediaServer/AppData/Plex Media Server:/plex:rw`
 
 #### PATTRMM
 
@@ -80,7 +80,7 @@ Ensure your Docker Compose version is compatible with version 2.9.
 - **Ports**:
   - `8181:8181`
 - **Volumes**:
-  - `/volume1/docker/duplex/config/tautulli:/config:rw`
+  - `${HOST_DOCKER_PATH}/duplex/config/tautulli:/config:rw`
 
 #### Notifiarr
 
@@ -93,7 +93,7 @@ Ensure your Docker Compose version is compatible with version 2.9.
 - **Ports**:
   - `5454:5454`
 - **Volumes**:
-  - `/volume1/docker/duplex/config/notifiarr:/config`
+  - `${HOST_DOCKER_PATH}/duplex/config/notifiarr:/config`
   - `/var/run/utmp:/var/run/utmp`
   - `/etc/machine-id:/etc/machine-id`
   - `/etc/localtime:/etc/localtime:ro`
