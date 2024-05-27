@@ -115,7 +115,7 @@ services:
 
     # Define the host and container ports
     ports:
-      - "8181:8181"
+      - "${TAUTULLI_PORT}:8181"
 
     # Mount host directories into the container
     volumes:
@@ -135,7 +135,7 @@ services:
 
     # Define the host and container ports
     ports:
-      - "5454:5454"
+      - "${NOTIFIARR_PORT}:5454"
 
     # Mount host directories into the container
     volumes:
@@ -163,5 +163,5 @@ services:
 
     # Mount host directories into the container
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock # Allow container to talk to host Docker API
-      - /etc/localtime:/etc/localtime:ro          # Setup container with the proper timezone
+      - /var/run/docker.sock:/var/run/docker.sock:rw # Allow container to talk to host Docker API
+      - /etc/localtime:/etc/localtime:ro             # Setup container with the proper timezone

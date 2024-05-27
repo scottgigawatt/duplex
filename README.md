@@ -4,7 +4,9 @@ Duplex simplifies Plex Media Server management on Synology NAS by providing a Do
 
 ## Overview
 
-This `docker-compose.yml` configures Docker containers for managing a Plex Media Server on a Synology NAS. It includes tools for metadata management, photo cleaning, monitoring, and automated updates.
+The `docker-compose.yml` file in this repository configures Docker containers for managing a Plex Media Server on a Synology NAS. It includes tools for metadata management, photo cleaning, monitoring, and automated updates.
+
+For more details on the Docker Compose configuration, refer to the [docker-compose.yml](docker-compose.yml) file in this repository.
 
 ## Included Tools
 
@@ -14,103 +16,6 @@ This `docker-compose.yml` configures Docker containers for managing a Plex Media
 - **Tautulli**: Monitors and tracks Plex Media Server usage. [GitHub](https://github.com/Tautulli/Tautulli/)
 - **Notifiarr**: Provides notifications for various media server activities. [GitHub](https://github.com/Notifiarr/notifiarr/)
 - **Watchtower**: Automatically updates Docker container base images. [GitHub](https://github.com/containrrr/watchtower)
-
-## Docker Compose Configuration
-
-Ensure your Docker Compose version is compatible with version 2.9.
-
-### Services Configuration
-
-> **Note**: Services will need to connect to Plex through the Docker bridge network. Use the gateway IP address of the bridge network assigned to each container to reach the Plex service running natively on the Synology NAS. You can find this IP by navigating to `Container Manager -> Network`.
-
-#### Kometa
-
-- **Image**: `kometateam/kometa:${KOMETA_TAG}`
-- **Pull Policy**: Always
-- **Container Name**: `kometa-${KOMETA_TAG}`
-- **Restart Policy**: Unless stopped
-- **Network Mode**: Bridge
-- **Environment Variables**:
-  - `KOMETA_DEBUG=${KOMETA_DEBUG}`
-  - `TZ=${TZ}`
-- **Volumes**:
-  - `${HOST_DOCKER_PATH}/kometa-config:/config:rw`
-
-#### ImageMaid
-
-- **Image**: `kometateam/imagemaid:${IMAGE_MAID_TAG}`
-- **Pull Policy**: Always
-- **Container Name**: `imagemaid-${IMAGE_MAID_TAG}`
-- **Restart Policy**: Unless stopped
-- **Network Mode**: Bridge
-- **Environment Variables**:
-  - `TZ=${TZ}`
-- **Volumes**:
-  - `${HOST_DOCKER_PATH}/duplex/config/imagemaid:/config:rw`
-  - `${HOST_VOLUME}/PlexMediaServer/AppData/Plex Media Server:/plex:rw`
-
-#### PATTRMM
-
-- **Image**: `ghcr.io/insertdisc/pattrmm:${PATTRMM_TAG}`
-- **Pull Policy**: Always
-- **Container Name**: `pattrmm-${PATTRMM_TAG}`
-- **Restart Policy**: Unless stopped
-- **Network Mode**: Bridge
-- **Environment Variables**:
-  - `PATTRMM_TIME=${PATTRMM_TIME}`
-  - `PUID=${PATTRMM_PUID}`
-  - `GUID=${PATTRMM_PGID}`
-  - `TZ=${TZ}`
-- **Volumes**:
-  - `${HOST_DOCKER_PATH}/duplex/config/pattrmm/data:/data:rw`
-  - `${HOST_DOCKER_PATH}/duplex/config/pattrmm/preferences:/preferences:rw`
-  - `${HOST_DOCKER_PATH}/kometa-config:/config:rw`
-
-#### Tautulli
-
-- **Image**: `tautulli/tautulli:${TAUTULLI_TAG}`
-- **Pull Policy**: Always
-- **Container Name**: `tautulli-${TAUTULLI_TAG}`
-- **Restart Policy**: Unless stopped
-- **Network Mode**: Bridge
-- **Environment Variables**:
-  - `PUID=${PUID}`
-  - `PGID=${PGID}`
-  - `TZ=${TZ}`
-- **Ports**:
-  - `8181:8181`
-- **Volumes**:
-  - `${HOST_DOCKER_PATH}/duplex/config/tautulli:/config:rw`
-
-#### Notifiarr
-
-- **Image**: `golift/notifiarr:${NOTIFIARR_TAG}`
-- **Pull Policy**: Always
-- **Container Name**: `notifiarr-${NOTIFIARR_TAG}`
-- **Restart Policy**: Unless stopped
-- **Network Mode**: Bridge
-- **Hostname**: notifiarr
-- **Ports**:
-  - `5454:5454`
-- **Volumes**:
-  - `${HOST_DOCKER_PATH}/duplex/config/notifiarr:/config`
-  - `/var/run/utmp:/var/run/utmp`
-  - `/etc/machine-id:/etc/machine-id`
-  - `/etc/localtime:/etc/localtime:ro`
-
-#### Watchtower
-
-- **Image**: `containrrr/watchtower:${WATCHTOWER_TAG}`
-- **Pull Policy**: Always
-- **Container Name**: `watchtower-${WATCHTOWER_TAG}`
-- **Restart Policy**: Unless stopped
-- **Network Mode**: Bridge
-- **Environment Variables**:
-  - `WATCHTOWER_POLL_INTERVAL=${WATCHTOWER_POLL_INTERVAL}`
-  - `WATCHTOWER_CLEANUP=${WATCHTOWER_CLEANUP}`
-- **Volumes**:
-  - `/var/run/docker.sock:/var/run/docker.sock`
-  - `/etc/localtime:/etc/localtime:ro`
 
 ## Usage
 
