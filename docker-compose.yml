@@ -176,7 +176,8 @@ services:
 
     # Mount host directories into the container
     volumes:
-      - ${HOST_DUPLEX_CONFIG}/wiki:/docs:rw # Mount config directory
+      - ${HOST_DUPLEX_CONFIG}/wiki:/docs:rw                        # Mount docs directory
+      - ${HOST_DUPLEX_PATH}/.git/modules/config/wiki:/docs/.git:rw # Needed for mkdocs-git-revision plugins
 
   #
   # Define the 'watchtower' service
