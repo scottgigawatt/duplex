@@ -10,7 +10,7 @@ For more details on the Docker Compose configuration, refer to the [docker-compo
 
 ## Included Tools
 
-- **Kometa**: Manages Plex Media Server metadata. [Configuration details](https://github.com/scottgigawatt/kometa-config). [More info](https://kometa.wiki/en/nightly/)
+- **Kometa**: Manages Plex Media Server metadata. Configuration details are in a [separate repository](https://github.com/scottgigawatt/kometa-config) and included as a submodule in this repository for easier deployment. Refer to the [Kometa config submodule](config/kometa). [More info](https://kometa.wiki/en/nightly/)
 - **ImageMaid**: Cleans Plex Media Server photos. [More info](https://kometa.wiki/en/nightly/kometa/scripts/imagemaid/)
 - **PATTRMM**: Schedule and run media processing tasks. [GitHub](https://github.com/insertdisc/pattrmm)
 - **Tautulli**: Monitors and tracks Plex Media Server usage. [GitHub](https://github.com/Tautulli/Tautulli/)
@@ -23,7 +23,12 @@ For more details on the Docker Compose configuration, refer to the [docker-compo
 
 Follow these steps to start the Duplex service stack:
 
-1. Clone this repository to your Synology NAS.
+1. Clone this repository to your Synology NAS, including the submodules.
+
+   ```bash
+   git clone --recurse-submodules https://github.com/yourusername/duplex.git
+   ```
+
 2. Navigate to the directory containing the `docker-compose.yml` file.
 3. Open a terminal or SSH into your Synology NAS.
 4. Run `docker-compose up -d` to start the containers in detached mode.
