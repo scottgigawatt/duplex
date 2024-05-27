@@ -1,3 +1,6 @@
 [submodule "config/kometa"]
 	path = config/kometa
 	url = git@github.com:scottgigawatt/kometa-config.git
+[submodule "config/wiki"]
+	path = config/wiki
+	url = git@github.com:scottgigawatt/wiki.git
