@@ -15,7 +15,9 @@
     "PGID",
     "Plexing",
     "PUID",
+    "scottgigawatt",
     "Tautulli",
-    "utmp"
+    "utmp",
+    "venv"
   ]
 }

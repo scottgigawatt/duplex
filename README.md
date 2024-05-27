@@ -11,11 +11,13 @@ For more details on the Docker Compose configuration, refer to the [docker-compo
 ## Included Tools
 
 - **Kometa**: Manages Plex Media Server metadata. [More info](https://kometa.wiki/en/nightly/)
-  > **Note**: Configuration details are in a [separate repository](https://github.com/scottgigawatt/kometa-config) and included as a submodule in this repository at `config/kometa` for easier deployment.
+  > **Note**: Kometa configuration details are in a [separate repository](https://github.com/scottgigawatt/kometa-config) and included as a submodule in this repository at `config/kometa` for easier deployment.
 - **ImageMaid**: Cleans Plex Media Server photos. [More info](https://kometa.wiki/en/nightly/kometa/scripts/imagemaid/)
 - **PATTRMM**: Schedule and run media processing tasks. [GitHub](https://github.com/insertdisc/pattrmm)
 - **Tautulli**: Monitors and tracks Plex Media Server usage. [GitHub](https://github.com/Tautulli/Tautulli/)
 - **Notifiarr**: Provides notifications for various media server activities. [GitHub](https://github.com/Notifiarr/notifiarr/)
+- **Material for MkDocs**: Documentation site generator using Material for MkDocs. [GitHub](https://github.com/squidfunk/mkdocs-material)
+  > **Note**: MkDocs Wiki configuration details are in a [separate repository](https://github.com/scottgigawatt/wiki) and included as a submodule in this repository at `config/wiki` for easier deployment.
 - **Watchtower**: Automatically updates Docker container base images. [GitHub](https://github.com/containrrr/watchtower)
 
 ## Usage
@@ -30,11 +32,11 @@ Follow these steps to start the Duplex service stack:
    git clone --recurse-submodules https://github.com/yourusername/duplex.git
    ```
 
-2. Navigate to the directory containing the `docker-compose.yml` file.
-3. Open a terminal or SSH into your Synology NAS.
-4. Run `docker-compose up -d` to start the containers in detached mode.
-5. Access the services through their respective endpoints.
-6. Configure services to connect to Plex using the gateway IP address of the Docker bridge network. Find this IP in `Container Manager -> Network` for DSM 7.2 and above.
+1. Navigate to the directory containing the `docker-compose.yml` file.
+1. Open a terminal or SSH into your Synology NAS.
+1. Run `docker-compose up -d` to start the containers in detached mode.
+1. Access the services through their respective endpoints.
+1. Configure services to connect to Plex using the gateway IP address of the Docker bridge network. Find this IP in `Container Manager -> Network` for DSM 7.2 and above.
 
 ### Managing Docker Config Environment Variables
 
@@ -51,11 +53,11 @@ Adjust the values of these environment variables to your requirements.
 To import this project into DSM 7.2 Container Manager's Project feature:
 
 1. SSH into your Synology system.
-2. Clone this repository.
-3. In Container Manager, click **Project** then **Create**.
-4. Provide a title, e.g., **duplex**.
-5. Set the path to the cloned repository.
-6. Proceed through UI prompts to finish creating the project.
+1. Clone this repository.
+1. In Container Manager, click **Project** then **Create**.
+1. Provide a title, e.g., **duplex**.
+1. Set the path to the cloned repository.
+1. Proceed through UI prompts to finish creating the project.
 
 Refer to the official Synology documentation [here](https://kb.synology.com/en-id/DSM/help/ContainerManager/docker_project?version=7) for more on Container Manager Projects.
 
@@ -66,10 +68,10 @@ Use DSM 7 Reverse Proxy to configure secure access to Synology applications. Fol
 > **Note**: If you encounter "Socket closed" errors when accessing the DSM UI via reverse proxy and trying to open terminals for running containers, enable WebSocket for the reverse proxy record:
 >
 > 1. Go to `Control Panel -> Application Portal -> Reverse Proxy`.
-> 2. Select `Edit` for your reverse proxy record.
-> 3. Navigate to the `Custom Header` tab.
-> 4. From the `Create` dropdown, select `WebSocket`.
-> 5. Save the changes to resolve the issue.
+> 1. Select `Edit` for your reverse proxy record.
+> 1. Navigate to the `Custom Header` tab.
+> 1. From the `Create` dropdown, select `WebSocket`.
+> 1. Save the changes to resolve the issue.
 
 ## Environment Details
 

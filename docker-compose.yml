@@ -9,7 +9,7 @@
 #   - PATTRMM: Creates chronological 'Returning Soon' and 'In-History' collections
 #   - Tautulli: Provides monitoring and tracking tools for Plex Media Server.
 #   - Notifiarr: Provides notifications for applications and websites
-#   - MkDocs with Material theme: Generates static documentation from Markdown files with Material theme.
+#   - Material for MkDocs: Generates static documentation from Markdown files with Material theme.
 #   - Watchtower: Automates Docker container base image updates.
 #
 # For more information about Kometa, visit: https://kometa.wiki/en/nightly/
@@ -17,7 +17,7 @@
 # For more information about PATTRMM, visit: https://github.com/InsertDisc/pattrmm
 # For more information about Tautulli, visit: https://github.com/Tautulli/Tautulli
 # For more information about Notifiarr, visit: https://notifiarr.wiki/en/home
-# For more information about MkDocs with Material theme, visit: https://squidfunk.github.io/mkdocs-material/
+# For more information about Material for MkDocs, visit: https://squidfunk.github.io/mkdocs-material/
 # For more information about Watchtower, visit: https://github.com/containrrr/watchtower
 #
 
