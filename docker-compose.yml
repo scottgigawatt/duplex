@@ -157,6 +157,8 @@ services:
       dockerfile: Dockerfile                       # Dockerfile to use for the build
       args:                                        # Build arguments passed to Dockerfile
         MKDOCS_TAG: ${MKDOCS_TAG}                  # Specify FROM base image tag as a build argument
+    entrypoint: sh                                 # Override the image entrypoint
+    command: -c "${MKDOCS_ENTRYPOINT}"             # Supply the entrypoint command
     container_name: mkdocs-${MKDOCS_TAG}           # Append Docker image tag to container name
     restart: unless-stopped                        # Restart the container unless explicitly stopped
     network_mode: bridge                           # Use the default bridge network
@@ -176,8 +178,8 @@ services:
 
     # Mount host directories into the container
     volumes:
-      - ${HOST_DUPLEX_CONFIG}/wiki:/docs:rw                        # Mount docs directory
-      - ${HOST_DUPLEX_PATH}/.git/modules/config/wiki:/docs/.git:rw # Needed for mkdocs-git-revision plugins
+      - ${HOST_DUPLEX_CONFIG}/wiki:/docs:rw                   # Mount docs directory
+      - ${HOST_DUPLEX_PATH}/.git/modules/config/wiki:/.git:rw # Needed for mkdocs-git-revision plugins
 
   #
   # Define the 'watchtower' service
