@@ -9,7 +9,6 @@
 #   - PATTRMM: Creates chronological 'Returning Soon' and 'In-History' collections
 #   - Tautulli: Provides monitoring and tracking tools for Plex Media Server.
 #   - Notifiarr: Provides notifications for applications and websites
-#   - Material for MkDocs: Generates static documentation from Markdown files with Material theme.
 #   - Watchtower: Automates Docker container base image updates.
 #
 # For more information about Kometa, visit: https://kometa.wiki/en/nightly/
@@ -17,7 +16,6 @@
 # For more information about PATTRMM, visit: https://github.com/InsertDisc/pattrmm
 # For more information about Tautulli, visit: https://github.com/Tautulli/Tautulli
 # For more information about Notifiarr, visit: https://notifiarr.wiki/en/home
-# For more information about Material for MkDocs, visit: https://squidfunk.github.io/mkdocs-material/
 # For more information about Watchtower, visit: https://github.com/containrrr/watchtower
 #
 
@@ -145,41 +143,6 @@ services:
       - /var/run/utmp:/var/run/utmp:ro             # Used to count logged in users
       - /etc/machine-id:/etc/machine-id:ro         # Used to uniquely identify the host
       - /etc/localtime:/etc/localtime:ro           # Setup container with the proper timezone
-
-  #
-  # Define the 'mkdocs' service
-  #
-  mkdocs:
-    # Docker image build and container information
-    image: squidfunk/mkdocs-material:${MKDOCS_TAG} # Run using the specified tag
-    build:                                         # Build to install additional plugins
-      context: config/wiki                         # Docker build context
-      dockerfile: Dockerfile                       # Dockerfile to use for the build
-      args:                                        # Build arguments passed to Dockerfile
-        MKDOCS_TAG: ${MKDOCS_TAG}                  # Specify FROM base image tag as a build argument
-    entrypoint: sh                                 # Override the image entrypoint
-    command: -c "${MKDOCS_ENTRYPOINT}"             # Supply the entrypoint command
-    container_name: mkdocs-${MKDOCS_TAG}           # Append Docker image tag to container name
-    restart: unless-stopped                        # Restart the container unless explicitly stopped
-    network_mode: bridge                           # Use the default bridge network
-    hostname: mkdocs                               # Set the container hostname
-
-    # Define resource limits
-    mem_limit: ${MKDOCS_MEM_LIMIT}
-    cpu_shares: ${MKDOCS_CPU_SHARES}
-
-    # Enable interactive terminal for the container
-    stdin_open: true
-    tty: true
-
-    # Define the host and container ports
-    ports:
-      - ${MKDOCS_PORT}:8000
-
-    # Mount host directories into the container
-    volumes:
-      - ${HOST_DUPLEX_CONFIG}/wiki:/docs:rw                   # Mount docs directory
-      - ${HOST_DUPLEX_PATH}/.git/modules/config/wiki:/.git:rw # Needed for mkdocs-git-revision plugins
 
   #
   # Define the 'watchtower' service

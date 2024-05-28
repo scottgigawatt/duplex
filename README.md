@@ -16,8 +16,6 @@ For more details on the Docker Compose configuration, refer to the [docker-compo
 - **PATTRMM**: Schedule and run media processing tasks. [GitHub](https://github.com/insertdisc/pattrmm)
 - **Tautulli**: Monitors and tracks Plex Media Server usage. [GitHub](https://github.com/Tautulli/Tautulli/)
 - **Notifiarr**: Provides notifications for various media server activities. [GitHub](https://github.com/Notifiarr/notifiarr/)
-- **Material for MkDocs**: Documentation site generator using Material for MkDocs. [GitHub](https://github.com/squidfunk/mkdocs-material)
-  > **Note**: MkDocs Wiki configuration details are in a [separate repository](https://github.com/scottgigawatt/wiki) and included as a submodule in this repository at `config/wiki` for easier deployment.
 - **Watchtower**: Automatically updates Docker container base images. [GitHub](https://github.com/containrrr/watchtower)
 
 ## Usage
