@@ -14,7 +14,7 @@ libraries:
     save_folder: "shows/"
     overlay_save_folder: "overlays/"
     refresh: 30
-    days_ahead: 45
+    days_ahead: 90
 
     # Additional extensions for 'TV Shows'
     extensions:
