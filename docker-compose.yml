@@ -1,3 +1,4 @@
+---
 #
 # docker-compose.yml: Docker Utilities for Plex (Duplex) contains a Docker Compose
 # configuration tailored for a Synology NAS environments, simplifying the setup process
@@ -25,6 +26,20 @@
 version: "2.9"
 
 #
+# Setup default propreties for all or most containers
+#
+x-default-container: &default-container # YAML anchor for default container
+  pull_policy: always                   # Ensure that the image is always pulled
+  restart: unless-stopped               # Restart the container unless explicitly stopped
+  network_mode: bridge                  # Use the default bridge network
+
+#
+# Setup default variables for all or most containers
+#
+x-default-environment: &default-environment # YAML anchor for default environment
+    TZ: ${TZ}                               # Set the appropriate timezone
+
+#
 # Define the services section
 #
 services:
@@ -33,17 +48,15 @@ services:
   #
   kometa:
     # Docker image and container information
+    <<: *default-container                 # Pull in the default container information
     image: kometateam/kometa:${KOMETA_TAG} # Run using the specified tag
-    pull_policy: always                    # Ensure that the image is always pulled
     container_name: kometa-${KOMETA_TAG}   # Append Docker image tag to container name
-    restart: unless-stopped                # Restart the container unless explicitly stopped
-    network_mode: bridge                   # Use the default bridge network
     hostname: kometa                       # Set the container hostname
 
     # Define the container environment
     environment:
-      - KOMETA_DEBUG=${KOMETA_DEBUG} # Toggles running with extra debug logs
-      - TZ=${TZ}                     # Set the timezone
+      <<: *default-environment      # Pull in the default environment
+      KOMETA_DEBUG: ${KOMETA_DEBUG} # Toggles running with extra debug logs
 
     # Mount host directories into the container
     volumes:
@@ -54,16 +67,14 @@ services:
   #
   imagemaid:
     # Docker image and container information
+    <<: *default-container                        # Pull in the default container information
     image: kometateam/imagemaid:${IMAGE_MAID_TAG} # Run using the specified tag
-    pull_policy: always                           # Ensure that the image is always pulled
     container_name: imagemaid-${IMAGE_MAID_TAG}   # Append Docker image tag to container name
-    restart: unless-stopped                       # Restart the container unless explicitly stopped
-    network_mode: bridge                          # Use the default bridge network
     hostname: imagemaid                           # Set the container hostname
 
     # Define the container environment
     environment:
-      - TZ=${TZ} # Set the timezone
+      <<: *default-environment # Pull in the default environment
 
     # Mount host directories into the container
     volumes:
@@ -75,19 +86,17 @@ services:
   #
   pattrmm:
     # Docker image and container information
+    <<: *default-container                           # Pull in the default container information
     image: ghcr.io/insertdisc/pattrmm:${PATTRMM_TAG} # Run using the specified tag
-    pull_policy: always                              # Ensure that the image is always pulled
     container_name: pattrmm-${PATTRMM_TAG}           # Append Docker image tag to container name
-    restart: unless-stopped                          # Restart the container unless explicitly stopped
-    network_mode: bridge                             # Use the default bridge network
     hostname: pattrmm                                # Set the container hostname
 
     # Define the container environment
     environment:
-      - PATTRMM_TIME=${PATTRMM_TIME} # Set scheduled run time
-      - PUID=${PATTRMM_PUID}         # Set uid from ssh session
-      - GUID=${PATTRMM_PGID}         # Set gid from ssh session
-      - TZ=${TZ}                     # Set the timezone
+      <<: *default-environment      # Pull in the default environment
+      PATTRMM_TIME: ${PATTRMM_TIME} # Set scheduled run time
+      PUID: ${PATTRMM_PUID}         # Set uid from ssh session
+      GUID: ${PATTRMM_PGID}         # Set gid from ssh session
 
     # Mount host directories into the container
     volumes:
@@ -100,18 +109,16 @@ services:
   #
   tautulli:
     # Docker image and container information
+    <<: *default-container                   # Pull in the default container information
     image: tautulli/tautulli:${TAUTULLI_TAG} # Run using the specified tag
-    pull_policy: always                      # Ensure that the image is always pulled
     container_name: tautulli-${TAUTULLI_TAG} # Append Docker image tag to container name
-    restart: unless-stopped                  # Restart the container unless explicitly stopped
-    network_mode: bridge                     # Use the default bridge network
     hostname: tautulli                       # Set the container hostname
 
     # Define the container environment
     environment:
-      - PUID=${TAUTULLI_PUID} # Set uid from ssh session
-      - PGID=${TAUTULLI_PGID} # Set gid from ssh session
-      - TZ=${TZ}              # Set the timezone
+      <<: *default-environment # Pull in the default environment
+      PUID: ${TAUTULLI_PUID}   # Set uid from ssh session
+      PGID: ${TAUTULLI_PGID}   # Set gid from ssh session
 
     # Define the host and container ports
     ports:
@@ -126,12 +133,14 @@ services:
   #
   notifiarr:
     # Docker image and container information
+    <<: *default-container                     # Pull in the default container information
     image: golift/notifiarr:${NOTIFIARR_TAG}   # Run using the specified tag
-    pull_policy: always                        # Ensure that the image is always pulled
     container_name: notifiarr-${NOTIFIARR_TAG} # Append Docker image tag to container name
-    restart: unless-stopped                    # Restart the container unless explicitly stopped
-    network_mode: bridge                       # Use the default bridge network
     hostname: notifiarr                        # Set the container hostname
+
+    # Define the container environment
+    environment:
+      <<: *default-environment # Pull in the default environment
 
     # Define the host and container ports
     ports:
@@ -149,17 +158,16 @@ services:
   #
   watchtower:
     # Docker image and container information
+    <<: *default-container                         # Pull in the default container information
     image: containrrr/watchtower:${WATCHTOWER_TAG} # Run using the specified tag
-    pull_policy: always                            # Ensure that the image is always pulled
     container_name: watchtower-${WATCHTOWER_TAG}   # Append Docker image tag to container name
-    restart: unless-stopped                        # Restart the container unless explicitly stopped
-    network_mode: bridge                           # Use the default bridge network
     hostname: watchtower                           # Set the container hostname
 
     # Define the container environment
     environment:
-      - WATCHTOWER_POLL_INTERVAL=${WATCHTOWER_POLL_INTERVAL} # Set how often to check for new images
-      - WATCHTOWER_CLEANUP=${WATCHTOWER_CLEANUP}             # Clean old images afer container updates
+      <<: *default-environment                              # Pull in the default environment
+      WATCHTOWER_POLL_INTERVAL: ${WATCHTOWER_POLL_INTERVAL} # Set how often to check for new images
+      WATCHTOWER_CLEANUP: ${WATCHTOWER_CLEANUP}             # Clean old images afer container updates
 
     # Mount host directories into the container
     volumes:
