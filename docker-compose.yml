@@ -165,9 +165,13 @@ services:
 
     # Define the container environment
     environment:
-      <<: *default-environment                              # Pull in the default environment
-      WATCHTOWER_POLL_INTERVAL: ${WATCHTOWER_POLL_INTERVAL} # Set how often to check for new images
-      WATCHTOWER_CLEANUP: ${WATCHTOWER_CLEANUP}             # Clean old images afer container updates
+      <<: *default-environment                                    # Pull in the default environment
+      WATCHTOWER_POLL_INTERVAL: ${WATCHTOWER_POLL_INTERVAL}       # Set how often to check for new images
+      WATCHTOWER_CLEANUP: ${WATCHTOWER_CLEANUP}                   # Clean old images afer updates
+      WATCHTOWER_INCLUDE_STOPPED: ${WATCHTOWER_INCLUDE_STOPPED}   # Update stopped containers as well
+      WATCHTOWER_REVIVE_STOPPED: ${WATCHTOWER_REVIVE_STOPPED}     # Start stopped containers after update
+      WATCHTOWER_NOTIFICATIONS: ${WATCHTOWER_NOTIFICATIONS}       # Send notifications for updates
+      WATCHTOWER_NOTIFICATION_URL: ${WATCHTOWER_NOTIFICATION_URL} # URL for webhook notifications
 
     # Mount host directories into the container
     volumes:
