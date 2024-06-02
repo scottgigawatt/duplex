@@ -172,9 +172,6 @@ services:
       WATCHTOWER_REVIVE_STOPPED: ${WATCHTOWER_REVIVE_STOPPED}     # Start stopped containers after update
       WATCHTOWER_NOTIFICATIONS: ${WATCHTOWER_NOTIFICATIONS}       # Send notifications for updates
       WATCHTOWER_NOTIFICATION_URL: ${WATCHTOWER_NOTIFICATION_URL} # URL for webhook notifications
-      WATCHTOWER_NOTIFICATION_TEMPLATE: |-                        # Format notificaiton messages
-        {{range .}}{{.Time.Format "12-01-2020 15:04:05"}} ({{.Level}})':' {{.Message}}{{println}}{{end}}
-
 
     # Mount host directories into the container
     volumes:
