@@ -1,4 +1,3 @@
----
 #
 # docker-compose.yml: Docker Utilities for Plex (Duplex) contains a Docker Compose
 # configuration tailored for a Synology NAS environments, simplifying the setup process
@@ -19,6 +18,8 @@
 # For more information about Notifiarr, visit: https://notifiarr.wiki/en/home
 # For more information about Watchtower, visit: https://github.com/containrrr/watchtower
 #
+
+---
 
 #
 # Docker Compose version on the target system
