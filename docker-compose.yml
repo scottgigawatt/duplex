@@ -121,7 +121,7 @@ services:
     # Add container labels
     labels:
       # Homepage service labels (https://gethomepage.dev)
-      homepage.group: Media                                 # Homepage service grouping
+      homepage.group: Monitoring                            # Homepage service grouping
       homepage.name: Tautulli                               # Homepage service name
       homepage.icon: tautulli.png                           # Homepage service icon
       homepage.href: http://localhost:${TAUTULLI_PORT}      # Homepage service URL
