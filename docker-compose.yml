@@ -113,6 +113,11 @@ services:
     container_name: tautulli-${TAUTULLI_TAG} # Append Docker image tag to container name
     hostname: tautulli                       # Set the container hostname
 
+    # Define networks for the container
+    networks:
+      - default  # Add the default duplex network
+      - plundarr # Add the plundarr network (for homepage visibility)
+
     # Add container labels
     labels:
       # Homepage service labels (https://gethomepage.dev)
@@ -200,3 +205,7 @@ networks:
   # Configure the default network
   default:
     name: ${COMPOSE_PROJECT_NAME} # Use the name of the compose project
+
+  # Configure the plundarr network for containers that need access to it
+  plundarr:
+    name: ${PLUNDARR_PROJECT_NAME} # Use the name of the plundarr compose project
