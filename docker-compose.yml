@@ -1,3 +1,4 @@
+---
 #
 # docker-compose.yml: Docker Utilities for Plex (Duplex) contains a Docker Compose
 # configuration tailored for a Synology NAS environments, simplifying the setup process
@@ -18,8 +19,6 @@
 # For more information about Notifiarr, visit: https://notifiarr.wiki/en/home
 # For more information about Watchtower, visit: https://github.com/containrrr/watchtower
 #
-
----
 
 #
 # Docker Compose version on the target system
@@ -114,6 +113,22 @@ services:
     image: tautulli/tautulli:${TAUTULLI_TAG} # Run using the specified tag
     container_name: tautulli-${TAUTULLI_TAG} # Append Docker image tag to container name
     hostname: tautulli                       # Set the container hostname
+
+    # Add container labels
+    labels:
+      # Homepage service labels (https://gethomepage.dev)
+      homepage.group: Media                                 # Homepage service grouping
+      homepage.name: Tautulli                               # Homepage service name
+      homepage.icon: tautulli.png                           # Homepage service icon
+      homepage.href: http://localhost:${TAUTULLI_PORT}      # Homepage service URL
+      homepage.description: Plex monitoring                 # Homepage service description
+      homepage.weight: 4                                    # Homepage service grouping order
+      homepage.widget.type: tautulli                        # Homepage widget type
+      homepage.widget.url: http://tautulli:${TAUTULLI_PORT} # Homepage widget URL
+      homepage.widget.key: ${TAUTULLI_API_KEY}              # Homepage widget API key
+      homepage.widget.enableUser: true                      # Homepage widget option, defaults to false
+      homepage.widget.showEpisodeNumber: true               # Homepage widget option, defaults to false
+      homepage.widget.expandOneStreamToTwoRows: false       # Homepage widget option, defaults to true
 
     # Define the container environment
     environment:
