@@ -118,11 +118,6 @@ services:
     container_name: tautulli-${TAUTULLI_TAG} # Append Docker image tag to container name
     hostname: tautulli                       # Set the container hostname
 
-    # Define networks for the container
-    networks:
-      - default  # Add the default duplex network
-      - plundarr # Add the plundarr network (for homepage visibility)
-
     # Define the container environment
     environment:
       <<: *default-environment # Pull in the default environment
@@ -195,12 +190,8 @@ networks:
   default:
     name: ${COMPOSE_PROJECT_NAME} # Use the name of the compose project
     ipam:                         # IP Address Management
-      driver: bridge              # Use the bridge driver
+      driver: default             # Use the default driver
       config:
         - subnet: ${COMPOSE_NETWORK_SUBNET}     # Subnet in CIDR format that represents a network segment
           ip_range: ${COMPOSE_NETWORK_IP_RANGE} # Range of IPs from which to allocate container IPs
           gateway: ${COMPOSE_NETWORK_GATEWAY}   # Gateway for the master subnet
-
-  # Configure the plundarr network for containers that need access to it
-  plundarr:
-    name: ${PLUNDARR_PROJECT_NAME} # Use the name of the plundarr compose project
