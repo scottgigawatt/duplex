@@ -1,14 +1,14 @@
-# Duplex
+# Duplex 📺🚀
 
 Duplex simplifies Plex Media Server management on Synology NAS by providing a Docker Compose configuration with essential tools and utilities.
 
-## Overview
+## Overview 📋
 
 The `docker-compose.yml` file in this repository configures Docker containers for managing a Plex Media Server on a Synology NAS. It includes tools for metadata management, photo cleaning, monitoring, and automated updates.
 
 For more details on the Docker Compose configuration, refer to the [docker-compose.yml](docker-compose.yml) file in this repository.
 
-## Included Tools
+## Included Tools 🛠️
 
 - **Kometa**: Manages Plex Media Server metadata. [More info](https://kometa.wiki/en/nightly/)
   > **Note**: Kometa configuration details are in a [separate repository](https://github.com/scottgigawatt/kometa-config) and included as a submodule in this repository at `config/kometa` for easier deployment.
@@ -19,7 +19,7 @@ For more details on the Docker Compose configuration, refer to the [docker-compo
 - **Watchtower**: Automatically updates Docker container base images. [GitHub](https://github.com/containrrr/watchtower)
 - **Kometa Overlay Reset**: Removes all overlays placed on a Plex Library. [More info](https://github.com/kometa-team/overlay-reset)
 
-## Usage
+## Usage 🚀
 
 ### Starting the Service Stack
 
@@ -37,7 +37,7 @@ Follow these steps to start the Duplex service stack:
 5. Access the services through their respective endpoints.
 6. Configure services to connect to Plex using the gateway IP address of the Docker bridge network. Find this IP in `Container Manager -> Network` for DSM 7.2 and above.
 
-### Managing Docker Config Environment Variables
+### Managing Docker Config Environment Variables 🧩
 
 The configurations for the main Docker Compose file, ImageMaid, and Overlay Reset are managed using `.env` files. The `example.env` files can be copied to `.env` and updated to change the behavior.
 
@@ -53,7 +53,7 @@ KOMETA_TAG="latest" docker-compose up -d
 
 Adjust the values of these environment variables to your requirements.
 
-### Managing the Project with DSM Container Manager
+### Managing the Project with DSM Container Manager 📦
 
 To import this project into DSM 7.2 Container Manager's Project feature:
 
@@ -66,7 +66,7 @@ To import this project into DSM 7.2 Container Manager's Project feature:
 
 Refer to the official Synology documentation [here](https://kb.synology.com/en-id/DSM/help/ContainerManager/docker_project?version=7) for more on Container Manager Projects.
 
-### Secure Access to Synology Applications
+### Secure Access to Synology Applications 🔒
 
 Use DSM 7 Reverse Proxy to configure secure access to Synology applications. Follow the guide [here](https://mariushosting.com/synology-how-to-use-reverse-proxy-on-dsm-7/) for DSM 7.
 
@@ -78,14 +78,14 @@ Use DSM 7 Reverse Proxy to configure secure access to Synology applications. Fol
 > 4. From the `Create` dropdown, select `WebSocket`.
 > 5. Save the changes to resolve the issue.
 
-## Environment Details
+## Environment Details 🖥️
 
 Tested on Synology DS916+ running DSM 7.2.1-69057 Update 5, with Docker Compose version v2.9.0-6413-g38f6acd.
 
-## License
+## License 📄
 
 Licensed under the Apache 2 License - see [LICENSE](LICENSE) for details.
 
 ---
 
-Contribute or provide feedback to improve the Duplex repository. Happy Plexing!
+Contribute or provide feedback to improve the Duplex repository. Happy Plexing! 🌟
