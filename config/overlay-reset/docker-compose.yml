@@ -18,7 +18,7 @@ version: "2.9"
 #
 x-default-container: &default-container # YAML anchor for default container
   pull_policy: always                   # Ensure that the image is always pulled
-  restart: no                           # Restart the container unless explicitly stopped
+  restart: "no"                         # Restart the container unless explicitly stopped
   logging:                              # Configure container logging options
     driver: "json-file"                 # Use JSON file logging driver
     options:
