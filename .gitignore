@@ -8,6 +8,8 @@ logs/
 newsletters/
 temp/
 *.lock
-*.db
+*.db*
 UUID
 config.ini
+config/pattrmm/data/*
+!**/README.md
