@@ -5,6 +5,7 @@
     "fontcolor",
     "golift",
     "imagemaid",
+    "imdb",
     "insertdisc",
     "Kometa",
     "kometateam",
@@ -17,7 +18,8 @@
     "PUID",
     "scottgigawatt",
     "Tautulli",
+    "tmdb",
     "utmp",
     "venv"
-  ]
+]
 }
