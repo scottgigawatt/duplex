@@ -61,6 +61,7 @@ services:
     environment:
       <<: *default-environment      # Pull in the default environment
       KOMETA_DEBUG: ${KOMETA_DEBUG} # Toggles running with extra debug logs
+      KOMETA_TIMES: ${KOMETA_TIMES} # Set the times Kometa will run
 
     # Mount host directories into the container
     volumes:
