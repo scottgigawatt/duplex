@@ -58,7 +58,7 @@ Adjust the values of these environment variables to your requirements.
 To import this project into DSM 7.2 Container Manager's Project feature:
 
 1. SSH into your Synology system.
-2. Clone this repository.
+2. Clone this repository, e.g. to `/volume1/docker/duplex`.
 3. In Container Manager, click **Project** then **Create**.
 4. Provide a title, e.g., **duplex**.
 5. Set the path to the cloned repository.
