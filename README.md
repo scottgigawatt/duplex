@@ -14,11 +14,11 @@ For more details on the Docker Compose configuration, refer to the [docker-compo
 |-------------------------|--------------------------------------------------------------|---------------------------------------------------------------------------|
 | **Kometa** ✨            | Manages Plex Media Server metadata.                          | [Kometa Info](https://kometa.wiki/en/nightly/)                            |
 | **ImageMaid** 🧼        | Cleans Plex Media Server photos.                             | [ImageMaid Info](https://kometa.wiki/en/nightly/kometa/scripts/imagemaid/)|
+| **Overlay Reset** 🧹    | Removes all overlays placed on a Plex Library.               | [Kometa Overlay Reset Info](https://github.com/kometa-team/overlay-reset) |
 | **PATTRMM** 📅          | Schedule and run media processing tasks.                     | [PATTRMM GitHub](https://github.com/insertdisc/pattrmm)                   |
 | **Tautulli** 📊         | Monitors and tracks Plex Media Server usage.                 | [Tautulli GitHub](https://github.com/Tautulli/Tautulli/)                  |
 | **Notifiarr** 🔔        | Provides notifications for various media server activities.  | [Notifiarr GitHub](https://github.com/Notifiarr/notifiarr/)               |
 | **Watchtower** 🛠️       | Automatically updates Docker container base images.          | [Watchtower GitHub](https://github.com/containrrr/watchtower)             |
-| **Kometa Overlay Reset** 🧹 | Removes all overlays placed on a Plex Library.             | [Kometa Overlay Reset Info](https://github.com/kometa-team/overlay-reset) |
 
 ## Usage 🚀
 
