@@ -1,8 +1,9 @@
-# Kometa Overlay Reset Configuration
 
-Welcome to the `overlay-reset` directory. This directory contains the Docker Compose configuration for Kometa Overlay Reset, a Python 3 project designed to remove overlays from Plex libraries.
+# 🧹 Kometa Overlay Reset Configuration
 
-## Usage
+Welcome to the `overlay-reset` directory! 🎉 This directory contains the Docker Compose configuration for **Kometa Overlay Reset**, a Python 3 project designed to remove overlays from your Plex libraries. 🖥️
+
+## 🛠️ Usage
 
 1. **Clone Repository:**
 
@@ -12,7 +13,7 @@ Welcome to the `overlay-reset` directory. This directory contains the Docker Com
    ```
 
 2. **Configure Environment:**
-   - Copy `example.env` to `.env` and configure the variables.
+   - 📋 Copy `example.env` to `.env` and configure the variables.
 
 3. **Run Docker Compose:**
 
@@ -20,12 +21,17 @@ Welcome to the `overlay-reset` directory. This directory contains the Docker Com
    docker-compose up -d
    ```
 
-## Files
+   🌀 This will start the container in the background.
 
-- **docker-compose.yml**: Docker Compose configuration.
-- **example.env**: Example environment file.
+## 📂 Files
+
+- **`docker-compose.yml`**: Docker Compose configuration.
+- **`example.env`**: Example environment file for setting variables.
+
+## 🔗 More Information
 
 For more details, visit the [Kometa Overlay Reset GitHub](https://github.com/kometa-team/overlay-reset).
 
 ---
-Enjoy cleaning up your Plex library!
+
+✨ Enjoy a clutter-free Plex library! 🚀
