@@ -59,3 +59,24 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:rw # Allow container to talk to host Docker API
       - /etc/localtime:/etc/localtime:ro             # Setup container with the proper timezone
+
+    # Docker networks to search for image updates
+    networks:
+      - ${COMPOSE_NETWORK_DUPLEX}   # Duplex stack network name
+      - ${COMPOSE_NETWORK_PLUNDARR} # Plundarr stack network name
+
+#
+# Define the networks section
+#
+networks:
+  # Configure the duplex network
+  duplex:
+    name: ${COMPOSE_NETWORK_DUPLEX} # Duplex stack network name
+    external: true                  # Connect to an external network not defined here
+    driver: default                 # Use the default driver
+
+  # Configure the plundarr network
+  plundarr:
+    name: ${COMPOSE_NETWORK_PLUNDARR} # Plundarr stack network name
+    external: true                    # Connect to an external network not defined here
+    driver: default                   # Use the default driver
