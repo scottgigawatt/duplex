@@ -43,6 +43,7 @@ services:
     <<: *default-container                           # Pull in the default container information
     image: containrrr/watchtower:${WATCHTOWER_TAG}   # Run using the specified tag
     container_name: watchtower-run-${WATCHTOWER_TAG} # Append Docker image tag to container name
+    restart: "no"                                    # Do not restart the container once it exits
     hostname: watchtower-run                         # Set the container hostname
 
     # Define the container environment
