@@ -40,10 +40,10 @@ services:
   #
   watchtower-run:
     # Docker image and container information
-    <<: *default-container                            # Pull in the default container information
-    image: containrrr/watchtower:${WATCHTOWER_TAG}    # Run using the specified tag
+    <<: *default-container                           # Pull in the default container information
+    image: containrrr/watchtower:${WATCHTOWER_TAG}   # Run using the specified tag
     container_name: watchtower-run-${WATCHTOWER_TAG} # Append Docker image tag to container name
-    hostname: watchtower                              # Set the container hostname
+    hostname: watchtower-run                         # Set the container hostname
 
     # Define the container environment
     environment:
@@ -59,17 +59,3 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:rw # Allow container to talk to host Docker API
       - /etc/localtime:/etc/localtime:ro             # Setup container with the proper timezone
-
-#
-# Define the networks section
-#
-networks:
-  # Configure the default network
-  default:
-    name: ${COMPOSE_PROJECT_NAME} # Use the name of the compose project
-    ipam:                         # IP Address Management
-      driver: default             # Use the default driver
-      config:
-        - subnet: ${COMPOSE_NETWORK_SUBNET}     # Subnet in CIDR format that represents a network segment
-          ip_range: ${COMPOSE_NETWORK_IP_RANGE} # Range of IPs from which to allocate container IPs
-          gateway: ${COMPOSE_NETWORK_GATEWAY}   # Gateway for the master subnet

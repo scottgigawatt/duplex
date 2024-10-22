@@ -168,6 +168,10 @@ services:
     container_name: watchtower-${WATCHTOWER_TAG}   # Append Docker image tag to container name
     hostname: watchtower                           # Set the container hostname
 
+    # Add container labels
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false" # Exclude container from (run once) Watchtower
+
     # Define the container environment
     environment:
       <<: *default-environment                                    # Pull in the default environment
