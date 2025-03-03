@@ -16,20 +16,20 @@ version: "2.9"
 #
 # Setup default properties for all or most containers
 #
-x-default-container: &default-container # YAML anchor for default container
-  pull_policy: always                   # Ensure that the image is always pulled
-  restart: "no"                         # Restart the container unless explicitly stopped
-  logging:                              # Configure container logging options
-    driver: "json-file"                 # Use JSON file logging driver
+x-default-container: &default-container  # YAML anchor for default container
+  pull_policy: always                    # Ensure that the image is always pulled
+  restart: "no"                          # Restart the container unless explicitly stopped
+  logging:                               # Configure container logging options
+    driver: "json-file"                  # Use JSON file logging driver
     options:
-      max-size: ${LOG_MAX_SIZE}         # Maximum file size for logs files
-      max-file: ${LOG_MAX_FILE}         # Maximum number of log files to retain
+      max-size: ${LOG_MAX_SIZE}          # Maximum file size for logs files
+      max-file: ${LOG_MAX_FILE}          # Maximum number of log files to retain
 
 #
 # Setup default variables for all or most containers
 #
-x-default-environment: &default-environment # YAML anchor for default environment
-    TZ: ${TZ}                               # Set the appropriate timezone
+x-default-environment: &default-environment  # YAML anchor for default environment
+    TZ: ${TZ}                                # Set the appropriate timezone
 
 #
 # Define the services section
@@ -40,15 +40,15 @@ services:
   #
   overlay-reset:
     # Docker image and container information
-    <<: *default-container                               # Pull in the default container information
-    image: kometateam/overlay-reset:${OVERLAY_RESET_TAG} # Run using the specified tag
-    container_name: overlay-reset-${OVERLAY_RESET_TAG}   # Append Docker image tag to container name
-    hostname: overlay-reset                              # Set the container hostname
+    <<: *default-container                                # Pull in the default container information
+    image: kometateam/overlay-reset:${OVERLAY_RESET_TAG}  # Run using the specified tag
+    container_name: overlay-reset-${OVERLAY_RESET_TAG}    # Append Docker image tag to container name
+    hostname: overlay-reset                               # Set the container hostname
 
     # Define the container environment
     environment:
-      <<: *default-environment # Pull in the default environment
+      <<: *default-environment  # Pull in the default environment
 
     # Mount host directories into the container
     volumes:
-      - ${HOST_DUPLEX_CONFIG}/overlay-reset:/config # Mount the config persistent storage directory
+      - ${HOST_DUPLEX_CONFIG}/overlay-reset:/config  # Mount the config persistent storage directory

@@ -16,20 +16,20 @@ version: "2.9"
 #
 # Setup default properties for all or most containers
 #
-x-default-container: &default-container # YAML anchor for default container
-  pull_policy: always                   # Ensure that the image is always pulled
-  restart: unless-stopped               # Restart the container unless explicitly stopped
-  logging:                              # Configure container logging options
-    driver: "json-file"                 # Use JSON file logging driver
+x-default-container: &default-container  # YAML anchor for default container
+  pull_policy: always                    # Ensure that the image is always pulled
+  restart: unless-stopped                # Restart the container unless explicitly stopped
+  logging:                               # Configure container logging options
+    driver: "json-file"                  # Use JSON file logging driver
     options:
-      max-size: ${LOG_MAX_SIZE}         # Maximum file size for logs files
-      max-file: ${LOG_MAX_FILE}         # Maximum number of log files to retain
+      max-size: ${LOG_MAX_SIZE}          # Maximum file size for logs files
+      max-file: ${LOG_MAX_FILE}          # Maximum number of log files to retain
 
 #
 # Setup default variables for all or most containers
 #
-x-default-environment: &default-environment # YAML anchor for default environment
-    TZ: ${TZ}                               # Set the appropriate timezone
+x-default-environment: &default-environment  # YAML anchor for default environment
+    TZ: ${TZ}                                # Set the appropriate timezone
 
 #
 # Define the services section
@@ -40,31 +40,31 @@ services:
   #
   watchtower-run:
     # Docker image and container information
-    <<: *default-container                           # Pull in the default container information
-    image: containrrr/watchtower:${WATCHTOWER_TAG}   # Run using the specified tag
-    container_name: watchtower-run-${WATCHTOWER_TAG} # Append Docker image tag to container name
-    restart: "no"                                    # Do not restart the container once it exits
-    hostname: watchtower-run                         # Set the container hostname
+    <<: *default-container                            # Pull in the default container information
+    image: containrrr/watchtower:${WATCHTOWER_TAG}    # Run using the specified tag
+    container_name: watchtower-run-${WATCHTOWER_TAG}  # Append Docker image tag to container name
+    restart: "no"                                     # Do not restart the container once it exits
+    hostname: watchtower-run                          # Set the container hostname
 
     # Define the container environment
     environment:
-      <<: *default-environment                                    # Pull in the default environment
-      WATCHTOWER_CLEANUP: ${WATCHTOWER_CLEANUP}                   # Clean old images afer updates
-      WATCHTOWER_INCLUDE_STOPPED: ${WATCHTOWER_INCLUDE_STOPPED}   # Update stopped containers as well
-      WATCHTOWER_REVIVE_STOPPED: ${WATCHTOWER_REVIVE_STOPPED}     # Start stopped containers after update
-      WATCHTOWER_NOTIFICATIONS: ${WATCHTOWER_NOTIFICATIONS}       # Send notifications for updates
-      WATCHTOWER_NOTIFICATION_URL: ${WATCHTOWER_NOTIFICATION_URL} # URL for webhook notifications
-      WATCHTOWER_RUN_ONCE: ${WATCHTOWER_RUN_ONCE}                 # Option to run once and quit
+      <<: *default-environment                                     # Pull in the default environment
+      WATCHTOWER_CLEANUP: ${WATCHTOWER_CLEANUP}                    # Clean old images after updates
+      WATCHTOWER_INCLUDE_STOPPED: ${WATCHTOWER_INCLUDE_STOPPED}    # Update stopped containers as well
+      WATCHTOWER_REVIVE_STOPPED: ${WATCHTOWER_REVIVE_STOPPED}      # Start stopped containers after update
+      WATCHTOWER_NOTIFICATIONS: ${WATCHTOWER_NOTIFICATIONS}        # Send notifications for updates
+      WATCHTOWER_NOTIFICATION_URL: ${WATCHTOWER_NOTIFICATION_URL}  # URL for webhook notifications
+      WATCHTOWER_RUN_ONCE: ${WATCHTOWER_RUN_ONCE}                  # Option to run once and quit
 
     # Mount host directories into the container
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:rw # Allow container to talk to host Docker API
-      - /etc/localtime:/etc/localtime:ro             # Setup container with the proper timezone
+      - /var/run/docker.sock:/var/run/docker.sock:rw  # Allow container to talk to host Docker API
+      - /etc/localtime:/etc/localtime:ro              # Setup container with the proper timezone
 
     # Docker networks to search for image updates
     networks:
-      - ${COMPOSE_NETWORK_DUPLEX}   # Duplex stack network name
-      - ${COMPOSE_NETWORK_PLUNDARR} # Plundarr stack network name
+      - ${COMPOSE_NETWORK_DUPLEX}    # Duplex stack network name
+      - ${COMPOSE_NETWORK_PLUNDARR}  # Plundarr stack network name
 
 #
 # Define the networks section
@@ -72,12 +72,12 @@ services:
 networks:
   # Configure the duplex network
   duplex:
-    name: ${COMPOSE_NETWORK_DUPLEX} # Duplex stack network name
-    external: true                  # Connect to an external network not defined here
-    driver: default                 # Use the default driver
+    name: ${COMPOSE_NETWORK_DUPLEX}  # Duplex stack network name
+    external: true                   # Connect to an external network not defined here
+    driver: default                  # Use the default driver
 
   # Configure the plundarr network
   plundarr:
-    name: ${COMPOSE_NETWORK_PLUNDARR} # Plundarr stack network name
-    external: true                    # Connect to an external network not defined here
-    driver: default                   # Use the default driver
+    name: ${COMPOSE_NETWORK_PLUNDARR}  # Plundarr stack network name
+    external: true                     # Connect to an external network not defined here
+    driver: default                    # Use the default driver
