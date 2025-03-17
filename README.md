@@ -4,7 +4,7 @@ Welcome to Duplex! Your trusty sidekick for Plex Media Server management on Syno
 
 ## Overview 📋
 >
-> ☠️ **Rumor has it there's hidden treasure in these waters...** [🦜🏴‍☠️](config/plundarr/README.md️)
+> ☠️ **Rumor has it there's hidden treasure in these waters...** [🦜🏴‍☠️](config/plundarr/README.md)
 
 The `docker-compose.yml` file in this repository sets the stage for managing your Plex Media Server on a Synology NAS. It's like your personal assistant, complete with tools for metadata management, photo cleaning, monitoring, and automated updates.
 
