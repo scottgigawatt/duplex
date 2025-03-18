@@ -10,7 +10,7 @@ The `docker-compose.yml` file in this repository sets the stage for managing you
 
 For a deeper dive into the Docker Compose configuration, check out the Docker Compose file in this repository.
 
-📄 [View docker-compose.yml](./docker-compose.yml)
+- 📄 [View `docker-compose.yml`](./docker-compose.yml)
 
 ## Included Tools 🛠️
 
