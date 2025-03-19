@@ -22,7 +22,7 @@ For a deeper dive into the Docker Compose configuration, check out the Docker Co
 | **PATTRMM** 📅          | Schedules yer chores like a true deckhand.                  | [More Info](https://github.com/insertdisc/pattrmm)                      |
 | **Tautulli** 📊         | Tracks crew activity on yer Plex vessel.                    | [More Info](https://github.com/Tautulli/Tautulli/)                      |
 | **Notifiarr** 🔔        | Sends word o' ship happenings straight to yer crow's nest.  | [More Info](https://github.com/Notifiarr/notifiarr/)                    |
-| **Watchtower** 🛠️       | Auto-updates yer containers like a lookout changin’ shifts.  | [More Info](https://github.com/containrrr/watchtower)                   |
+| **Watchtower** 🛠️       | Auto-updates yer containers like a lookout changin' shifts.  | [More Info](https://github.com/containrrr/watchtower)                   |
 
 ## Usage 🚀
 
@@ -47,7 +47,7 @@ Ready to kick off your Duplex service stack? Follow these blockbuster steps:
 5. Access the services through their respective endpoints—like opening a treasure chest of media!
 6. Configure services to connect to Plex using the gateway IP address of the Docker bridge network. You can find this IP in `Container Manager -> Network` for DSM 7.2 and above.
    > [!IMPORTANT]
-   > 🎥 For the smoothest production rollout, we recommend managing this project via DSM Container Manager’s Project feature. Jump to [Managing the Project with DSM Container Manager 📦](#managing-the-project-with-dsm-container-manager-) to roll out the red carpet for your deployment.
+   > 🎥 For the smoothest production rollout, we recommend managing this project via DSM Container Manager's Project feature. Jump to [Managing the Project with DSM Container Manager 📦](#managing-the-project-with-dsm-container-manager-) to roll out the red carpet for your deployment.
 
 ### Managing Docker Config Environment Variables 🧩
 
