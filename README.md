@@ -38,6 +38,7 @@ Ready to kick off your Duplex service stack? Follow these blockbuster steps:
 
    > [!NOTE]
    > 🎬 The Kometa configuration files are maintained in a separate repo: [kometa-config](https://github.com/scottgigawatt/kometa-config). It's included here as a submodule at `config/kometa`—hence the `--recurse-submodules` magic.
+
    > [!TIP]
    > 🍿 Want to remix this blockbuster? Fork both repos and update the URLs to create your own cinematic universe!
 
@@ -46,6 +47,7 @@ Ready to kick off your Duplex service stack? Follow these blockbuster steps:
 4. Run `docker-compose up -d` to start the containers in detached mode.
 5. Access the services through their respective endpoints—like opening a treasure chest of media!
 6. Configure services to connect to Plex using the gateway IP address of the Docker bridge network. You can find this IP in `Container Manager -> Network` for DSM 7.2 and above.
+
    > [!IMPORTANT]
    > 🎥 For the smoothest production rollout, we recommend managing this project via DSM Container Manager's Project feature. Jump to [Managing the Project with DSM Container Manager 📦](#managing-the-project-with-dsm-container-manager-) to roll out the red carpet for your deployment.
 
