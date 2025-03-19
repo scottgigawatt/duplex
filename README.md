@@ -62,7 +62,7 @@ The configurations for the main Docker Compose file, ImageMaid, and Overlay Rese
 Want to override these variables on the fly? Just do it on the command line when starting the Docker Compose stack:
 
 ```bash
-KOMETA_TAG="latest" docker-compose up -d
+KOMETA_TAG="nightly" docker-compose up -d
 ```
 
 Adjust the values of these environment variables to fit your streaming dreams.
