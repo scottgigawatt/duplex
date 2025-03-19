@@ -27,7 +27,7 @@ For a deeper dive into the Docker Compose configuration, check out the Docker Co
 | **Watchtower** 🛠️   | Auto-updates your containers like a dedicated editor in post-production.       | [More Info](https://github.com/containrrr/watchtower)                 |
 
 > [!NOTE]
-> Overlay Reset is included as a separate docker compose deployment in [`config/overlay-reset`](./config/overlay-reset/README.md). It can be deployed separately using the same steps in the [Managing the Project with DSM Container Manager](#3-managing-the-project-with-dsm-container-manager-) section.
+> Overlay Reset is included as a separate docker compose deployment in [`config/overlay-reset`](./config/overlay-reset/README.md). It can be deployed separately using the same steps in the [Managing the Project with DSM Container Manager](#5-managing-the-project-with-dsm-container-manager-) section.
 
 ---
 
@@ -46,8 +46,6 @@ Ready to start your streaming adventure? First, clone the project repository to 
 ```sh
 git clone --recurse-submodules https://github.com/scottgigawatt/duplex.git /volume1/docker/duplex
 ```
-
----
 
 ### 2. Managing Docker Config Environment Variables 🧩
 
@@ -75,7 +73,7 @@ vim config/imagemaid/.env
 > KOMETA_TAG="nightly" docker-compose up -d
 > ```
 
-#### Configuring IPAM and Network Firewall 🌍
+### 3. Configuring IPAM and Network Firewall 🌍
 
 Docker IPAM (IP Address Management) lets you assign IP addresses to your containers within a defined network range. This gives you more control, avoids random IP assignments, and makes your network predictable and easier to troubleshoot.
 
@@ -104,7 +102,7 @@ COMPOSE_NETWORK_IP_RANGE="${COMPOSE_NETWORK_IP_RANGE:-172.28.5.0/24}"
 COMPOSE_NETWORK_GATEWAY="${COMPOSE_NETWORK_GATEWAY:-172.28.5.254}"
 ```
 
-#### Updating Firewall Settings on Synology NAS 🔥
+### 4. Updating Firewall Settings on Synology NAS 🔥
 
 If you haven't set up a firewall on your Synology NAS yet, now's a good time. A firewall helps protect your NAS and control internal and external traffic.
 
@@ -126,9 +124,7 @@ This ensures your containers can talk to each other smoothly inside the Docker n
 
 For more info, check out the **[Docker Compose IPAM documentation](https://docs.docker.com/compose/compose-file/06-networks/#ipam)**.
 
----
-
-### 3. Managing the Project with DSM Container Manager 📦
+### 5. Managing the Project with DSM Container Manager 📦
 
 Let's make your project shine in DSM 7.2 Container Manager's Project feature:
 
