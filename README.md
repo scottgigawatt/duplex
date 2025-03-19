@@ -1,4 +1,4 @@
-🍿 _If this project were a character, it’d be Walter White yelling, “I am the one who knocks!” Smash that ⭐️ and make it kingpin famous._
+🍿 _Smash that ⭐️ like it's the Netflix "Skip Intro" button._
 
 # Duplex 📺🚀
 
