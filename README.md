@@ -14,15 +14,15 @@ For a deeper dive into the Docker Compose configuration, check out the Docker Co
 
 ## Included Tools 🛠️
 
-| Tool                    | Description                                                  | More Info                                                                 |
-|-------------------------|--------------------------------------------------------------|---------------------------------------------------------------------------|
-| **Kometa** ✨            | Your metadata maestro for Plex Media Server.                | [Kometa Info](https://kometa.wiki/en/nightly/)                            |
-| **ImageMaid** 🧼        | The superhero that cleans up those messy Plex Media Server photos. | [ImageMaid Info](https://kometa.wiki/en/nightly/kometa/scripts/imagemaid/)|
-| **Overlay Reset** 🧹    | Bye-bye overlays! Removes all overlays from your Plex Library. | [Kometa Overlay Reset Info](https://github.com/kometa-team/overlay-reset) |
-| **PATTRMM** 📅          | Your scheduler for media processing tasks—because timing is everything! | [PATTRMM GitHub](https://github.com/insertdisc/pattrmm)                   |
-| **Tautulli** 📊         | Your Plex usage tracker—perfect for the stats-loving cinephile. | [Tautulli GitHub](https://github.com/Tautulli/Tautulli/)                  |
-| **Notifiarr** 🔔        | Stay in the loop with notifications for all your media server shenanigans. | [Notifiarr GitHub](https://github.com/Notifiarr/notifiarr/)               |
-| **Watchtower** 🛠️       | The auto-updater that keeps your Docker containers fresh and fabulous. | [Watchtower GitHub](https://github.com/containrrr/watchtower)             |
+| Tool                    | Description                                                  | More Info |
+|-------------------------|--------------------------------------------------------------|-----------|
+| **Kometa** ✨            | The savvy first mate for yer Plex metadata.                | [More Info](https://kometa.wiki/en/nightly/)                            |
+| **ImageMaid** 🧼        | Swabs yer Plex photos clean as a whistle.                   | [More Info](https://kometa.wiki/en/nightly/kometa/scripts/imagemaid/)   |
+| **Overlay Reset** 🧹    | Scrubs away every overlay from yer Plex library.            | [More Info](https://github.com/kometa-team/overlay-reset)               |
+| **PATTRMM** 📅          | Schedules yer chores like a true deckhand.                  | [More Info](https://github.com/insertdisc/pattrmm)                      |
+| **Tautulli** 📊         | Tracks crew activity on yer Plex vessel.                    | [More Info](https://github.com/Tautulli/Tautulli/)                      |
+| **Notifiarr** 🔔        | Sends word o' ship happenings straight to yer crow's nest.  | [More Info](https://github.com/Notifiarr/notifiarr/)                    |
+| **Watchtower** 🛠️       | Auto-updates yer containers like a lookout changin’ shifts.  | [More Info](https://github.com/containrrr/watchtower)                   |
 
 ## Usage 🚀
 
