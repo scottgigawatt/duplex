@@ -36,11 +36,11 @@ Ready to kick off your Duplex service stack? Follow these blockbuster steps:
    git clone --recurse-submodules https://github.com/scottgigawatt/duplex.git
    ```
 
-   > [!NOTE]
-   > 🎬 The Kometa configuration files are maintained in a separate repo: [kometa-config](https://github.com/scottgigawatt/kometa-config). It's included here as a submodule at `config/kometa`—hence the `--recurse-submodules` magic.
+> [!NOTE]
+> 🎬 The Kometa configuration files are maintained in a separate repo: [kometa-config](https://github.com/scottgigawatt/kometa-config). It's included here as a submodule at `config/kometa`—hence the `--recurse-submodules` magic.
 
-   > [!TIP]
-   > 🍿 Want to remix this blockbuster? Fork both repos and update the URLs to create your own cinematic universe!
+> [!TIP]
+> 🍿 Want to remix this blockbuster? Fork both repos and update the URLs to create your own cinematic universe!
 
 2. Navigate to the directory containing the `docker-compose.yml` file.
 3. Open a terminal or SSH into your Synology NAS—time to get technical!
