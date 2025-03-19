@@ -47,6 +47,8 @@ Ready to start your streaming adventure? First, clone the project repository to 
 git clone --recurse-submodules https://github.com/scottgigawatt/duplex.git /volume1/docker/duplex
 ```
 
+---
+
 ### 2. Managing Docker Config Environment Variables 🧩
 
 Next, set up the configurations for the main Docker Compose deployment and ImageMaid using `.env` files. Copy the `example.env` files to `.env` and customize them for your cinematic needs.
@@ -73,11 +75,11 @@ vim config/imagemaid/.env
 > KOMETA_TAG="nightly" docker-compose up -d
 > ```
 
-Adjust the values of these environment variables to fit your streaming dreams.
-
 #### Configuring IPAM and Network Firewall 🌍
 
-Let's talk Docker IPAM (IP Address Management). It's the superhero of container networking! Time to get your hands dirty! Configure the following in your [`.env`](example.env) file:
+Docker IPAM (IP Address Management) lets you assign IP addresses to your containers within a defined network range. This gives you more control, avoids random IP assignments, and makes your network predictable and easier to troubleshoot.
+
+Update these settings to your [`.env`](example.env) file:
 
 ```bash
 #
@@ -104,21 +106,27 @@ COMPOSE_NETWORK_GATEWAY="${COMPOSE_NETWORK_GATEWAY:-172.28.5.254}"
 
 #### Updating Firewall Settings on Synology NAS 🔥
 
+If you haven't set up a firewall on your Synology NAS yet, now's a good time. A firewall helps protect your NAS and control internal and external traffic.
+
+To allow your containers to communicate within the private Docker network, follow these steps:
+
 To keep your containers communicating smoothly, you might need to tweak your firewall settings in Synology DSM. Follow these steps to update your **Synology Firewall** settings:
 
 1. Open **Control Panel** → **Security** (under Connectivity).
-2. Navigate to the **Firewall** tab → Click **Edit Rules**.
-3. Click **Create** to add a new rule:
+2. Go to the **Firewall** tab → Click **Edit Rules**.
+3. Click **Create** to add a rule:
    - **Ports**: Select `All`
    - **Source IP**: Select `Specific IP`
    - Click `Select` → Choose `Subnet`
    - Enter `172.28.0.0` for **IP Address** and `255.255.0.0` for **Subnet mask/Prefix length**
    - **Action**: Select `Allow`
-4. Click **OK** to apply the changes.
+4. Click **OK** to apply.
 
-Now your containers can chat freely! 🎉
+This ensures your containers can talk to each other smoothly inside the Docker network while your firewall still does its job of keeping unwanted traffic out.
 
-For more details, check out the **[Docker Compose IPAM documentation](https://docs.docker.com/compose/compose-file/06-networks/#ipam)**.
+For more info, check out the **[Docker Compose IPAM documentation](https://docs.docker.com/compose/compose-file/06-networks/#ipam)**.
+
+---
 
 ### 3. Managing the Project with DSM Container Manager 📦
 
