@@ -10,7 +10,7 @@ The `docker-compose.yml` file in this repository sets the stage for managing you
 
 For a deeper dive into the Docker Compose configuration, check out the Docker Compose file in this repository.
 
-- 📄 [View `docker-compose.yml`](./docker-compose.yml)
+- 📄 [View docker-compose.yml](./docker-compose.yml)
 
 ## Included Tools 🛠️
 
@@ -36,15 +36,18 @@ Ready to kick off your Duplex service stack? Follow these blockbuster steps:
    git clone --recurse-submodules https://github.com/scottgigawatt/duplex.git
    ```
 
-   > 🎬 **Behind the Scenes**: The Kometa configuration files are maintained in a separate repo here: [kometa-config](https://github.com/scottgigawatt/kometa-config). It's included in this project as a submodule at `config/kometa`—that's why you see the `--recurse-submodules` magic in the `git clone` command. When updates roll out in the config, we bump the submodule here to sync things up, like a sequel that actually improves on the original. 🍿
-   > Want to remix this setup for yourself? Fork both repos and update the URLs to point to your personal masterpieces. 🎞️✨
+   > [!NOTE]
+   > 🎬 The Kometa configuration files are maintained in a separate repo: [kometa-config](https://github.com/scottgigawatt/kometa-config). It's included here as a submodule at `config/kometa`—hence the `--recurse-submodules` magic.
+   > [!TIP]
+   > 🍿 Want to remix this blockbuster? Fork both repos and update the URLs to create your own cinematic universe!
 
 2. Navigate to the directory containing the `docker-compose.yml` file.
 3. Open a terminal or SSH into your Synology NAS—time to get technical!
 4. Run `docker-compose up -d` to start the containers in detached mode.
 5. Access the services through their respective endpoints—like opening a treasure chest of media!
 6. Configure services to connect to Plex using the gateway IP address of the Docker bridge network. You can find this IP in `Container Manager -> Network` for DSM 7.2 and above.
-   > 🎥 **Pro Tip**: While you can use these commands for testing and debugging, we recommend running this project through DSM Container Manager for a smoother production experience. Jump to [Managing the Project with DSM Container Manager 📦](#managing-the-project-with-dsm-container-manager-) to roll out the red carpet for your deployment.
+   > [!IMPORTANT]
+   > 🎥 For the smoothest production rollout, we recommend managing this project via DSM Container Manager’s Project feature. Jump to [Managing the Project with DSM Container Manager 📦](#managing-the-project-with-dsm-container-manager-) to roll out the red carpet for your deployment.
 
 ### Managing Docker Config Environment Variables 🧩
 
@@ -78,15 +81,13 @@ For more on Container Manager Projects, refer to the official Synology documenta
 
 Want to ensure secure access to your Synology applications? Use DSM 7 Reverse Proxy! Follow the guide [here](https://mariushosting.com/synology-how-to-use-reverse-proxy-on-dsm-7/) for DSM 7.
 
-> **Note**: If you encounter "Socket closed" errors when accessing the DSM UI via reverse proxy and trying to open terminals for running containers, enable WebSocket for the reverse proxy record:
->
-> 1. Go to `Control Panel -> Application Portal -> Reverse Proxy`.
-> 2. Select `Edit` for your reverse proxy record.
-> 3. Navigate to the `Custom Header` tab.
-> 4. From the `Create` dropdown, select `WebSocket`.
-> 5. Save the changes to resolve the issue—like fixing a plot hole!
+> [!WARNING]
+> 🚨 If you get "Socket closed" errors when accessing the DSM UI through a reverse proxy, enable WebSocket support under `Custom Header` to avoid cutting your scenes short.
 
 ## Environment Details 🖥️
+
+> [!CAUTION]
+> ⚠️ This setup has been tested on a Synology DS916+ with DSM 7.2.1-69057 Update 5. Other setups may have unexpected plot twists!
 
 Tested on Synology DS916+ running DSM 7.2.1-69057 Update 5, with Docker Compose v2.9.0-6413-g38f6acd.
 
