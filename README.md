@@ -48,8 +48,8 @@ Ready to kick off your Duplex service stack? Follow these blockbuster steps:
 5. Access the services through their respective endpoints—like opening a treasure chest of media!
 6. Configure services to connect to Plex using the gateway IP address of the Docker bridge network. You can find this IP in `Container Manager -> Network` for DSM 7.2 and above.
 
-   > [!IMPORTANT]
-   > 🎥 For the smoothest production rollout, we recommend managing this project via DSM Container Manager's Project feature. Jump to [Managing the Project with DSM Container Manager 📦](#managing-the-project-with-dsm-container-manager-) to roll out the red carpet for your deployment.
+> [!IMPORTANT]
+> 🎥 For the smoothest production rollout, we recommend managing this project via DSM Container Manager's Project feature. Jump to [Managing the Project with DSM Container Manager 📦](#managing-the-project-with-dsm-container-manager-) to roll out the red carpet for your deployment.
 
 ### Managing Docker Config Environment Variables 🧩
 
@@ -89,9 +89,9 @@ Want to ensure secure access to your Synology applications? Use DSM 7 Reverse Pr
 ## Environment Details 🖥️
 
 > [!CAUTION]
-> ⚠️ This setup has been tested on a Synology DS916+ with DSM 7.2.1-69057 Update 5. Other setups may have unexpected plot twists!
+> ⚠️ This setup has been tested on a Synology DS916+ with DSM 7.2. Other setups may have unexpected plot twists!
 
-Tested on Synology DS916+ running DSM 7.2.1-69057 Update 5, with Docker Compose v2.9.0-6413-g38f6acd.
+Tested on Synology DS916+ running DSM 7.2, with Docker Compose v2.9.
 
 ## License 📄
 
