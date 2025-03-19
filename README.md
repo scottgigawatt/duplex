@@ -75,26 +75,9 @@ vim config/imagemaid/.env
 
 Adjust the values of these environment variables to fit your streaming dreams.
 
-### 3. Managing the Project with DSM Container Manager 📦
+#### Configuring IPAM and Network Firewall 🌍
 
-Let's make your project shine in DSM 7.2 Container Manager's Project feature:
-
-1. Log in to your Synology NAS web UI.
-2. Open **Container Manager** and navigate to the **Project** tab.
-3. Click **Create**, give your project a name (e.g., `duplex`), and set the project path to the cloned directory.
-4. Follow the on-screen prompts to review settings and deploy the project like a pro!
-
-For more on Container Manager Projects, refer to the official Synology documentation [here](https://kb.synology.com/en-id/DSM/help/ContainerManager/docker_project?version=7).
-
----
-
-## Configuring IPAM and Network Firewall 🌍
-
-Let's talk Docker IPAM (IP Address Management). It's the superhero of container networking! To keep your containers communicating smoothly, you might need to tweak your firewall settings in Synology DSM.
-
-### IPAM Configuration
-
-Time to get your hands dirty! Configure the following in your [`.env`](example.env) file:
+Let's talk Docker IPAM (IP Address Management). It's the superhero of container networking! Time to get your hands dirty! Configure the following in your [`.env`](example.env) file:
 
 ```bash
 #
@@ -119,9 +102,9 @@ COMPOSE_NETWORK_IP_RANGE="${COMPOSE_NETWORK_IP_RANGE:-172.28.5.0/24}"
 COMPOSE_NETWORK_GATEWAY="${COMPOSE_NETWORK_GATEWAY:-172.28.5.254}"
 ```
 
-### Updating Firewall Settings on Synology NAS 🔥
+#### Updating Firewall Settings on Synology NAS 🔥
 
-Ready to unleash the power of communication for your Docker network? Update your **Synology Firewall** settings:
+To keep your containers communicating smoothly, you might need to tweak your firewall settings in Synology DSM. Follow these steps to update your **Synology Firewall** settings:
 
 1. Open **Control Panel** → **Security** (under Connectivity).
 2. Navigate to the **Firewall** tab → Click **Edit Rules**.
@@ -136,6 +119,17 @@ Ready to unleash the power of communication for your Docker network? Update your
 Now your containers can chat freely! 🎉
 
 For more details, check out the **[Docker Compose IPAM documentation](https://docs.docker.com/compose/compose-file/06-networks/#ipam)**.
+
+### 3. Managing the Project with DSM Container Manager 📦
+
+Let's make your project shine in DSM 7.2 Container Manager's Project feature:
+
+1. Log in to your Synology NAS web UI.
+2. Open **Container Manager** and navigate to the **Project** tab.
+3. Click **Create**, give your project a name (e.g., `duplex`), and set the project path to the cloned directory.
+4. Follow the on-screen prompts to review settings and deploy the project like a pro!
+
+For more on Container Manager Projects, refer to the official Synology documentation [here](https://kb.synology.com/en-id/DSM/help/ContainerManager/docker_project?version=7).
 
 ---
 
