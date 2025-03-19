@@ -1,3 +1,5 @@
+🍿 _If this project were a character, it’d be Walter White yelling, “I am the one who knocks!” Smash that ⭐️ and make it kingpin famous._
+
 # Duplex 📺🚀
 
 Welcome to Duplex! Your trusty sidekick for Plex Media Server management on Synology NAS, serving up a delightful Docker Compose configuration packed with essential tools and utilities.
@@ -16,13 +18,13 @@ For a deeper dive into the Docker Compose configuration, check out the Docker Co
 
 | Tool                    | Description                                                  | More Info |
 |-------------------------|--------------------------------------------------------------|-----------|
-| **Kometa** ✨            | The savvy first mate for yer Plex metadata.                | [More Info](https://kometa.wiki/en/nightly/)                            |
-| **ImageMaid** 🧼        | Swabs yer Plex photos clean as a whistle.                   | [More Info](https://kometa.wiki/en/nightly/kometa/scripts/imagemaid/)   |
-| **Overlay Reset** 🧹    | Scrubs away every overlay from yer Plex library.            | [More Info](https://github.com/kometa-team/overlay-reset)               |
-| **PATTRMM** 📅          | Schedules yer chores like a true deckhand.                  | [More Info](https://github.com/insertdisc/pattrmm)                      |
-| **Tautulli** 📊         | Tracks crew activity on yer Plex vessel.                    | [More Info](https://github.com/Tautulli/Tautulli/)                      |
-| **Notifiarr** 🔔        | Sends word o' ship happenings straight to yer crow's nest.  | [More Info](https://github.com/Notifiarr/notifiarr/)                    |
-| **Watchtower** 🛠️       | Auto-updates yer containers like a lookout changin' shifts.  | [More Info](https://github.com/containrrr/watchtower)                   |
+| **Kometa** ✨            | Your metadata director, making your Plex library Oscar-worthy.        | [More Info](https://kometa.wiki/en/nightly/)                            |
+| **ImageMaid** 🧼        | The photo stylist scrubbing your cast pics for the red carpet.        | [More Info](https://kometa.wiki/en/nightly/kometa/scripts/imagemaid/)   |
+| **Overlay Reset** 🧹    | Hits reset like Hollywood rebooting Spider-Man for the 5th time.      | [More Info](https://github.com/kometa-team/overlay-reset)               |
+| **PATTRMM** 📅          | The showrunner keeping your automation schedule on point.             | [More Info](https://github.com/insertdisc/pattrmm)                      |
+| **Tautulli** 📊         | Your behind-the-scenes analytics for who's watching what.             | [More Info](https://github.com/Tautulli/Tautulli/)                      |
+| **Notifiarr** 🔔        | Sends alerts faster than Netflix cancelling your favorite show.        | [More Info](https://github.com/Notifiarr/notifiarr/)                    |
+| **Watchtower** 🛠️       | Auto-updates your containers like a ninja editor working overtime.    | [More Info](https://github.com/containrrr/watchtower)                   |
 
 ## Usage 🚀
 
