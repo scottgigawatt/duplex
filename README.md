@@ -16,15 +16,15 @@ For a deeper dive into the Docker Compose configuration, check out the Docker Co
 
 ## Included Tools 🛠️
 
-| Tool                 | Description                                                                    | More Info                                                             |
-|----------------------|--------------------------------------------------------------------------------|-----------------------------------------------------------------------|
-| **Kometa** ✨         | Your metadata director, transforming your Plex library into a blockbuster hit. | [Wiki](https://kometa.wiki/en/latest/)                          |
-| **ImageMaid** 🧼     | The photo stylist polishing your cast pics for the red carpet.                 | [Wiki](https://kometa.wiki/en/nightly/kometa/scripts/imagemaid/) |
-| **Overlay Reset** 🧹 | Hits reset like Hollywood rebooting your favorite franchise.                   | [Repo](https://github.com/kometa-team/overlay-reset)             |
-| **PATTRMM** 📅       | The producer ensuring your automation schedule hits all the right notes.       | [Repo](https://github.com/insertdisc/pattrmm)                    |
-| **Tautulli** 📊      | Your behind-the-scenes analytics for tracking viewer engagement.               | [Repo](https://github.com/Tautulli/Tautulli/)                    |
-| **Notifiarr** 🔔     | Sends alerts faster than your favorite show's plot twists.                     | [Repo](https://github.com/Notifiarr/notifiarr/)                  |
-| **Watchtower** 🛠️   | Auto-updates your containers like a dedicated editor in post-production.       | [Repo](https://github.com/containrrr/watchtower)                 |
+| Tool                 | Description                                                   | More Info                                                             |
+|----------------------|---------------------------------------------------------------|-----------------------------------------------------------------------|
+| **Kometa** ✨         | Turns your Plex into a blockbuster.                          | [Wiki](https://kometa.wiki/en/latest/)                          |
+| **ImageMaid** 🧼     | Scrubs your Plex images till they shine.                     | [Wiki](https://kometa.wiki/en/nightly/kometa/scripts/imagemaid/) |
+| **Overlay Reset** 🧹 | Wipes away old overlays like a reboot.                       | [Repo](https://github.com/kometa-team/overlay-reset)             |
+| **PATTRMM** 📅       | Schedules chores so you don't have to.                       | [Repo](https://github.com/insertdisc/pattrmm)                    |
+| **Tautulli** 📊      | Spies on your Plex binge habits.                            | [Repo](https://github.com/Tautulli/Tautulli/)                    |
+| **Notifiarr** 🔔     | Blasts you with updates before drama hits.                  | [Repo](https://github.com/Notifiarr/notifiarr/)                  |
+| **Watchtower** 🛠️   | Updates containers while you sleep.                         | [Repo](https://github.com/containrrr/watchtower)                 |
 
 > [!NOTE]
 > Overlay Reset is included as a separate docker compose deployment in [`config/overlay-reset`](./config/overlay-reset/README.md). It can be deployed separately using the same steps in the [Managing the Project with DSM Container Manager](#5-deploying-the-project-with-dsm-container-manager-) section.
