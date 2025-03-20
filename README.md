@@ -18,13 +18,13 @@ For a deeper dive into the Docker Compose configuration, check out the Docker Co
 
 | Tool                 | Description                                                                    | More Info                                                             |
 |----------------------|--------------------------------------------------------------------------------|-----------------------------------------------------------------------|
-| **Kometa** ✨         | Your metadata director, transforming your Plex library into a blockbuster hit. | [More Info](https://kometa.wiki/en/nightly/)                          |
-| **ImageMaid** 🧼     | The photo stylist polishing your cast pics for the red carpet.                 | [More Info](https://kometa.wiki/en/nightly/kometa/scripts/imagemaid/) |
-| **Overlay Reset** 🧹 | Hits reset like Hollywood rebooting your favorite franchise.                   | [More Info](https://github.com/kometa-team/overlay-reset)             |
-| **PATTRMM** 📅       | The producer ensuring your automation schedule hits all the right notes.       | [More Info](https://github.com/insertdisc/pattrmm)                    |
-| **Tautulli** 📊      | Your behind-the-scenes analytics for tracking viewer engagement.               | [More Info](https://github.com/Tautulli/Tautulli/)                    |
-| **Notifiarr** 🔔     | Sends alerts faster than your favorite show's plot twists.                     | [More Info](https://github.com/Notifiarr/notifiarr/)                  |
-| **Watchtower** 🛠️   | Auto-updates your containers like a dedicated editor in post-production.       | [More Info](https://github.com/containrrr/watchtower)                 |
+| **Kometa** ✨         | Your metadata director, transforming your Plex library into a blockbuster hit. | [Wiki](https://kometa.wiki/en/latest/)                          |
+| **ImageMaid** 🧼     | The photo stylist polishing your cast pics for the red carpet.                 | [Wiki](https://kometa.wiki/en/nightly/kometa/scripts/imagemaid/) |
+| **Overlay Reset** 🧹 | Hits reset like Hollywood rebooting your favorite franchise.                   | [Repo](https://github.com/kometa-team/overlay-reset)             |
+| **PATTRMM** 📅       | The producer ensuring your automation schedule hits all the right notes.       | [Repo](https://github.com/insertdisc/pattrmm)                    |
+| **Tautulli** 📊      | Your behind-the-scenes analytics for tracking viewer engagement.               | [Repo](https://github.com/Tautulli/Tautulli/)                    |
+| **Notifiarr** 🔔     | Sends alerts faster than your favorite show's plot twists.                     | [Repo](https://github.com/Notifiarr/notifiarr/)                  |
+| **Watchtower** 🛠️   | Auto-updates your containers like a dedicated editor in post-production.       | [Repo](https://github.com/containrrr/watchtower)                 |
 
 > [!NOTE]
 > Overlay Reset is included as a separate docker compose deployment in [`config/overlay-reset`](./config/overlay-reset/README.md). It can be deployed separately using the same steps in the [Managing the Project with DSM Container Manager](#5-deploying-the-project-with-dsm-container-manager-) section.
@@ -108,15 +108,15 @@ If you haven't set up a firewall on your Synology NAS yet, now's a good time. A 
 
 To allow your containers to communicate within the private Docker network, follow these steps:
 
-1. Open **Control Panel** → **Security** (under Connectivity).
-2. Go to the **Firewall** tab → Click **Edit Rules**.
-3. Click **Create** to add a rule:
-   - **Ports**: Select `All`
-   - **Source IP**: Select `Specific IP`
-   - Click `Select` → Choose `Subnet`
-   - Enter `172.28.0.0` for **IP Address** and `255.255.0.0` for **Subnet mask/Prefix length**
-   - **Action**: Select `Allow`
-4. Click **OK** to apply.
+1. 🛠️ Open **Control Panel** → **Security** (under Connectivity).
+2. 🔒 Go to the **Firewall** tab → Click **Edit Rules**.
+3. ➕ Click **Create** to add a rule:
+   - 🎯 **Ports**: Select `All`
+   - 🌐 **Source IP**: Select `Specific IP`
+   - 🧩 Click `Select` → Choose `Subnet`
+   - 📝 Enter `172.28.0.0` for **IP Address** and `255.255.0.0` for **Subnet mask/Prefix length**
+   - ✅ **Action**: Select `Allow`
+4. 💾 Click **OK** to apply.
 
 This ensures your containers can talk to each other smoothly inside the Docker network while your firewall still does its job of keeping unwanted traffic out.
 
@@ -126,10 +126,10 @@ For more info, check out the **[Docker Compose IPAM documentation](https://docs.
 
 Let's make your project shine in DSM 7.2 Container Manager's Project feature:
 
-1. Log in to your Synology NAS web UI.
-2. Open **Container Manager** and navigate to the **Project** tab.
-3. Click **Create**, give your project a name (e.g., `duplex`), and set the project path to the cloned directory.
-4. Follow the on-screen prompts to review settings and deploy the project like a pro!
+1. 🔑 Log in to your Synology NAS web UI.
+2. 📦 Open **Container Manager** and navigate to the **Project** tab.
+3. 🆕 Click **Create**, give your project a name (e.g., `duplex`), and set the project path to the cloned directory.
+4. 🚀 Follow the on-screen prompts to review settings and deploy the project like a pro!
 
 For more on Container Manager Projects, refer to the official Synology documentation [here](https://kb.synology.com/en-id/DSM/help/ContainerManager/docker_project?version=7).
 
