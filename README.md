@@ -77,7 +77,7 @@ vim config/imagemaid/.env
 
 Docker IPAM (IP Address Management) lets you assign IP addresses to your containers within a defined network range. This gives you more control, avoids random IP assignments, and makes your network predictable and easier to troubleshoot.
 
-Update these settings to your `.env` file:
+Update these settings in your `.env` file:
 
 ```bash
 #
