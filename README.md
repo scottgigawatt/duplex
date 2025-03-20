@@ -21,13 +21,13 @@ For a deeper dive into the Docker Compose configuration, check out the Docker Co
 | **Kometa** ✨         | Your metadata director, transforming your Plex library into a blockbuster hit. | [More Info](https://kometa.wiki/en/nightly/)                          |
 | **ImageMaid** 🧼     | The photo stylist polishing your cast pics for the red carpet.                 | [More Info](https://kometa.wiki/en/nightly/kometa/scripts/imagemaid/) |
 | **Overlay Reset** 🧹 | Hits reset like Hollywood rebooting your favorite franchise.                   | [More Info](https://github.com/kometa-team/overlay-reset)             |
-| **PATTRMM** 📅       | The showrunner ensuring your automation schedule hits all the right notes.     | [More Info](https://github.com/insertdisc/pattrmm)                    |
+| **PATTRMM** 📅       | The producer ensuring your automation schedule hits all the right notes.       | [More Info](https://github.com/insertdisc/pattrmm)                    |
 | **Tautulli** 📊      | Your behind-the-scenes analytics for tracking viewer engagement.               | [More Info](https://github.com/Tautulli/Tautulli/)                    |
 | **Notifiarr** 🔔     | Sends alerts faster than your favorite show's plot twists.                     | [More Info](https://github.com/Notifiarr/notifiarr/)                  |
 | **Watchtower** 🛠️   | Auto-updates your containers like a dedicated editor in post-production.       | [More Info](https://github.com/containrrr/watchtower)                 |
 
 > [!NOTE]
-> Overlay Reset is included as a separate docker compose deployment in [`config/overlay-reset`](./config/overlay-reset/README.md). It can be deployed separately using the same steps in the [Managing the Project with DSM Container Manager](#5-managing-the-project-with-dsm-container-manager-) section.
+> Overlay Reset is included as a separate docker compose deployment in [`config/overlay-reset`](./config/overlay-reset/README.md). It can be deployed separately using the same steps in the [Managing the Project with DSM Container Manager](#5-deploying-the-project-with-dsm-container-manager-) section.
 
 ---
 
@@ -77,7 +77,7 @@ vim config/imagemaid/.env
 
 Docker IPAM (IP Address Management) lets you assign IP addresses to your containers within a defined network range. This gives you more control, avoids random IP assignments, and makes your network predictable and easier to troubleshoot.
 
-Update these settings to your [`.env`](example.env) file:
+Update these settings to your `.env` file:
 
 ```bash
 #
@@ -108,8 +108,6 @@ If you haven't set up a firewall on your Synology NAS yet, now's a good time. A 
 
 To allow your containers to communicate within the private Docker network, follow these steps:
 
-To keep your containers communicating smoothly, you might need to tweak your firewall settings in Synology DSM. Follow these steps to update your **Synology Firewall** settings:
-
 1. Open **Control Panel** → **Security** (under Connectivity).
 2. Go to the **Firewall** tab → Click **Edit Rules**.
 3. Click **Create** to add a rule:
@@ -124,7 +122,7 @@ This ensures your containers can talk to each other smoothly inside the Docker n
 
 For more info, check out the **[Docker Compose IPAM documentation](https://docs.docker.com/compose/compose-file/06-networks/#ipam)**.
 
-### 5. Managing the Project with DSM Container Manager 📦
+### 5. Deploying the Project with DSM Container Manager 📦
 
 Let's make your project shine in DSM 7.2 Container Manager's Project feature:
 
