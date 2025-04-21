@@ -71,6 +71,7 @@ vim config/imagemaid/.env
 
 > [!IMPORTANT]
 > 🎞️ _In a world where containers rise and networks clash..._
+>
 > Make sure you read the [Docker Project Setup](./SETUP.md) guide! It covers the essential plot points: configuring Docker networking, fine-tuning Synology settings, locking down the firewall, and launching your app stack with Container Manager. Miss it, and your production might never make it to opening night.
 
 The [Docker Project Setup](./SETUP.md) script features:
