@@ -2,13 +2,13 @@ _🍿 Smash that ⭐️ like you're fast-forwarding through a bad commercial bre
 
 # Duplex 📺🚀
 
-Welcome to Duplex — your backstage pass to running a star-studded Plex Media Server on Synology NAS! Think of it as your assistant director for managing all the Docker magic behind your media empire. 🎬
+Welcome to Duplex—your backstage pass to running a star-studded Plex Media Server on Synology NAS! Think of it as your assistant director for managing all the Docker magic behind your media empire. 🎬
 
 ## Overview 📋
 >
 > ☠️ **Rumor has it there's hidden treasure in these waters...** [🦜🏴‍☠️](config/plundarr/README.md)
 
-The `docker-compose.yml` script sets the scene for running your Plex Media Server on Synology NAS. It's like having a sitcom cast of helpful apps for metadata, cleaning, monitoring, and auto-updating — always ready for their cue.
+The `docker-compose.yml` script sets the scene for running your Plex Media Server on Synology NAS. It's like having a sitcom cast of helpful apps for metadata, cleaning, monitoring, and auto-updating—always ready for their cue.
 
 For a deeper dive into the Docker Compose configuration, check out the Docker Compose file in this repository.
 
@@ -16,7 +16,7 @@ For a deeper dive into the Docker Compose configuration, check out the Docker Co
 
 ## Included Tools 🛠️
 
-Here's the cast list — starring the finest apps to keep your Plex show running smoother than a perfect cold open:
+Here's the cast list—starring the finest apps to keep your Plex show running smoother than a perfect cold open:
 
 | Tool                 | Description                                                   | More Info                                                             |
 |----------------------|---------------------------------------------------------------|-----------------------------------------------------------------------|
@@ -38,10 +38,7 @@ Here's the cast list — starring the finest apps to keep your Plex show running
 Lights, camera, action! First, grab the project and all its star performers (submodules included) to your Synology NAS. Use the command below to ensure you include all the necessary submodules:
 
 > [!NOTE]
-> 🎬 The Kometa configuration files are spun off into their own spinoff series: [kometa-config](https://github.com/scottgigawatt/kometa-config). It's included here as a submodule at `config/kometa` — so don't skip that `--recurse-submodules` magic trick.
-
-> [!IMPORTANT]
-> Cloning with submodules is crucial for proper functionality.
+> 🎬 The Kometa configuration files are spun off into their own spinoff series: [kometa-config](https://github.com/scottgigawatt/kometa-config). It's included here as a submodule at `config/kometa`—so don't skip that `--recurse-submodules` magic trick.
 
 ```sh
 git clone --recurse-submodules https://github.com/scottgigawatt/duplex.git /volume1/docker/duplex
@@ -53,9 +50,6 @@ Every great production needs a script. Copy the example `.env` files and tweak t
 
 - 📄 [View example.env](example.env)
 - 📄 [View config/imagemaid/example.env](config/imagemaid/example.env)
-
-> [!NOTE]
-> Remember to edit the `.env` files to suit your individual setup.
 
 ```sh
 cp example.env .env
@@ -81,17 +75,17 @@ vim config/imagemaid/.env
 
 The [Docker Project Setup](./SETUP.md) script features:
 
-- 🌍🔧 [Configuring Docker Networking](./SETUP.md#chartin-the-docker-network-waters-)
-- 🖥️⚙️ [Synology Configuration](./SETUP.md#batten-down-the-hatches-)
-  - 🔥🛡️ [Updating Firewall Settings](./SETUP.md#guardin-the-ship-)
-  - 📦🚀 [Deploying With Container Manager](./SETUP.md#launchin-yer-fleet-)
+- 🌍🔧 [Configuring Docker Networking](./SETUP.md#configuring-docker-networking-)
+- 🖥️⚙️ [Synology Configuration](./SETUP.md#synology-configuration-️)
+  - 🔥🛡️ [Updating Firewall Settings](./SETUP.md#updating-firewall-settings-️)
+  - 📦🚀 [Deploying With Container Manager](./SETUP.md#deploying-with-container-manager-)
 
-Don’t be the hero who forgets their training montage. Read the guide. Save the project. 🎥
+Don't be the hero who forgets their training montage. Read the guide. Save the project. 🎥
 
 ## License 📄
 
-Licensed under the Apache 2 License — because every good show deserves a fair contract. 📄
+Licensed under the Apache 2 License—because every good show deserves a fair contract. 📄
 
 ---
 
-Contribute, suggest plot twists, or leave a review — your feedback keeps the Duplex series renewed for another season. Happy Plexing, and may your binge-watching be uninterrupted! 🌟
+Contribute, suggest plot twists, or leave a review—your feedback keeps the Duplex series renewed for another season. Happy Plexing, and may your binge-watching be uninterrupted! 🌟

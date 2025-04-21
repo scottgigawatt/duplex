@@ -65,7 +65,7 @@ To deploy a project using Synology Container Manager:
 1. 🔑 Log in to the Synology DSM web interface.
 2. 📦 Open **Container Manager** and navigate to the **Project** tab 📂.
 3. 🆕 Click **Create** and configure:
-   - 🏷️ **Project Name**: (e.g., `plundarr`)
+   - 🏷️ **Project Name**: (e.g., `duplex`)
    - 📂 **Project Path**: Path to the cloned repository.
 4. 🚀 Review and confirm the settings to deploy the project.
 
