@@ -1,4 +1,20 @@
-_🍿 Smash that ⭐️ like you're fast-forwarding through a bad commercial break._
+<hr />
+
+<p align="center">
+  <em>🍿 Smash that ⭐️ like you're fast-forwarding through a bad commercial break.</em>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Lights%20On-Docker-blue?logo=docker" alt="Lights On" />
+  <img src="https://img.shields.io/badge/Private%20Screening-PIA%20%7C%20WireGuard-green?logo=protonvpn" alt="Private Screening" />
+  <img src="https://img.shields.io/github/license/scottgigawatt/duplex?label=Director's%20Cut%20License&color=blue" alt="Director's Cut License" />
+  <img src="https://img.shields.io/github/last-commit/scottgigawatt/duplex?label=Last%20Episode&logo=git" alt="Last Episode" />
+  <img src="https://img.shields.io/github/repo-size/scottgigawatt/duplex?label=Media%20Vault" alt="Media Vault" />
+  <img src="https://img.shields.io/badge/Binge--Ready-Synology%20%7C%20macOS-blue" alt="Binge-Ready" />
+  <img src="https://img.shields.io/badge/Now%20Streaming-Full-orange" alt="Now Streaming" />
+</p>
+
+<hr />
 
 # Duplex 📺🚀
 
