@@ -11,7 +11,7 @@
   <img src="https://img.shields.io/github/last-commit/scottgigawatt/duplex?label=Last%20Episode&logo=git" alt="Last Episode" />
   <img src="https://img.shields.io/github/repo-size/scottgigawatt/duplex?label=Media%20Vault" alt="Media Vault" />
   <img src="https://img.shields.io/badge/Binge--Ready-Synology%20%7C%20macOS-blue" alt="Binge-Ready" />
-  <img src="https://img.shields.io/badge/Now%20Streaming-Full-orange" alt="Now Streaming" />
+  <img src="https://img.shields.io/badge/Now%20Streaming-Live-orange" alt="Now Streaming" />
 </p>
 
 <hr />
