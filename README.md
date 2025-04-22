@@ -105,4 +105,16 @@ Licensed under the Apache 2 License—because every good show deserves a fair co
 
 ---
 
+```
+   __________________________
+  | .----------------------. |
+  | |                      | |
+  | |   📺 Now Streaming   | |
+  | |   🍿 Duplex Media    | |
+  | |                      | |
+  | '----------------------' |
+  |__________________________|
+    (_)                  (_)
+```
+
 Contribute, suggest plot twists, or leave a review—your feedback keeps the Duplex series renewed for another season. Happy Plexing, and may your binge-watching be uninterrupted! 🌟
