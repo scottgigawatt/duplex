@@ -184,8 +184,9 @@ services:
 
     # Mount host directories into the container
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:rw  # Allow container to talk to host Docker API
-      - /etc/localtime:/etc/localtime:ro              # Setup container with the proper timezone
+      - /var/run/docker.sock:/var/run/docker.sock:rw # Allow container to talk to host Docker API
+      - ${WATCHTOWER_DOCKER_CONFIG}:/config.json:ro  # Mount Docker config for private registry access
+      - /etc/localtime:/etc/localtime:ro             # Setup container with the proper timezone
 
 #
 # Define the networks section
