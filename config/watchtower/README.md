@@ -1,42 +1,34 @@
+# Watchtower: One Update, No Sequel 🛠️🎬
 
-# 🚀 Watchtower Run Once Configuration
+This chart runs the maintained `nickfedor/watchtower` fork exactly once, updates
+eligible containers, and exits. It only considers containers labeled
+`com.centurylinklabs.watchtower.enable=true`.
 
-Welcome to the `watchtower` directory! This directory contains the Docker Compose configuration for running Watchtower **one time only** using the `WATCHTOWER_RUN_ONCE` environment variable. 🕒 Watchtower will check for updates on the specified containers, apply them, and then exit.
+The original `containrrr/watchtower` repository was archived in December 2025.
+Duplex uses the actively maintained compatible fork and its current
+documentation at [watchtower.nickfedor.com](https://watchtower.nickfedor.com/).
 
-## 🛠️ Usage
+## Configure and run 🧪
 
-1. **Clone Repository:**
+```sh
+cp config/watchtower/example.env config/watchtower/.env
+make watchtower-config
+make watchtower-run
+```
 
-   ```bash
-   git clone https://github.com/scottgigawatt/duplex.git
-   cd duplex/config/watchtower
-   ```
+Review these settings before the run:
 
-2. **Configure Environment:**
-   - 📋 Copy `example.env` to `.env` and configure the variables, including the container names you want to update.
+- `WATCHTOWER_LABEL_ENABLE` should remain `true`.
+- `WATCHTOWER_INCLUDE_STOPPED` and `WATCHTOWER_REVIVE_STOPPED` default to
+  `false`.
+- `WATCHTOWER_NOTIFICATION_URL` must be replaced or notifications disabled.
+- `WATCHTOWER_DOCKER_CONFIG` points to a directory containing `config.json` only
+  when registry authentication is needed.
 
-3. **Run Docker Compose:**
+> [!WARNING]
+> The Docker socket provides control of the Docker daemon and can lead to host
+> control. A read-only bind flag does not make socket API operations read-only.
+> Run only trusted images and inspect the exact labels before updating.
 
-   ```bash
-   docker-compose up
-   ```
-
-   🎯 This will trigger Watchtower to:
-   - Run once
-   - Check for container updates
-   - Apply updates if available 🧩
-   - Exit when complete.
-
-## 📂 Files
-
-- **`docker-compose.yml`**: Docker Compose configuration for Watchtower.
-- **`example.env`**: Example environment file to configure container targets and options.
-
-## ⚠️ Notes
-
-- Make sure the container names in your `.env` file match the names of the running containers you want to update.
-- For more details on the `WATCHTOWER_RUN_ONCE` feature, visit the [Watchtower Documentation](https://containrrr.dev/watchtower/).
-
----
-
-🔄 **Happy updating with Watchtower!**
+The one-shot container labels itself `false`, so it cannot attempt a surprise
+self-recast halfway through the scene.

@@ -1,0 +1,67 @@
+#
+# Copyright 2025-2026 Scott Gigawatt
+#
+# Licensed under the Apache License, Version 2.0.
+#
+# scorecard.yml: Measure and publish Duplex's supply-chain security posture.
+#
+
+name: "Audit the Studio Backlot 🛡️📺"
+
+#
+# Re-evaluate policy changes, the weekly schedule, and explicit maintainer runs.
+#
+on:
+    branch_protection_rule:
+    push:
+        branches:
+            - main
+        paths:
+            - ".github/workflows/**"
+            - ".github/renovate.json5"
+    schedule:
+        - cron: "29 8 * * 1"
+    workflow_dispatch:
+
+permissions:
+    contents: read
+
+jobs:
+    #
+    # Upload signed SARIF findings with only identity and security permissions.
+    #
+    scorecard:
+        name: "Count the Supply-Chain Plot Holes 🔍"
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+            id-token: write
+            security-events: write
+
+        steps:
+            #
+            # Keep credentials out of the checkout before Scorecard examines
+            # repository history and configuration.
+            #
+            - name: "Roll the Source Footage 🎞️"
+              uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+              with:
+                  persist-credentials: false
+
+            #
+            # Produce SARIF locally and publish the aggregate Scorecard result.
+            #
+            - name: "Inspect Every Wobbly Set Wall 🧱"
+              uses: ossf/scorecard-action@2d1146689b8cda280b9bc96326124645441f03bc  # v2.4.4
+              with:
+                  results_file: scorecard-results.sarif
+                  results_format: sarif
+                  publish_results: true
+
+            #
+            # Upload the report so findings appear in GitHub code scanning.
+            #
+            - name: "Send the Audit to the Editing Bay 📜"
+              uses: github/codeql-action/upload-sarif@5595ccaf912efad79be6eef63a5619ff05969be3  # v4
+              with:
+                  sarif_file: scorecard-results.sarif

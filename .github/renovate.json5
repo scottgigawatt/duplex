@@ -1,0 +1,67 @@
+// Copyright 2025-2026 Scott Gigawatt
+//
+// Licensed under the Apache License, Version 2.0.
+//
+// renovate.json5: Dependency update policy for Duplex images, Actions,
+//                 pre-commit hooks, and submodules.
+
+{
+    // Renovate schema and shared safe defaults.
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+        "config:recommended",
+        "helpers:pinGitHubActionDigests",
+        ":enablePreCommit"
+    ],
+
+    // Keep dependency work predictable for a single-maintainer repository.
+    "timezone": "America/New_York",
+    "schedule": ["before 8am on monday"],
+    "dependencyDashboard": true,
+    "labels": ["dependencies"],
+    "assignees": ["scottgigawatt"],
+    "reviewers": ["scottgigawatt"],
+
+    // Limit updates to dependency sources that Duplex actually owns.
+    "enabledManagers": [
+        "custom.regex",
+        "git-submodules",
+        "github-actions",
+        "pre-commit"
+    ],
+
+    // Extract image tags and optional digests from every checked-in example env.
+    "customManagers": [
+        {
+            "customType": "regex",
+            "managerFilePatterns": [
+                "/(^|/)example\\.env$/"
+            ],
+            "matchStrings": [
+                "[A-Z0-9_]+_IMAGE=\\\"\\$\\{[A-Z0-9_]+_IMAGE:-(?<depName>[^:}]+):(?<currentValue>[^@}]+)(?:@(?<currentDigest>sha256:[a-f0-9]+))?\\}\\\""
+            ],
+            "datasourceTemplate": "docker",
+            "versioningTemplate": "docker"
+        }
+    ],
+
+    // Keep related dependency work grouped and easy to review.
+    "packageRules": [
+        {
+            "groupName": "GitHub Actions",
+            "matchManagers": ["github-actions"]
+        },
+        {
+            "groupName": "Container images",
+            "matchManagers": ["custom.regex"]
+        },
+        {
+            "groupName": "Pre-commit hooks",
+            "matchManagers": ["pre-commit"]
+        },
+        {
+            "groupName": "Submodules",
+            "matchManagers": ["git-submodules"]
+        }
+    ]
+}

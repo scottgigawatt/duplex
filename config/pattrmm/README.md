@@ -1,15 +1,28 @@
-# PATTRMM Configuration
+# PATTRMM's Scheduling Department 📅🎬
 
-The `pattrmm` directory serves as the `/data` and `/preferences` directories for the PATTRMM container in the Duplex repository. It will automatically be used for PATTRMM configuration as specified by the Docker Compose configuration in the project root directory.
+PATTRMM creates Returning Soon, In-History, and other metadata for Kometa. This
+directory supplies its writable `/data` and `/preferences` mounts, while the
+Kometa submodule is mounted at `/config` for generated metadata.
 
-## Setup and Configuration
+## Directory contract 📂
 
-No additional setup is required for the `pattrmm` directory. It will be utilized by the PATTRMM container according to the configuration specified in the Duplex Docker Compose file.
+- [`data/`](data/README.md): generated history, cache, and logs.
+- [`preferences/`](preferences/README.md): checked-in settings and generated
+  templates.
+- `config/kometa`: the separate Kometa configuration repository receiving
+  PATTRMM output.
 
-Ensure that the necessary configurations, including any required environment variables or settings, are correctly applied to the `pattrmm` directory as per the Duplex Docker Compose configuration.
+Set `PATTRMM_TIME`, `PATTRMM_PUID`, and `PATTRMM_PGID` in the root `.env`.
+Upstream intentionally names the group variable `GUID`; Duplex maps the clearer
+host setting to that required container variable.
 
----
+> [!NOTE]
+> Run PATTRMM before Kometa so the day's metadata is on set before Kometa starts
+> filming it.
 
-For more information about PATTRMM and its usage, refer to the [official documentation](https://github.com/insertdisc/pattrmm).
+PATTRMM publishes `latest`, `develop`, and `nightly` image channels rather than
+release-version tags. Duplex pins the reviewed `latest` multi-architecture
+manifest digest and lets Renovate propose digest updates.
 
-If you have any questions or need further assistance, feel free to reach out. Happy scheduling and processing with PATTRMM!
+See the official [PATTRMM repository](https://github.com/InsertDisc/pattrmm) for
+current settings and generated filename guidance.

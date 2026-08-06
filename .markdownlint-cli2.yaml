@@ -1,0 +1,28 @@
+#
+# Copyright 2025-2026 Scott Gigawatt
+#
+# Licensed under the Apache License, Version 2.0.
+#
+# .markdownlint-cli2.yaml: Markdown style and file selection for Duplex docs.
+#
+
+globs:
+  - "**/*.md"
+  - "#.git/**"
+
+gitignore: true
+
+ignores:
+  - "config/kometa/**"
+
+config:
+  default: true
+  line-length: false
+  no-inline-html: false
+  first-line-h1: false
+  list-marker-space: false
+  code-block-style: false
+  single-title:
+    front_matter_title: ""
+  no-duplicate-heading:
+    siblings_only: true

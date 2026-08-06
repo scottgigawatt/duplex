@@ -1,203 +1,192 @@
----
 #
-# docker-compose.yml: Docker Utilities for Plex (Duplex) contains a Docker Compose
-# configuration tailored for a Synology NAS environments, simplifying the setup process
-# for managing Plex Media Server by integrating several useful tools and utilities.
+# Copyright 2025-2026 Scott Gigawatt
 #
-# Tools Included:
-#   - Kometa: Manages metadata in Plex Media Server.
-#   - ImageMaid: Cleans photos in Plex Media Server.
-#   - PATTRMM: Creates chronological 'Returning Soon' and 'In-History' collections
-#   - Tautulli: Provides monitoring and tracking tools for Plex Media Server.
-#   - Notifiarr: Provides notifications for applications and websites
-#   - Watchtower: Automates Docker container base image updates.
+# Licensed under the Apache License, Version 2.0.
 #
-# For more information about Kometa, visit: https://kometa.wiki/en/nightly/
-# For more information about ImageMaid, visit: https://kometa.wiki/en/nightly/kometa/scripts/imagemaid/
-# For more information about PATTRMM, visit: https://github.com/InsertDisc/pattrmm
-# For more information about Tautulli, visit: https://github.com/Tautulli/Tautulli
-# For more information about Notifiarr, visit: https://notifiarr.wiki/en/home
-# For more information about Watchtower, visit: https://github.com/containrrr/watchtower
+# docker-compose.yml: Run Duplex's Plex metadata, maintenance, monitoring, and
+#                     notification services on Docker Compose or Synology DSM.
+#
+# Services included:
+#   - Kometa:      https://kometa.wiki
+#   - ImageMaid:   https://kometa.wiki/en/latest/kometa/scripts/imagemaid/
+#   - PATTRMM:     https://github.com/InsertDisc/pattrmm
+#   - Tautulli:    https://docs.tautulli.com
+#   - Notifiarr:   https://notifiarr.wiki
+#   - Watchtower:  https://watchtower.nickfedor.com
 #
 
 #
-# Docker Compose version on the target system
+# Setup default properties shared by every service.
 #
-version: "2.9"
-
-#
-# Setup default properties for all or most containers
-#
-x-default-container: &default-container  # YAML anchor for default container
-  pull_policy: always                    # Ensure that the image is always pulled
-  restart: unless-stopped                # Restart the container unless explicitly stopped
-  logging:                               # Configure container logging options
-    driver: "json-file"                  # Use JSON file logging driver
+x-default-container: &default-container  # YAML anchor for common container settings
+  pull_policy: always                    # Check the registry before every deployment
+  restart: unless-stopped                # Restart unless an operator stops the container
+  logging:                               # Bound local JSON log growth
+    driver: "json-file"                  # Use Docker's JSON file logging driver
     options:
-      max-size: ${LOG_MAX_SIZE}          # Maximum file size for logs files
-      max-file: ${LOG_MAX_FILE}          # Maximum number of log files to retain
+      max-size: ${LOG_MAX_SIZE}          # Maximum size of each rotated log file
+      max-file: ${LOG_MAX_FILE}          # Number of rotated log files to retain
 
 #
-# Setup default variables for all or most containers
+# Setup the timezone shared by every service.
 #
-x-default-environment: &default-environment  # YAML anchor for default environment
-    TZ: ${TZ}                                # Set the appropriate timezone
+x-default-environment: &default-environment  # YAML anchor for shared environment values
+  TZ: ${TZ}                                  # IANA timezone used by scheduled services
 
 #
-# Define the services section
+# Mark services that Watchtower may update.
+#
+x-enable-watchtower: &enable-watchtower  # YAML anchor for opt-in update labels
+  - "com.centurylinklabs.watchtower.enable=true"  # Allow this service to be updated
+
+#
+# Mark infrastructure that must never update itself.
+#
+x-disable-watchtower: &disable-watchtower  # YAML anchor for opt-out update labels
+  - "com.centurylinklabs.watchtower.enable=false"  # Require an intentional update
+
+#
+# Define the Duplex service stack.
 #
 services:
   #
-  # Define the 'kometa' service
+  # Manage Plex metadata, collections, overlays, and playlists.
   #
   kometa:
-    # Docker image and container information
-    <<: *default-container                  # Pull in the default container information
-    image: kometateam/kometa:${KOMETA_TAG}  # Run using the specified tag
-    container_name: kometa-${KOMETA_TAG}    # Append Docker image tag to container name
-    hostname: kometa                        # Set the container hostname
+    <<: *default-container  # Pull in common container settings
+    image: ${KOMETA_IMAGE}  # Versioned official Kometa image
+    container_name: kometa  # Stable name used by operators and integrations
+    hostname: kometa        # Stable hostname inside the Compose network
 
-    # Define the container environment
+    labels: *enable-watchtower  # Permit reviewed tag rebuilds to roll forward
+
     environment:
-      <<: *default-environment       # Pull in the default environment
-      KOMETA_DEBUG: ${KOMETA_DEBUG}  # Toggles running with extra debug logs
-      KOMETA_TIMES: ${KOMETA_TIMES}  # Set the times Kometa will run
+      <<: *default-environment       # Pull in the shared timezone
+      KOMETA_DEBUG: ${KOMETA_DEBUG}  # Enable additional diagnostic output
+      KOMETA_TIMES: ${KOMETA_TIMES}  # Daily schedule in Kometa's time-list format
 
-    # Mount host directories into the container
     volumes:
-      - ${HOST_DUPLEX_CONFIG}/kometa:/config:rw  # Mount config directory
+      - "${HOST_DUPLEX_CONFIG}/kometa:/config:rw"  # Kometa config, cache, and logs
 
   #
-  # Define the 'imagemaid' service
+  # Clean Plex's image cache on the configured maintenance schedule.
   #
   imagemaid:
-    # Docker image and container information
-    <<: *default-container                         # Pull in the default container information
-    image: kometateam/imagemaid:${IMAGE_MAID_TAG}  # Run using the specified tag
-    container_name: imagemaid-${IMAGE_MAID_TAG}    # Append Docker image tag to container name
-    hostname: imagemaid                            # Set the container hostname
+    <<: *default-container     # Pull in common container settings
+    image: ${IMAGEMAID_IMAGE}  # Versioned official ImageMaid image
+    container_name: imagemaid  # Stable name used by operators and integrations
+    hostname: imagemaid        # Stable hostname inside the Compose network
 
-    # Define the container environment
+    labels: *enable-watchtower  # Permit reviewed tag rebuilds to roll forward
+
     environment:
-      <<: *default-environment  # Pull in the default environment
+      <<: *default-environment  # Pull in the shared timezone
 
-    # Mount host directories into the container
     volumes:
-      - ${HOST_DUPLEX_CONFIG}/imagemaid:/config:rw                         # Mount config directory
-      - ${HOST_VOLUME}/PlexMediaServer/AppData/Plex Media Server:/plex:rw  # Mount plex directory
+      - "${HOST_DUPLEX_CONFIG}/imagemaid:/config:rw"  # ImageMaid settings and logs
+      - "${HOST_PLEX_CONFIG}:/plex:rw"                 # Plex image cache and database
 
   #
-  # Define the 'pattrmm' (Plex Assistant to the Regional Meta Manager) service
+  # Generate Returning Soon and In-History metadata for Kometa.
   #
   pattrmm:
-    # Docker image and container information
-    <<: *default-container                            # Pull in the default container information
-    image: ghcr.io/insertdisc/pattrmm:${PATTRMM_TAG}  # Run using the specified tag
-    container_name: pattrmm-${PATTRMM_TAG}            # Append Docker image tag to container name
-    hostname: pattrmm                                 # Set the container hostname
+    <<: *default-container  # Pull in common container settings
+    image: ${PATTRMM_IMAGE}  # Digest-pinned upstream image; no versioned tags exist
+    container_name: pattrmm  # Stable name used by operators and integrations
+    hostname: pattrmm        # Stable hostname inside the Compose network
 
-    # Define the container environment
+    labels: *disable-watchtower  # Renovate owns the pinned PATTRMM image digest
+
     environment:
-      <<: *default-environment       # Pull in the default environment
-      PATTRMM_TIME: ${PATTRMM_TIME}  # Set scheduled run time
-      PUID: ${PATTRMM_PUID}          # Set uid from ssh session
-      GUID: ${PATTRMM_PGID}          # Set gid from ssh session
+      <<: *default-environment       # Pull in the shared timezone
+      PATTRMM_TIME: ${PATTRMM_TIME}  # Daily scheduled run time in 24-hour format
+      PUID: ${PATTRMM_PUID}          # Host user ID for generated files
+      GUID: ${PATTRMM_PGID}          # Upstream variable name for the host group ID
 
-    # Mount host directories into the container
     volumes:
-      - ${HOST_DUPLEX_CONFIG}/pattrmm/data:/data:rw                # Data directory
-      - ${HOST_DUPLEX_CONFIG}/pattrmm/preferences:/preferences:rw  # Preferences directory
-      - ${HOST_DUPLEX_CONFIG}/kometa:/config:rw                    # Kometa config directory
+      - "${HOST_DUPLEX_CONFIG}/pattrmm/data:/data:rw"                # Runtime history and cache
+      - "${HOST_DUPLEX_CONFIG}/pattrmm/preferences:/preferences:rw"  # PATTRMM settings
+      - "${HOST_DUPLEX_CONFIG}/kometa:/config:rw"                    # Generated Kometa metadata
 
   #
-  # Define the 'tautulli' service
+  # Monitor Plex activity and expose the Tautulli web interface.
   #
   tautulli:
-    # Docker image and container information
-    <<: *default-container                    # Pull in the default container information
-    image: tautulli/tautulli:${TAUTULLI_TAG}  # Run using the specified tag
-    container_name: tautulli-${TAUTULLI_TAG}  # Append Docker image tag to container name
-    hostname: tautulli                        # Set the container hostname
+    <<: *default-container   # Pull in common container settings
+    image: ${TAUTULLI_IMAGE}  # Versioned official Tautulli image
+    container_name: tautulli  # Stable name used by operators and integrations
+    hostname: tautulli        # Stable hostname inside the Compose network
 
-    # Define the container environment
+    labels: *enable-watchtower  # Permit reviewed tag rebuilds to roll forward
+
     environment:
-      <<: *default-environment  # Pull in the default environment
-      PUID: ${TAUTULLI_PUID}    # Set uid from ssh session
-      PGID: ${TAUTULLI_PGID}    # Set gid from ssh session
+      <<: *default-environment  # Pull in the shared timezone
+      PUID: ${TAUTULLI_PUID}    # Host user ID for Tautulli state
+      PGID: ${TAUTULLI_PGID}    # Host group ID for Tautulli state
 
-    # Define the host and container ports
     ports:
-      - "${TAUTULLI_PORT}:8181"  # Tautulli web UI port
+      - "${TAUTULLI_PORT}:8181"  # Tautulli web interface
 
-    # Mount host directories into the container
     volumes:
-      - ${HOST_DUPLEX_CONFIG}/tautulli:/config:rw # Mount config directory
+      - "${HOST_DUPLEX_CONFIG}/tautulli:/config:rw"  # Database, settings, and logs
 
   #
-  # Define the 'notifiarr' service
+  # Send service notifications and expose the Notifiarr client interface.
   #
   notifiarr:
-    # Docker image and container information
-    <<: *default-container                      # Pull in the default container information
-    image: golift/notifiarr:${NOTIFIARR_TAG}    # Run using the specified tag
-    container_name: notifiarr-${NOTIFIARR_TAG}  # Append Docker image tag to container name
-    hostname: notifiarr                         # Set the container hostname
+    <<: *default-container    # Pull in common container settings
+    image: ${NOTIFIARR_IMAGE}  # Versioned official Notifiarr image
+    container_name: notifiarr  # Stable name used by operators and integrations
+    hostname: notifiarr        # Required to keep one stable Notifiarr client identity
 
-    # Define the container environment
+    labels: *enable-watchtower  # Permit reviewed tag rebuilds to roll forward
+
     environment:
-      <<: *default-environment  # Pull in the default environment
+      <<: *default-environment  # Pull in the shared timezone
 
-    # Define the host and container ports
     ports:
-      - "${NOTIFIARR_PORT}:5454"  # Notifiarr web UI port
+      - "${NOTIFIARR_PORT}:5454"  # Notifiarr web interface and webhook endpoint
 
-    # Mount host directories into the container
     volumes:
-      - ${HOST_DUPLEX_CONFIG}/notifiarr:/config:rw  # Mount config directory
-      - /var/run/utmp:/var/run/utmp:ro              # Used to count logged in users
-      - /etc/machine-id:/etc/machine-id:ro          # Used to uniquely identify the host
-      - /etc/localtime:/etc/localtime:ro            # Setup container with the proper timezone
+      - "${HOST_DUPLEX_CONFIG}/notifiarr:/config:rw"  # Generated Notifiarr client config
+      - "/var/run/utmp:/var/run/utmp:ro"              # Logged-in user count
+      - "/etc/machine-id:/etc/machine-id:ro"          # Stable host identity
 
   #
-  # Define the 'watchtower' service
+  # Update only containers that explicitly opt in with a Watchtower label.
   #
   watchtower:
-    # Docker image and container information
-    <<: *default-container                          # Pull in the default container information
-    image: containrrr/watchtower:${WATCHTOWER_TAG}  # Run using the specified tag
-    container_name: watchtower-${WATCHTOWER_TAG}    # Append Docker image tag to container name
-    hostname: watchtower                            # Set the container hostname
+    <<: *default-container     # Pull in common container settings
+    image: ${WATCHTOWER_IMAGE}  # Maintained community Watchtower image
+    container_name: watchtower  # Stable name used by operators and integrations
+    hostname: watchtower        # Stable hostname inside the Compose network
 
-    # Add container labels
-    labels:
-      - "com.centurylinklabs.watchtower.enable=false"  # Exclude container from (run once) Watchtower
+    labels: *disable-watchtower  # Prevent the updater from replacing itself
 
-    # Define the container environment
     environment:
-      <<: *default-environment                                     # Pull in the default environment
-      WATCHTOWER_POLL_INTERVAL: ${WATCHTOWER_POLL_INTERVAL}        # Set how often to check for new images
-      WATCHTOWER_CLEANUP: ${WATCHTOWER_CLEANUP}                    # Clean old images after updates
-      WATCHTOWER_INCLUDE_STOPPED: ${WATCHTOWER_INCLUDE_STOPPED}    # Update stopped containers as well
-      WATCHTOWER_REVIVE_STOPPED: ${WATCHTOWER_REVIVE_STOPPED}      # Start stopped containers after update
-      WATCHTOWER_NOTIFICATIONS: ${WATCHTOWER_NOTIFICATIONS}        # Send notifications for updates
-      WATCHTOWER_NOTIFICATION_URL: ${WATCHTOWER_NOTIFICATION_URL}  # URL for webhook notifications
+      <<: *default-environment                                     # Pull in the shared timezone
+      DOCKER_CONFIG: /config                                       # Directory containing registry credentials
+      WATCHTOWER_POLL_INTERVAL: ${WATCHTOWER_POLL_INTERVAL}        # Seconds between registry checks
+      WATCHTOWER_CLEANUP: ${WATCHTOWER_CLEANUP}                    # Remove superseded images
+      WATCHTOWER_INCLUDE_STOPPED: ${WATCHTOWER_INCLUDE_STOPPED}    # Inspect stopped labeled containers
+      WATCHTOWER_REVIVE_STOPPED: ${WATCHTOWER_REVIVE_STOPPED}      # Restart updated stopped containers
+      WATCHTOWER_LABEL_ENABLE: ${WATCHTOWER_LABEL_ENABLE}          # Ignore containers without an opt-in label
+      WATCHTOWER_NOTIFICATIONS: ${WATCHTOWER_NOTIFICATIONS}        # Notification backend
+      WATCHTOWER_NOTIFICATION_URL: ${WATCHTOWER_NOTIFICATION_URL}  # Notification destination
 
-    # Mount host directories into the container
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:rw # Allow container to talk to host Docker API
-      - ${WATCHTOWER_DOCKER_CONFIG}:/config.json:ro  # Mount Docker config for private registry access
-      - /etc/localtime:/etc/localtime:ro             # Setup container with the proper timezone
+      - "/var/run/docker.sock:/var/run/docker.sock:rw"       # Docker daemon control socket
+      - "${WATCHTOWER_DOCKER_CONFIG}:/config:ro"             # Registry credentials directory
 
 #
-# Define the networks section
+# Define the isolated Duplex network.
 #
 networks:
-  # Configure the default network
   default:
-    name: ${COMPOSE_PROJECT_NAME}  # Use the name of the compose project
-    ipam:                          # IP Address Management
-      driver: default              # Use the default driver
+    name: ${COMPOSE_PROJECT_NAME}  # Stable network name shared with optional tools
+    ipam:
+      driver: default  # Use Docker's default IP address management driver
       config:
-        - subnet: ${COMPOSE_NETWORK_SUBNET}      # Subnet in CIDR format that represents a network segment
-          ip_range: ${COMPOSE_NETWORK_IP_RANGE}  # Range of IPs from which to allocate container IPs
-          gateway: ${COMPOSE_NETWORK_GATEWAY}    # Gateway for the master subnet
+        - subnet: ${COMPOSE_NETWORK_SUBNET}      # Address space reserved for Duplex
+          ip_range: ${COMPOSE_NETWORK_IP_RANGE}  # Addresses assigned to containers
+          gateway: ${COMPOSE_NETWORK_GATEWAY}    # Gateway inside the reserved subnet

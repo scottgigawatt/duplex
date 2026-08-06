@@ -1,0 +1,58 @@
+#
+# Copyright 2025-2026 Scott Gigawatt
+#
+# Licensed under the Apache License, Version 2.0.
+#
+# validate-pr.yml: Validate every Duplex chart and repository quality policy.
+#
+
+name: "Screen the Director's Cut 🧪📺"
+
+#
+# Run the complete validation suite for every pull request targeting main.
+# The broad path rule keeps this workflow available as a dependable merge gate.
+#
+on:
+    pull_request:
+        branches:
+            - main
+        paths:
+            - "**"
+
+permissions:
+    contents: read
+
+jobs:
+    #
+    # Validate Compose contracts and repository policy without write access.
+    #
+    validate-pr:
+        name: "Check the Script, Props, and Continuity 🎬"
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+
+        steps:
+            #
+            # Include the Kometa configuration submodule without retaining a
+            # credential that later validation steps could accidentally expose.
+            #
+            - name: "Roll the Source Footage 🎞️"
+              uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+              with:
+                  submodules: recursive
+                  persist-credentials: false
+
+            #
+            # Render every chart from checked-in safe examples, then verify the
+            # Compose-to-environment variable contracts.
+            #
+            - name: "Rehearse Every Compose Scene 🎭"
+              run: make validate
+
+            #
+            # Finish with secret, Markdown, workflow, shell, YAML, and file
+            # hygiene checks shared with local development.
+            #
+            - name: "Run the Continuity Department 🔍"
+              uses: pre-commit/action@2c7b3805fd2a0fd8c1884dcaebf91fc102a13ecd  # v3.0.1

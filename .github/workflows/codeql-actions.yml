@@ -1,0 +1,59 @@
+#
+# Copyright 2025-2026 Scott Gigawatt
+#
+# Licensed under the Apache License, Version 2.0.
+#
+# codeql-actions.yml: Analyze Duplex's GitHub Actions source with CodeQL.
+#
+
+name: "Interrogate the Production Rigging 🔎📺"
+
+#
+# Inspect pull requests, resulting main commits, and explicit maintainer runs.
+#
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+        branches:
+            - main
+    workflow_dispatch:
+
+permissions:
+    contents: read
+
+jobs:
+    #
+    # Grant only the metadata and publishing permissions CodeQL requires.
+    #
+    codeql-actions:
+        name: "Inspect the Workflow Script 🧪"
+        runs-on: ubuntu-latest
+        permissions:
+            actions: read
+            contents: read
+            security-events: write
+
+        steps:
+            #
+            # Checkout is read-only; CodeQL alone can publish code-scanning
+            # findings for the repository's workflow definitions.
+            #
+            - name: "Roll the Source Footage 🎞️"
+              uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+              with:
+                  persist-credentials: false
+
+            - name: "Wake the CodeQL Projector 📽️"
+              uses: github/codeql-action/init@5595ccaf912efad79be6eef63a5619ff05969be3  # v4
+              with:
+                  languages: actions
+
+            #
+            # Keep Actions findings in a dedicated code-scanning category.
+            #
+            - name: "Review the Suspicious Footage 🕵️"
+              uses: github/codeql-action/analyze@5595ccaf912efad79be6eef63a5619ff05969be3  # v4
+              with:
+                  category: "/language:actions"

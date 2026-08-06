@@ -1,83 +1,50 @@
----
 #
-# docker-compose.yml: Docker Compose configuration for a "Run Once" Watchtower instance.
+# Copyright 2025-2026 Scott Gigawatt
 #
-# Tools Included:
-#   - Watchtower: Automates Docker container base image updates.
+# Licensed under the Apache License, Version 2.0.
 #
-# For more information about Watchtower, visit: https://github.com/containrrr/watchtower
+# docker-compose.yml: Run one Watchtower update pass against containers that
+#                     explicitly opt in with the Watchtower enable label.
+#
+# Documentation: https://watchtower.nickfedor.com
 #
 
 #
-# Docker Compose version on the target system
+# Setup common one-shot container properties.
 #
-version: "2.9"
-
-#
-# Setup default properties for all or most containers
-#
-x-default-container: &default-container  # YAML anchor for default container
-  pull_policy: always                    # Ensure that the image is always pulled
-  restart: unless-stopped                # Restart the container unless explicitly stopped
-  logging:                               # Configure container logging options
-    driver: "json-file"                  # Use JSON file logging driver
+x-default-container: &default-container  # YAML anchor for common container settings
+  pull_policy: always                    # Check the registry before every run
+  restart: "no"                          # Exit after the requested update pass
+  logging:                               # Bound local JSON log growth
+    driver: "json-file"                  # Use Docker's JSON file logging driver
     options:
-      max-size: ${LOG_MAX_SIZE}          # Maximum file size for logs files
-      max-file: ${LOG_MAX_FILE}          # Maximum number of log files to retain
+      max-size: ${LOG_MAX_SIZE}          # Maximum size of each rotated log file
+      max-file: ${LOG_MAX_FILE}          # Number of rotated log files to retain
 
 #
-# Setup default variables for all or most containers
-#
-x-default-environment: &default-environment  # YAML anchor for default environment
-    TZ: ${TZ}                                # Set the appropriate timezone
-
-#
-# Define the services section
+# Define the one-shot Watchtower service.
 #
 services:
-  #
-  # Define the 'watchtower-run' service
-  #
   watchtower-run:
-    # Docker image and container information
-    <<: *default-container                            # Pull in the default container information
-    image: containrrr/watchtower:${WATCHTOWER_TAG}    # Run using the specified tag
-    container_name: watchtower-run-${WATCHTOWER_TAG}  # Append Docker image tag to container name
-    restart: "no"                                     # Do not restart the container once it exits
-    hostname: watchtower-run                          # Set the container hostname
+    <<: *default-container         # Pull in common one-shot settings
+    image: ${WATCHTOWER_IMAGE}     # Maintained community Watchtower image
+    container_name: watchtower-run  # Stable name used by operators
+    hostname: watchtower-run        # Stable hostname inside the container
 
-    # Define the container environment
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"  # Never update this one-shot container
+
     environment:
-      <<: *default-environment                                     # Pull in the default environment
-      WATCHTOWER_CLEANUP: ${WATCHTOWER_CLEANUP}                    # Clean old images after updates
-      WATCHTOWER_INCLUDE_STOPPED: ${WATCHTOWER_INCLUDE_STOPPED}    # Update stopped containers as well
-      WATCHTOWER_REVIVE_STOPPED: ${WATCHTOWER_REVIVE_STOPPED}      # Start stopped containers after update
-      WATCHTOWER_NOTIFICATIONS: ${WATCHTOWER_NOTIFICATIONS}        # Send notifications for updates
-      WATCHTOWER_NOTIFICATION_URL: ${WATCHTOWER_NOTIFICATION_URL}  # URL for webhook notifications
-      WATCHTOWER_RUN_ONCE: ${WATCHTOWER_RUN_ONCE}                  # Option to run once and quit
+      TZ: ${TZ}                                                    # IANA timezone used in logs
+      DOCKER_CONFIG: /config                                       # Directory containing registry credentials
+      WATCHTOWER_CLEANUP: ${WATCHTOWER_CLEANUP}                    # Remove superseded images
+      WATCHTOWER_INCLUDE_STOPPED: ${WATCHTOWER_INCLUDE_STOPPED}    # Inspect stopped labeled containers
+      WATCHTOWER_REVIVE_STOPPED: ${WATCHTOWER_REVIVE_STOPPED}      # Restart updated stopped containers
+      WATCHTOWER_LABEL_ENABLE: ${WATCHTOWER_LABEL_ENABLE}          # Ignore containers without an opt-in label
+      WATCHTOWER_NOTIFICATIONS: ${WATCHTOWER_NOTIFICATIONS}        # Notification backend
+      WATCHTOWER_NOTIFICATION_URL: ${WATCHTOWER_NOTIFICATION_URL}  # Notification destination
+      WATCHTOWER_RUN_ONCE: ${WATCHTOWER_RUN_ONCE}                  # Run one update pass and exit
 
-    # Mount host directories into the container
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:rw  # Allow container to talk to host Docker API
-      - /etc/localtime:/etc/localtime:ro              # Setup container with the proper timezone
-
-    # Docker networks to search for image updates
-    networks:
-      - ${COMPOSE_NETWORK_DUPLEX}    # Duplex stack network name
-      - ${COMPOSE_NETWORK_PLUNDARR}  # Plundarr stack network name
-
-#
-# Define the networks section
-#
-networks:
-  # Configure the duplex network
-  duplex:
-    name: ${COMPOSE_NETWORK_DUPLEX}  # Duplex stack network name
-    external: true                   # Connect to an external network not defined here
-    driver: default                  # Use the default driver
-
-  # Configure the plundarr network
-  plundarr:
-    name: ${COMPOSE_NETWORK_PLUNDARR}  # Plundarr stack network name
-    external: true                     # Connect to an external network not defined here
-    driver: default                    # Use the default driver
+      - "/var/run/docker.sock:/var/run/docker.sock:rw"  # Docker daemon control socket
+      - "${WATCHTOWER_DOCKER_CONFIG}:/config:ro"        # Registry credentials directory

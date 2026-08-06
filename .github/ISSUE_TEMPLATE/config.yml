@@ -1,0 +1,14 @@
+#
+# Copyright 2025-2026 Scott Gigawatt
+#
+# Licensed under the Apache License, Version 2.0.
+#
+# config.yml: Disable blank issues and direct live support to the community.
+#
+
+blank_issues_enabled: false
+
+contact_links:
+  - name: "🔥HADES🔥"
+    url: https://discord.gg/BpEGzWwGYf
+    about: "Need live help before the credits roll? Bring the clean details to 🔥HADES🔥."

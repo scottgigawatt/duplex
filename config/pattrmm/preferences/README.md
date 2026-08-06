@@ -1,17 +1,17 @@
-# PATTRMM Preferences Directory
+# PATTRMM Preferences: Notes from Standards & Practices 📋
 
-This `preferences` directory stores the `settings.yml` file that configures how PATTRMM runs.
+PATTRMM mounts this directory at `/preferences`. The checked-in
+[`settings.yml`](settings.yml) configures libraries, metadata output, overlay
+placement, date formatting, and optional status overlays.
 
-## Current Configuration
+Review library names against Plex and output folders against the Kometa config
+before starting the container. PATTRMM may generate additional template files
+here as upstream features evolve.
 
-- **TV Shows Library**:
-  - `Returning Soon`
-  - `In-History`
-- **Movies Library**:
-  - `In-History`
+> [!IMPORTANT]
+> Back up local preference changes before replacing templates during an upgrade.
+> Upstream release notes may require renamed metadata files or regenerated
+> templates.
 
-The `settings.yml` file contains these configurations to manage how PATTRMM processes your media libraries.
-
----
-
-For more information, refer to the [official documentation](https://github.com/insertdisc/pattrmm).
+See the official [PATTRMM settings reference](https://github.com/InsertDisc/pattrmm#settings-file)
+for every supported field.

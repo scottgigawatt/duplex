@@ -1,15 +1,18 @@
-# Tautulli Configuration
+# Tautulli's Ratings Department 📊🍿
 
-The `tautulli` directory serves as the `/config` directory for the Tautulli container in the Duplex repository. It will automatically be used for Tautulli configuration as specified by the Docker Compose configuration in the project root directory.
+This directory is mounted at `/config` for Tautulli's database, settings,
+backups, and logs. In other words, this is where the show about watching shows
+keeps its extremely serious paperwork.
 
-## Setup and Configuration
+## First run 🎬
 
-No additional setup is required for the `tautulli` directory. It will be utilized by the Tautulli container according to the configuration specified in the Duplex Docker Compose file.
+1. Set `TAUTULLI_PUID`, `TAUTULLI_PGID`, and `TAUTULLI_PORT` in the root `.env`.
+2. Ensure the selected host identity can write this directory.
+3. Start Duplex with `make up`.
+4. Open `http://YOUR-NAS:8181` and complete setup.
 
-Ensure that the necessary configurations, including any required environment variables or settings, are correctly applied to the `tautulli` directory as per the Duplex Docker Compose configuration.
+Back up this directory before image upgrades. Never commit Tautulli's database,
+logs, authentication settings, Plex token, or user activity.
 
----
-
-For more information about Tautulli and its usage, refer to the [official documentation](https://github.com/Tautulli/Tautulli/wiki).
-
-If you have any questions or need further assistance, feel free to reach out. Happy monitoring and tracking with Tautulli!
+See the official [Tautulli installation guide](https://docs.tautulli.com/getting-started/installation)
+for Docker, Synology, UID/GID, port, and upgrade guidance.

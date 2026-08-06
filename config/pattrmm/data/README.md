@@ -1,15 +1,12 @@
-# PATTRMM Data Directory
+# PATTRMM Runtime Data 🎞️
 
-This `data` directory is used by the PATTRMM container to store history, logs, and cache files.
+PATTRMM mounts this directory at `/data` for generated history, logs, and cache.
+The repository keeps this README as the seat marker; runtime files remain
+ignored.
 
-## Purpose
+Do not commit generated data. Back it up only when its history is operationally
+useful, and redact tokens, private library names, and host details before sharing
+diagnostics.
 
-- **History**: Task execution history.
-- **Logs**: Operation logs.
-- **Cache**: Cached data for performance.
-
-This directory is automatically utilized by PATTRMM as specified in the Duplex Docker Compose file.
-
----
-
-For more information, refer to the [official documentation](https://github.com/insertdisc/pattrmm).
+See the official [PATTRMM repository](https://github.com/InsertDisc/pattrmm) for
+the current runtime behavior.

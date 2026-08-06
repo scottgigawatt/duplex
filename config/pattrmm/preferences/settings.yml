@@ -1,5 +1,9 @@
 #
-# settings.yml: Main settings file for PATTRMM.
+# Copyright 2025-2026 Scott Gigawatt
+#
+# Licensed under the Apache License, Version 2.0.
+#
+# settings.yml: PATTRMM library, collection, overlay, and presentation defaults.
 #
 
 #
@@ -62,9 +66,9 @@ horizontal_align: center
 vertical_align: top
 vertical_offset: 0
 horizontal_offset: 0
-leading_zeros: False
+leading_zeros: false
 date_delimiter: "/"
-year_in_dates: False
+year_in_dates: false
 returning_soon_bgcolor: "#81007F"
 returning_soon_fontcolor: "#FFFFFF"
 
@@ -73,36 +77,36 @@ returning_soon_fontcolor: "#FFFFFF"
 #
 extra_overlays:
   new:
-    use: False
+    use: false
     bgcolor: "#008001"
     font_color: "#FFFFFF"
     text: "N E W  S E R I E S"
     horizontal_align: center
     vertical_align: top
   upcoming:
-    use: False
+    use: false
     bgcolor: "#fc4e03"
     font_color: "#FFFFFF"
     text: "U P C O M I N G"
     horizontal_align: center
     vertical_align: top
   airing:
-    use: False
+    use: false
     bgcolor: "#343399"
     font_color: "#FFFFFF"
     text: "A I R I N G"
   returning:
-    use: False
+    use: false
     bgcolor: "#81007F"
     font_color: "#FFFFFF"
     text: "R E T U R N I N G"
   ended:
-    use: False
+    use: false
     bgcolor: "#000000"
     font_color: "#FFFFFF"
     text: "E N D E D"
   canceled:
-    use: False
+    use: false
     bgcolor: "#CF142B"
     font_color: "#FFFFFF"
     text: "C A N C E L E D"
