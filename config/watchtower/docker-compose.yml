@@ -17,7 +17,7 @@ x-default-container: &default-container  # YAML anchor for common container sett
   restart: "no"                          # Exit after the requested update pass
   logging:                               # Bound local JSON log growth
     driver: "json-file"                  # Use Docker's JSON file logging driver
-    options:
+    options:                             # Options for the JSON file driver
       max-size: ${LOG_MAX_SIZE}          # Maximum size of each rotated log file
       max-file: ${LOG_MAX_FILE}          # Number of rotated log files to retain
 
@@ -26,8 +26,8 @@ x-default-container: &default-container  # YAML anchor for common container sett
 #
 services:
   watchtower-run:
-    <<: *default-container         # Pull in common one-shot settings
-    image: ${WATCHTOWER_IMAGE}     # Maintained community Watchtower image
+    <<: *default-container          # Pull in common one-shot settings
+    image: ${WATCHTOWER_IMAGE}      # Maintained community Watchtower image
     container_name: watchtower-run  # Stable name used by operators
     hostname: watchtower-run        # Stable hostname inside the container
 

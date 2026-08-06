@@ -23,7 +23,7 @@ x-default-container: &default-container  # YAML anchor for common container sett
   restart: unless-stopped                # Restart unless an operator stops the container
   logging:                               # Bound local JSON log growth
     driver: "json-file"                  # Use Docker's JSON file logging driver
-    options:
+    options:                             # Logging options for the JSON file driver
       max-size: ${LOG_MAX_SIZE}          # Maximum size of each rotated log file
       max-file: ${LOG_MAX_FILE}          # Number of rotated log files to retain
 
@@ -36,13 +36,13 @@ x-default-environment: &default-environment  # YAML anchor for shared environmen
 #
 # Mark services that Watchtower may update.
 #
-x-enable-watchtower: &enable-watchtower  # YAML anchor for opt-in update labels
+x-enable-watchtower: &enable-watchtower           # YAML anchor for opt-in update labels
   - "com.centurylinklabs.watchtower.enable=true"  # Allow this service to be updated
 
 #
 # Mark infrastructure that must never update itself.
 #
-x-disable-watchtower: &disable-watchtower  # YAML anchor for opt-out update labels
+x-disable-watchtower: &disable-watchtower          # YAML anchor for opt-out update labels
   - "com.centurylinklabs.watchtower.enable=false"  # Require an intentional update
 
 #
@@ -84,13 +84,13 @@ services:
 
     volumes:
       - "${HOST_DUPLEX_CONFIG}/imagemaid:/config:rw"  # ImageMaid settings and logs
-      - "${HOST_PLEX_CONFIG}:/plex:rw"                 # Plex image cache and database
+      - "${HOST_PLEX_CONFIG}:/plex:rw"                # Plex image cache and database
 
   #
   # Generate Returning Soon and In-History metadata for Kometa.
   #
   pattrmm:
-    <<: *default-container  # Pull in common container settings
+    <<: *default-container   # Pull in common container settings
     image: ${PATTRMM_IMAGE}  # Digest-pinned upstream image; no versioned tags exist
     container_name: pattrmm  # Stable name used by operators and integrations
     hostname: pattrmm        # Stable hostname inside the Compose network
@@ -112,7 +112,7 @@ services:
   # Monitor Plex activity and expose the Tautulli web interface.
   #
   tautulli:
-    <<: *default-container   # Pull in common container settings
+    <<: *default-container    # Pull in common container settings
     image: ${TAUTULLI_IMAGE}  # Versioned official Tautulli image
     container_name: tautulli  # Stable name used by operators and integrations
     hostname: tautulli        # Stable hostname inside the Compose network
@@ -134,7 +134,7 @@ services:
   # Send service notifications and expose the Notifiarr client interface.
   #
   notifiarr:
-    <<: *default-container    # Pull in common container settings
+    <<: *default-container     # Pull in common container settings
     image: ${NOTIFIARR_IMAGE}  # Versioned official Notifiarr image
     container_name: notifiarr  # Stable name used by operators and integrations
     hostname: notifiarr        # Required to keep one stable Notifiarr client identity
@@ -156,7 +156,7 @@ services:
   # Update only containers that explicitly opt in with a Watchtower label.
   #
   watchtower:
-    <<: *default-container     # Pull in common container settings
+    <<: *default-container      # Pull in common container settings
     image: ${WATCHTOWER_IMAGE}  # Maintained community Watchtower image
     container_name: watchtower  # Stable name used by operators and integrations
     hostname: watchtower        # Stable hostname inside the Compose network
@@ -175,8 +175,8 @@ services:
       WATCHTOWER_NOTIFICATION_URL: ${WATCHTOWER_NOTIFICATION_URL}  # Notification destination
 
     volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock:rw"       # Docker daemon control socket
-      - "${WATCHTOWER_DOCKER_CONFIG}:/config:ro"             # Registry credentials directory
+      - "/var/run/docker.sock:/var/run/docker.sock:rw"  # Docker daemon control socket
+      - "${WATCHTOWER_DOCKER_CONFIG}:/config:ro"        # Registry credentials directory
 
 #
 # Define the isolated Duplex network.

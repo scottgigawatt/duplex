@@ -9,12 +9,12 @@ issues, pull requests, Discord channels, and logs.
 Duplex supports the current `main` branch and the image references checked into
 its current `example.env` files.
 
-| Version | Supported |
-| ------- | --------- |
-| Current `main` branch | ✅ |
-| Current checked-in image references | ✅ |
-| Older commits and local image overrides | ❌ |
-| Modified third-party images or Kometa submodule forks | ❌ |
+| Version                                               | Supported |
+| ----------------------------------------------------- | --------- |
+| Current `main` branch                                 | ✅        |
+| Current checked-in image references                   | ✅        |
+| Older commits and local image overrides               | ❌        |
+| Modified third-party images or Kometa submodule forks | ❌        |
 
 Security fixes target the current chart rather than maintaining multiple old
 production cuts.

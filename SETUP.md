@@ -54,16 +54,16 @@ diff -u .env.before-duplex-modernization example.env
 
 The current chart uses complete image references and clearer host paths:
 
-| Older variable | Current variable or action |
-| -------------- | -------------------------- |
-| `KOMETA_TAG` | Set `KOMETA_IMAGE` |
-| `IMAGE_MAID_TAG` | Set `IMAGEMAID_IMAGE` |
-| `PATTRMM_TAG` | Set `PATTRMM_IMAGE` |
-| `TAUTULLI_TAG` | Set `TAUTULLI_IMAGE` |
-| `NOTIFIARR_TAG` | Set `NOTIFIARR_IMAGE` |
-| `WATCHTOWER_TAG` | Set `WATCHTOWER_IMAGE` |
-| `HOST_VOLUME` | Set the explicit `HOST_PLEX_CONFIG` path |
-| `HOST_DUPLEX_PATH` | Remove; the chart uses `HOST_DUPLEX_CONFIG` |
+| Older variable                     | Current variable or action                                 |
+| ---------------------------------- | ---------------------------------------------------------- |
+| `KOMETA_TAG`                       | Set `KOMETA_IMAGE`                                         |
+| `IMAGE_MAID_TAG`                   | Set `IMAGEMAID_IMAGE`                                      |
+| `PATTRMM_TAG`                      | Set `PATTRMM_IMAGE`                                        |
+| `TAUTULLI_TAG`                     | Set `TAUTULLI_IMAGE`                                       |
+| `NOTIFIARR_TAG`                    | Set `NOTIFIARR_IMAGE`                                      |
+| `WATCHTOWER_TAG`                   | Set `WATCHTOWER_IMAGE`                                     |
+| `HOST_VOLUME`                      | Set the explicit `HOST_PLEX_CONFIG` path                   |
+| `HOST_DUPLEX_PATH`                 | Remove; the chart uses `HOST_DUPLEX_CONFIG`                |
 | Watchtower `config.json` file path | Set `WATCHTOWER_DOCKER_CONFIG` to its containing directory |
 
 The simplest safe migration is to create a fresh file and transfer only the
@@ -187,10 +187,10 @@ docker compose ps
 
 Only expose ports needed by trusted clients:
 
-| Default port | Service | Purpose |
-| ------------ | ------- | ------- |
-| `8181/tcp` | Tautulli | Web interface |
-| `5454/tcp` | Notifiarr | Web interface and Plex webhooks |
+| Default port | Service   | Purpose                         |
+| ------------ | --------- | ------------------------------- |
+| `8181/tcp`   | Tautulli  | Web interface                   |
+| `5454/tcp`   | Notifiarr | Web interface and Plex webhooks |
 
 If the Synology firewall is enabled, allow those ports only from trusted LAN or
 reverse-proxy addresses. Do not publish Docker's API or socket over TCP.
