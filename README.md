@@ -43,17 +43,18 @@ an existing Plex installation and its application-data directory.
 
 ## Tonight's cast 🎭
 
-The default image versions below were verified against each project's official
-release or deployment documentation on August 5, 2026.
+The services and deployment guidance below were verified against each project's
+official documentation on August 5, 2026. Reviewed default image references
+remain centralized in `example.env`.
 
-| Service            | Default image                                            | Role                                           | Official source                                                 |
-| ------------------ | -------------------------------------------------------- | ---------------------------------------------- | --------------------------------------------------------------- |
-| **Kometa** ✨      | `kometateam/kometa:v2.4.6`                               | Metadata, collections, playlists, and overlays | [Wiki](https://kometa.wiki/en/latest/)                          |
-| **ImageMaid** 🧼   | `kometateam/imagemaid:v1.2.0`                            | Plex image-cache maintenance                   | [Wiki](https://kometa.wiki/en/latest/kometa/scripts/imagemaid/) |
-| **PATTRMM** 📅     | `ghcr.io/insertdisc/pattrmm:latest` at a reviewed digest | Returning Soon and In-History metadata         | [Repository](https://github.com/InsertDisc/pattrmm)             |
-| **Tautulli** 📊    | `tautulli/tautulli:v2.17.2`                              | Plex activity monitoring                       | [Docs](https://docs.tautulli.com/getting-started/installation)  |
-| **Notifiarr** 🔔   | `golift/notifiarr:0.9.5`                                 | Notifications and service checks               | [Wiki](https://notifiarr.wiki/pages/client/install/)            |
-| **Watchtower** 🛠️  | `nickfedor/watchtower:1.20.3`                            | Label-scoped container updates                 | [Docs](https://watchtower.nickfedor.com/)                       |
+| Service            | Role                                           | Docs                                                            |
+| ------------------ | ---------------------------------------------- | --------------------------------------------------------------- |
+| **Kometa** ✨      | Metadata, collections, playlists, and overlays | [Wiki](https://kometa.wiki/en/latest/)                          |
+| **ImageMaid** 🧼   | Plex image-cache maintenance                   | [Wiki](https://kometa.wiki/en/latest/kometa/scripts/imagemaid/) |
+| **PATTRMM** 📅     | Returning Soon and In-History metadata         | [Repository](https://github.com/InsertDisc/pattrmm)             |
+| **Tautulli** 📊    | Plex activity monitoring                       | [Docs](https://docs.tautulli.com/getting-started/installation)  |
+| **Notifiarr** 🔔   | Notifications and service checks               | [Wiki](https://notifiarr.wiki/pages/client/install/)            |
+| **Watchtower** 🛠️  | Label-scoped container updates                 | [Docs](https://watchtower.nickfedor.com/)                       |
 
 Kometa Overlay Reset has its own one-shot chart under
 [`config/overlay-reset`](config/overlay-reset/README.md). It is deliberately not
@@ -92,9 +93,7 @@ with confidence.”
 Clone Duplex with its Kometa configuration submodule:
 
 ```sh
-git clone --recurse-submodules \
-    https://github.com/scottgigawatt/duplex.git \
-    /volume1/docker/duplex
+git clone --recurse-submodules https://github.com/scottgigawatt/duplex.git /volume1/docker/duplex
 cd /volume1/docker/duplex
 ```
 
