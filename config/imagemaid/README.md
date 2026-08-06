@@ -1,15 +1,32 @@
-# Image Maid Configuration
+# ImageMaid's Digital Broom Closet 🧼🎬
 
-The `imagemaid` directory serves as the `/config` directory for the ImageMaid container in the Duplex repository. It contains a `.env` file to configure the ImageMaid Python program.
+This directory is mounted at `/config` inside ImageMaid. It holds the private
+application `.env`, logs, and maintenance state while ImageMaid cleans Plex's
+image cache with the intensity of a production assistant who just found glitter
+in the continuity photos.
 
-## Environment Variables
+## Setup 🛠️
 
-The `.env` file contains environment variables used to configure ImageMaid. Detailed information about these environment variables can be found [here](https://kometa.wiki/en/nightly/kometa/scripts/imagemaid/#example-env-file).
+```sh
+cp config/imagemaid/example.env config/imagemaid/.env
+```
 
-Feel free to adjust the values of these environment variables in the `.env` file according to your specific requirements.
+Edit the private file and replace at least:
 
----
+- `PLEX_URL`
+- `PLEX_TOKEN`
+- the schedule and cleanup modes appropriate for the server
 
-For more information about ImageMaid and its usage, refer to the [official documentation](https://kometa.wiki/en/nightly/kometa/scripts/imagemaid/).
+The main Compose chart mounts `HOST_PLEX_CONFIG` at `/plex`. That host path must
+contain Plex's `Cache`, `Metadata`, and `Plug-in Support` directories.
 
-If you have any questions or need further assistance, feel free to reach out. Happy cleaning!
+> [!WARNING]
+> ImageMaid changes Plex application data. Back up Plex, verify the mount, and
+> start with conservative modes. A misplaced path can turn spring cleaning into
+> a season finale.
+
+Keep `config/imagemaid/.env`, generated logs, and Plex tokens out of git. The
+checked-in [`example.env`](example.env) contains placeholders only.
+
+See the official [ImageMaid documentation](https://kometa.wiki/en/latest/kometa/scripts/imagemaid/)
+for current modes, schedules, and safety guidance.

@@ -1,37 +1,33 @@
+# Kometa Overlay Reset: The Eraser Cut 🧹💣
 
-# 🧹 Kometa Overlay Reset Configuration
+Overlay Reset removes Kometa-applied overlays from Plex libraries. Upstream
+describes it as destructive with no undo, so Duplex keeps it out of the primary
+stack, disables automatic restarts, and makes the checked-in example a dry run.
 
-Welcome to the `overlay-reset` directory! 🎉 This directory contains the Docker Compose configuration for **Kometa Overlay Reset**, a Python 3 project designed to remove overlays from your Plex libraries. 🖥️
+## Before touching the big red button 🛡️
 
-## 🛠️ Usage
+- Back up Plex application data.
+- Read the official
+  [Overlay Reset documentation](https://kometa.wiki/en/latest/kometa/scripts/overlay-reset/).
+- Confirm `PLEX_URL`, `PLEX_LIBRARY`, and every optional selector.
+- Keep `DRY_RUN="True"` for the first pass.
+- Review the complete output before allowing writes.
 
-1. **Clone Repository:**
+## Rehearse the recovery 🎬
 
-   ```bash
-   git clone https://github.com/scottgigawatt/duplex.git
-   cd duplex/config/overlay-reset
-   ```
+```sh
+cp config/overlay-reset/example.env config/overlay-reset/.env
+make overlay-reset-config
+make overlay-reset-run
+```
 
-2. **Configure Environment:**
-   - 📋 Copy `example.env` to `.env` and configure the variables.
+The container reads application settings from `/config/.env`, which is the same
+private file used by Compose. Do not commit it.
 
-3. **Run Docker Compose:**
+Only after a clean backup and reviewed dry run should you set
+`DRY_RUN="False"` and execute another one-shot run. The container exits when it
+finishes and will not restart itself.
 
-   ```bash
-   docker-compose up -d
-   ```
-
-   🌀 This will start the container in the background.
-
-## 📂 Files
-
-- **`docker-compose.yml`**: Docker Compose configuration.
-- **`example.env`**: Example environment file for setting variables.
-
-## 🔗 More Information
-
-For more details, visit the [Kometa Overlay Reset GitHub](https://github.com/kometa-team/overlay-reset).
-
----
-
-✨ Enjoy a clutter-free Plex library! 🚀
+> [!CAUTION]
+> This tool is the narrative equivalent of deleting the timeline. If the dry
+> run surprises you, stop the show and fix the settings.

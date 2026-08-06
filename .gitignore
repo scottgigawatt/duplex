@@ -1,15 +1,27 @@
+#
+# Copyright 2025-2026 Scott Gigawatt
+#
+# Licensed under the Apache License, Version 2.0.
+#
+# .gitignore: Local credentials, generated application state, and host metadata.
+#
+
 .DS_Store
-.secrets/
 .env
+.secrets/
+
 backups/
 cache/
 exports/
 logs/
 newsletters/
 temp/
-*.lock
+
 *.db*
+*.lock
 UUID
 config.ini
+
+config/notifiarr/notifiarr.conf
 config/pattrmm/data/*
 !**/README.md

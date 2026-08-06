@@ -1,0 +1,60 @@
+########################################################
+# Copyright 2025-2026 Scott Gigawatt                   #
+# Licensed under the Apache License, Version 2.0.      #
+# Notifiarr v0.9.x placeholder configuration reference #
+########################################################
+
+## This file documents safe baseline fields for a new Duplex deployment.
+## Prefer Notifiarr's first-run Web UI, which generates the complete current
+## configuration in ignored notifiarr.conf.
+##
+## Official example:
+## https://github.com/Notifiarr/notifiarr/blob/main/examples/notifiarr.conf.example
+
+## Copy the API key from the Notifiarr account only in private notifiarr.conf.
+api_key = ""
+
+## The Web UI password must be at least nine characters. Leaving it unset makes
+## Notifiarr use the API key until the password is changed in the Web UI.
+ui_password = ""
+
+## Listen on all container interfaces so the published Compose port is usable.
+bind_addr = "0.0.0.0:5454"
+
+## Container updates replace the application; Windows self-update stays off.
+auto_update = "off"
+
+## Keep ordinary logging enabled and bound debug request bodies when debugging.
+quiet = false
+debug = false
+trace = false
+max_body = 102400
+
+## Keep the default API base path and compression behavior.
+urlbase = "/"
+no_compress = false
+
+## Rotate small private log files instead of retaining unlimited history.
+log_file_mb = 5
+log_files = 10
+file_mode = "0600"
+
+## Permit requested diagnostic uploads; set true for stricter local-only logs.
+no_uploads = false
+
+## Network and retry settings.
+timeout = "1m"
+apt = false
+serial = false
+retries = 4
+
+## Current configuration schema version used by the v0.9.x client.
+version = 1
+
+## Service checks are configured through the Web UI. This safe baseline keeps
+## the subsystem enabled without embedding application URLs or API keys.
+[services]
+disabled = false
+parallel = 1
+interval = "10m"
+log_file = ""

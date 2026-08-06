@@ -1,54 +1,38 @@
----
 #
-# docker-compose.yml: Docker Compose configuration to remove all overlays placed on a Plex library.
+# Copyright 2025-2026 Scott Gigawatt
 #
-# Tools Included:
-#   - Overlay Reset: Remove all overlays placed on a Plex library.
+# Licensed under the Apache License, Version 2.0.
 #
-# For more information about Overlay Reset, visit: https://kometa.wiki/en/latest/kometa/scripts/overlay-reset/
+# docker-compose.yml: Run the destructive Kometa Overlay Reset recovery tool as
+#                     a one-shot container with configuration under /config.
+#
+# Documentation: https://kometa.wiki/en/latest/kometa/scripts/overlay-reset/
 #
 
 #
-# Docker Compose version on the target system
+# Setup common one-shot container properties.
 #
-version: "2.9"
+x-default-container: &default-container  # YAML anchor for common container settings
+  pull_policy: always                    # Check the registry before every run
+  restart: "no"                          # Never repeat a destructive recovery automatically
+  logging:                               # Bound local JSON log growth
+    driver: "json-file"                  # Use Docker's JSON file logging driver
+    options:                             # Options for the JSON file driver
+      max-size: ${LOG_MAX_SIZE}          # Maximum size of each rotated log file
+      max-file: ${LOG_MAX_FILE}          # Number of rotated log files to retain
 
 #
-# Setup default properties for all or most containers
-#
-x-default-container: &default-container  # YAML anchor for default container
-  pull_policy: always                    # Ensure that the image is always pulled
-  restart: "no"                          # Restart the container unless explicitly stopped
-  logging:                               # Configure container logging options
-    driver: "json-file"                  # Use JSON file logging driver
-    options:
-      max-size: ${LOG_MAX_SIZE}          # Maximum file size for logs files
-      max-file: ${LOG_MAX_FILE}          # Maximum number of log files to retain
-
-#
-# Setup default variables for all or most containers
-#
-x-default-environment: &default-environment  # YAML anchor for default environment
-    TZ: ${TZ}                                # Set the appropriate timezone
-
-#
-# Define the services section
+# Define the one-shot Overlay Reset service.
 #
 services:
-  #
-  # Define the 'overlay-reset' service
-  #
   overlay-reset:
-    # Docker image and container information
-    <<: *default-container                                # Pull in the default container information
-    image: kometateam/overlay-reset:${OVERLAY_RESET_TAG}  # Run using the specified tag
-    container_name: overlay-reset-${OVERLAY_RESET_TAG}    # Append Docker image tag to container name
-    hostname: overlay-reset                               # Set the container hostname
+    <<: *default-container         # Pull in common one-shot settings
+    image: ${OVERLAY_RESET_IMAGE}  # Versioned official Overlay Reset image
+    container_name: overlay-reset  # Stable name used by operators
+    hostname: overlay-reset        # Stable hostname inside the Compose network
 
-    # Define the container environment
     environment:
-      <<: *default-environment  # Pull in the default environment
+      TZ: ${TZ}  # IANA timezone used in logs and scheduled expressions
 
-    # Mount host directories into the container
     volumes:
-      - ${HOST_DUPLEX_CONFIG}/overlay-reset:/config  # Mount the config persistent storage directory
+      - "${HOST_OVERLAY_RESET_CONFIG}:/config:rw"  # Settings, state, and recovery logs
