@@ -234,7 +234,7 @@ make overlay-reset-run
 
 Only disable dry-run mode after reviewing the official
 [Overlay Reset documentation](https://kometa.wiki/en/latest/kometa/scripts/overlay-reset/)
-and the local [recovery guide](config/overlay-reset/README.md).
+and the local [recovery guide](../config/overlay-reset/README.md).
 
 ### One-shot Watchtower
 

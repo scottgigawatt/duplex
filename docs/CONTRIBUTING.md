@@ -6,7 +6,7 @@ problem is “probably networking.”
 
 ## Before writing the episode 🍿
 
-- Read the root [README](../README.md) and [setup guide](../SETUP.md).
+- Read the root [README](../README.md) and [setup guide](SETUP.md).
 - Read the [security policy](SECURITY.md) before sharing logs or config.
 - Follow the [code of conduct](CODE_OF_CONDUCT.md).
 - Search existing issues and pull requests for the same plot.

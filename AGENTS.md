@@ -50,7 +50,7 @@ funny, energetic, readable, and operationally useful. Production jokes belong
 in:
 
 - `README.md`
-- `SETUP.md`
+- `docs/SETUP.md`
 - files under `docs/`
 - config-directory README files
 - GitHub issue and pull request templates

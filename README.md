@@ -129,7 +129,7 @@ private deployment and may display interpolated values, so do not paste its
 output into issues without redacting it.
 
 > [!IMPORTANT]
-> Read the full [Docker Project Setup](SETUP.md) before deploying on Synology.
+> Read the full [Docker Project Setup](docs/SETUP.md) before deploying on Synology.
 > It covers networking, permissions, Container Manager, upgrades, and the image
 > variable migration from older Duplex checkouts. Skipping it is how the plucky
 > side character becomes a six-hour troubleshooting subplot.
@@ -225,7 +225,7 @@ apply here.
 
 ## Documentation map 🗺️
 
-- [Deployment and upgrade setup](SETUP.md)
+- [Deployment and upgrade setup](docs/SETUP.md)
 - [Contributing](docs/CONTRIBUTING.md)
 - [Security policy](docs/SECURITY.md)
 - [Code of conduct](docs/CODE_OF_CONDUCT.md)
