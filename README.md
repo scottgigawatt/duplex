@@ -28,6 +28,18 @@
 
 # Duplex 📺🚀
 
+> [!IMPORTANT]
+> **This standalone repository is deprecated.**
+> [Plundarr](https://github.com/scottgigawatt/plundarr#readme) is the maintained
+> successor, where Maraudarr generates the equivalent Plex-adjacent deployment
+> as the `duplex` preset. Use Plundarr for new deployments, migrations,
+> dependency updates, and future releases.
+>
+> Existing deployments can keep rolling, but migrate when practical. After this
+> notice lands, a final archival release will be cut from `main`; no further
+> feature or dependency updates are planned here. The end credits are rolling;
+> future seasons air from Plundarr. 📺
+
 Duplex is the backstage crew for a Plex production that has somehow survived
 multiple seasons, three recasts, and one database nobody remembers approving.
 It runs metadata, artwork maintenance, monitoring, notifications, and controlled
