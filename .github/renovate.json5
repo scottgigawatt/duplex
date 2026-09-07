@@ -6,6 +6,9 @@
 //                 pre-commit hooks, and submodules.
 
 {
+    // Standalone development has moved to the generated Plundarr duplex preset.
+    "enabled": false,
+
     // Renovate schema and shared safe defaults.
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
     "extends": [
@@ -17,7 +20,7 @@
     // Keep dependency work predictable for a single-maintainer repository.
     "timezone": "America/New_York",
     "schedule": ["before 8am on monday"],
-    "dependencyDashboard": true,
+    "dependencyDashboard": false,
     "labels": ["dependencies"],
     "assignees": ["scottgigawatt"],
     "reviewers": ["scottgigawatt"],
